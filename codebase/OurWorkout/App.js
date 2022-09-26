@@ -1,31 +1,61 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
-import RegisterScreen from './screens/RegisterScreen';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator, HeaderStyleInterpolators } from "@react-navigation/stack";
+import React, { useState, useEffect } from 'react'
+import { firebase } from './config'
 
-const Stack = createNativeStackNavigator();
+import Login from './screens/LoginScreen'
+import Register from "./screens/RegisterScreen";
+import HomeScreen from "./screens/HomeScreen";
+import Header from "./components/Header";
+import BottomNavBar from "./components/BottomNavBar";
 
-export default function App() {
-  return (
-    <NavigationContainer>
+const Stack = createStackNavigator();
+
+const App = () => {
+  const [initalizing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+
+  const onAuthStateChanged = (user) => {
+    setUser(user);
+    if (initalizing) setInitializing(false);
+
+  }
+
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+
+  if (initalizing) return null;
+
+  if (!user) {
+    return (
       <Stack.Navigator>
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{ headerShown: false }}
+        />
+        
       </Stack.Navigator>
-    </NavigationContainer>
-  );
+    )
+  }
+
+  return (
+    <BottomNavBar />
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => {
+  return(
+    <NavigationContainer>
+      <App />
+    </NavigationContainer>
+  )
+}
