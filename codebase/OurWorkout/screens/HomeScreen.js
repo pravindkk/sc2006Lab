@@ -5,9 +5,6 @@ import { getAuth, signOut } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native'
 import Svg, { SvgFromUri, SvgWithCss } from 'react-native-svg'
 
-// import ChatIcon from '../assets/icons/Chat'
-// import ChatIcon from '../assets/icons/ChatIcon';
-
 import Chat from '../assets/icons/Chat.svg'
 import Home from '../assets/icons/Search.svg'
 
@@ -39,7 +36,10 @@ const HomeScreen = () => {
                 <Text style={styles.welcomeBanner}>
                     Welcome Back, {name.firstName}
                 </Text>
-                {/* <Chat width={25} height={25} fill={'#fff'} /> */}
+                <TouchableOpacity onPress={() => navigation.replace("Chat")}>
+                    <Chat width={25} height={25} fill={'#000'} />
+                </TouchableOpacity>
+                
                 
             </View>
             

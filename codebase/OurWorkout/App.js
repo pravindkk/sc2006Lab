@@ -8,6 +8,7 @@ import Register from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import Header from "./components/Header";
 import BottomNavBar from "./components/BottomNavBar";
+import ChatScreen from "./screens/ChatScreen";
 
 const Stack = createStackNavigator();
 
@@ -48,12 +49,19 @@ const App = () => {
   }
 
   return (
-    <Stack.Screen
-      name="BottomNavBar"
-      component={BottomNavBar}
-      options={{ headerShown: false }}
-    />
-    // <BottomNavBar />
+    <Stack.Navigator>
+      <Stack.Screen
+        name="BottomNavBar"
+        component={BottomNavBar}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{ headerShown: false }}
+      />
+      {/* // <BottomNavBar /> */}
+    </Stack.Navigator>
   )
 }
 
