@@ -1,12 +1,17 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { SvgUri } from 'react-native-svg';
-// import HomeIcon from '../assets/icons/Home.svg';
+import { SvgFromXml, SvgUri } from 'react-native-svg';
+
 
 import HomeScreen from '../screens/HomeScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import SearchScreen from '../screens/SearchScreen';
+
+import SearchIcon from '../assets/icons/Search.svg'
+import ChatIcon from '../assets/icons/Chat.svg'
+import ProfileIcon from '../assets/icons/Profile.svg'
+import HomeIcon from '../assets/icons/Home.svg'
 
 const Tab = createBottomTabNavigator()
 
@@ -25,15 +30,7 @@ const BottomNavBar = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
-              <Image
-                source={require('../assets/icons/Home.png')}
-                resizeMode="contain"
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? "#fff" : '#72777A'
-                }}
-              />
+              <HomeIcon width={25} height={25} fill={focused ? '#fff' : '#fff'} />
               { focused && 
                 <Text
                   style={{color: focused ? '#fff' : '#72777A', fontSize: 12}}
@@ -52,15 +49,26 @@ const BottomNavBar = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
-              <Image
-                source={require('../assets/icons/Search.png')}
-                resizeMode="contain"
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? "#fff" : '#72777A'
-                }}
-              />
+              <SearchIcon width={25} height={25} fill={focused ? '#fff': '#303437'} />
+              { focused && 
+                <Text
+                  style={{color: focused ? '#fff' : '#72777A', fontSize: 12}}
+                >
+                  Search
+                </Text>
+              }
+            </View>
+          )
+        }}
+      />
+
+      <Tab.Screen
+        name="Chat" 
+        component={SearchScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
+              <ChatIcon width={25} height={25} fill={focused ? '#fff': '#303437'} />
               { focused && 
                 <Text
                   style={{color: focused ? '#fff' : '#72777A', fontSize: 12}}
@@ -80,15 +88,7 @@ const BottomNavBar = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
-              <Image
-                source={require('../assets/icons/Profile.png')}
-                resizeMode="contain"
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? "#fff" : '#72777A'
-                }}
-              />
+              <ProfileIcon width={25} height={25} fill={focused ? '#fff': '#303437'} />
               { focused && 
                 <Text
                   style={{color: focused ? '#fff' : '#72777A', fontSize: 12}}
@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     // padding: 20,
     bottom: 30,
-    left: 25,
-    right: 25,
+    left: 15,
+    right: 15,
     elevation: 0,
     backgroundColor: '#fff',
     height: 60,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     justifyContent: 'center', 
     top: 15,
-    width: 90,
+    width: 80,
     height: 50,
     borderRadius: 30,
     flexDirection: 'row',

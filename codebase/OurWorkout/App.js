@@ -48,7 +48,12 @@ const App = () => {
   }
 
   return (
-    <BottomNavBar />
+    <Stack.Screen
+      name="BottomNavBar"
+      component={BottomNavBar}
+      options={{ headerShown: false }}
+    />
+    // <BottomNavBar />
   )
 }
 
