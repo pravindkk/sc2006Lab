@@ -1,14 +1,84 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image} from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { GetUser } from '../components/UserComponent';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const ProfileScreen = () => {
-  return (
-    <View>
-      <Text>ProfileScreen</Text>
-    </View>
-  )
+function ProfileScreen() {
+  const[user, setUser] = useState('');
+  const [hasLoaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const getLoggedInUser = async () => {
+      
+      const loggedInUser = await GetUser();
+      setUser(loggedInUser);
+      // console.log(user);
+    }
+
+    getLoggedInUser().then(setLoaded(true)).catch(console.error)
+  },[])
+
+
+
+  return hasLoaded ?
+    <SafeAreaView style={styles.container}>
+      <View style={{alignItems: 'center'}}>
+        <Image                 
+          source={{
+          uri: user.photo,
+          }}
+          style={{ width: 100, height: 100, borderWidth: 0, borderRadius: 60 }}
+        />
+        <Text style={styles.name}>{user.firstName}</Text>
+      </View>
+      <View style={{justifyContent: 'center'}} >
+      <TouchableOpacity style={styles.buttonContainer} >
+        <Text style={styles.buttonText}>Profile Information</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonContainer} >
+        <Text style={styles.buttonText}>Preferences</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonContainer} >
+        <Text style={styles.buttonText}>Notifications</Text>
+      </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  : <SafeAreaView style={{flex: 1}}><Text>Loading...</Text></SafeAreaView>
 }
 
 export default ProfileScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'center',
+    // alignItems: 'center',
+    
+  },
+
+  name: {
+    marginTop: 10,
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
+
+  buttonContainer: {
+    marginTop: 10, 
+    width: '80%', 
+    padding: 20, 
+    // paddingLeft: 100,
+    // paddingRight: 100,
+    borderWidth: 1, 
+    borderRadius: 10, 
+    borderColor: '#CFD3D4' 
+  },
+
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    
+  },
+})
+

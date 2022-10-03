@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native'
 import Checkbox from 'expo-checkbox';
 import React, { useState } from 'react'
 import { firebase } from '../config'
 import { useNavigation } from '@react-navigation/native';
+import pickImage from '../components/ImagePicker'
 
 const RegisterScreen = () => {
     const [email, setEmail] = useState('');
@@ -11,9 +12,19 @@ const RegisterScreen = () => {
     const [lastName, setLastName] = useState('');
     const [isSelected, setSelection] = useState(false);
 
+    const [image, setImage] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
+
     const navigation = useNavigation();
 
+    const chooseImage = async () => {
+        const pickedImage = await pickImage();
+        setImage(pickedImage)
+        
+    }
+
     registerUser = async (email, password, firstName, lastName) => {
+        const response = await fetch(image)
+        const blob = await response.blob();
         if (isSelected == false) {
             alert("Please accept the T&C of OurWorkout")
             return
@@ -40,10 +51,14 @@ const RegisterScreen = () => {
             }).catch((error) => {
                 alert(error.message)
             })
+            .then(() => {
+                firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid).put(blob)
+            })
         }).catch((error) => {
             alert(error.message)
         })
     }
+
 
     return (
         <View style={[styles.container, {marginTop: 60, padding: 20}]}>
@@ -98,6 +113,18 @@ const RegisterScreen = () => {
                         secureTextEntry
                     />
                 </View>
+                <View style={[styles.inputContainer, {marginTop: 20}]}>
+                    <Text style={styles.inputTitle}>Profile Picture</Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Image
+                            source={{uri: image}}
+                            style={{width: 100, height: 100, borderRadius: 50 }} 
+                        />
+                        <TouchableOpacity onPress={chooseImage} style={{justifyContent: 'center'}}>
+                            <Text style={{fontSize: 17}}>Choose Picture</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
                 <View style={styles.checkboxContainer}>
                     <Checkbox
                         style={styles.checkbox}
@@ -112,7 +139,7 @@ const RegisterScreen = () => {
                     onPress={() => registerUser(email, password, firstName, lastName)}
                     style={[styles.button, { marginTop: 30 }]}
                 >
-                    <Text style={styles.buttonText}>Login</Text>
+                    <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('Login')}

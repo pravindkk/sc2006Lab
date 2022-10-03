@@ -9,12 +9,15 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native-community/checkbox": "^0.5.12",
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/stack": "^6.3.1",
+    "@svgr/core": "^6.4.0",
     "expo": "~46.0.9",
     "expo-checkbox": "~2.2.0",
+    "expo-image-picker": "~13.3.1",
     "expo-status-bar": "~1.4.0",
     "firebase": "^9.6.11",
     "react": "18.0.0",
