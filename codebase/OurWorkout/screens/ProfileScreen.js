@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { GetUser } from '../components/UserComponent';
+import { GetUser, StoreUser } from '../components/UserComponent';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { getAuth, signOut } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native';
@@ -50,6 +50,7 @@ const ProfileScreen = () => {
       
         <TouchableOpacity
           onPress={() => {
+              StoreUser('');
               const auth = getAuth()
               signOut(auth).then(() => {
                   alert("You have been signed out!")

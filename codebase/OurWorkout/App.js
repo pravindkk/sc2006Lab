@@ -21,7 +21,10 @@ const App = () => {
   const [userData, setUserData] = useState('');
 
   const onAuthStateChanged = async (user) => {
-    if (user) await updateLocalStorage(user.uid);
+    if (user) {
+      setTimeout(async () => await updateLocalStorage(user.uid), 1000);
+      
+    }
     setUser(user);
     if (initalizing) setInitializing(false);
 
