@@ -12,6 +12,7 @@ import SearchIcon from '../assets/icons/Search.svg'
 import ChatIcon from '../assets/icons/Chat.svg'
 import ProfileIcon from '../assets/icons/Profile.svg'
 import HomeIcon from '../assets/icons/Home.svg'
+import DiscussionScreen from '../screens/DiscussionScreen';
 
 const Tab = createBottomTabNavigator()
 
@@ -63,8 +64,8 @@ const BottomNavBar = () => {
       />
 
       <Tab.Screen
-        name="Chat" 
-        component={SearchScreen}
+        name="Discussion" 
+        component={DiscussionScreen}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>

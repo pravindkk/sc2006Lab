@@ -11,6 +11,7 @@ import HomeScreen from "./screens/HomeScreen";
 import Header from "./components/Header";
 import BottomNavBar from "./components/BottomNavBar";
 import ChatScreen from "./screens/ChatScreen";
+import ProfileInfoScreen from "./screens/profileScreens/ProfileInfoScreen";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,7 @@ const App = () => {
       if (snapshot.exists) {
         
         loggedInUser = snapshot.data()
+        loggedInUser['uid'] = uid;
         await firebase.storage().ref().child('users/' + uid).getDownloadURL().then((res) => {
           loggedInUser['photo'] = res
         })
@@ -84,7 +86,7 @@ const App = () => {
   }
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="BottomNavBar">
       <Stack.Screen
         name="BottomNavBar"
         component={BottomNavBar}
@@ -93,6 +95,11 @@ const App = () => {
       <Stack.Screen
         name="Chat"
         component={ChatScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProfileInfo"
+        component={ProfileInfoScreen}
         options={{ headerShown: false }}
       />
       {/* // <BottomNavBar /> */}

@@ -4,8 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { GetUser } from '../components/UserComponent';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { getAuth, signOut } from 'firebase/auth'
+import { useNavigation } from '@react-navigation/native';
 
-function ProfileScreen() {
+const ProfileScreen = () => {
+  const navigation = useNavigation();
   const[user, setUser] = useState('');
   const [hasLoaded, setLoaded] = useState(false);
 
@@ -24,44 +26,44 @@ function ProfileScreen() {
 
   return hasLoaded ?
     <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={{flex: 1, justifyContent: 'center'}} >
+        <View style={{alignItems: 'center'}}>
+          <Image                 
+            source={{
+            uri: user.photo,
+            }}
+            style={{ width: 100, height: 100, borderWidth: 0, borderRadius: 60 }}
+          />
+          <Text style={styles.name}>{user.firstName}</Text>
+        </View>
+        <View style={{justifyContent: 'center'}} >
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("ProfileInfo")} >
+            <Text style={styles.buttonText}>Profile Information</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonContainer} >
+            <Text style={styles.buttonText}>Preferences</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonContainer} >
+            <Text style={styles.buttonText}>Notifications</Text>
+          </TouchableOpacity>
+        </View>
       
-      <View style={{alignItems: 'center'}}>
-        <Image                 
-          source={{
-          uri: user.photo,
+        <TouchableOpacity
+          onPress={() => {
+              const auth = getAuth()
+              signOut(auth).then(() => {
+                  alert("You have been signed out!")
+              }).catch((error) => {
+                  alert(error.message)
+              })
           }}
-          style={{ width: 100, height: 100, borderWidth: 0, borderRadius: 60 }}
-        />
-        <Text style={styles.name}>{user.firstName}</Text>
-      </View>
-      <View style={{justifyContent: 'center'}} >
-      <TouchableOpacity style={styles.buttonContainer} >
-        <Text style={styles.buttonText}>Profile Information</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonContainer} >
-        <Text style={styles.buttonText}>Preferences</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonContainer} >
-        <Text style={styles.buttonText}>Notifications</Text>
-      </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity
-        onPress={() => {
-            const auth = getAuth()
-            signOut(auth).then(() => {
-                alert("You have been signed out!")
-            }).catch((error) => {
-                alert(error.message)
-            })
-        }}
-        style={styles.signOutButton}
-      >
-        <Text style={{fontSize: 16, color: '#fff'}}>
-            Sign Out
-        </Text>
-      </TouchableOpacity>
-      
+          style={styles.signOutButton}
+        >
+          <Text style={{fontSize: 16, color: '#fff'}}>
+              Sign Out
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
     </SafeAreaView>
   : <SafeAreaView style={{flex: 1}}><Text>Loading...</Text></SafeAreaView>
 }
@@ -87,6 +89,7 @@ const styles = StyleSheet.create({
     marginTop: 10, 
     width: '80%', 
     padding: 20, 
+    alignSelf: 'center',
     // paddingLeft: 100,
     // paddingRight: 100,
     borderWidth: 1, 
@@ -101,12 +104,14 @@ const styles = StyleSheet.create({
 
   signOutButton: {
     marginTop: 20,
+    width: '80%',
     justifyContent: 'center',
     alignSelf: 'center',
     backgroundColor: '#000',
     padding: 20,
     backgroundColor: '#303437',
     borderRadius: 10,
+    alignItems: 'center',
     
 
   },

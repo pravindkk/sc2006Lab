@@ -27,34 +27,11 @@ const HomeScreen = () => {
                 <Text style={styles.welcomeBanner}>
                     Welcome {'\n'}Back, {user.firstName}
                 </Text>
-                <TouchableOpacity onPress={() => navigation.replace("Chat")} style={{justifyContent: 'center'}}>
+                <TouchableOpacity onPress={() => navigation.navigate("Chat")} style={{justifyContent: 'center'}}>
                     <View style={styles.chatIconButton}><Chat width={25} height={25} fill={'#72777A'} /></View>
                 </TouchableOpacity>
             </View>
-
-            <Image
-                source={{
-                uri: user.photo,
-                }}
-                style={{ width: 100, height: 100, borderWidth: 0 }}
-                
-            />
-                    
-            <TouchableOpacity
-                onPress={() => {
-                    const auth = getAuth()
-                    signOut(auth).then(() => {
-                        alert("You have been signed out!")
-                    }).catch((error) => {
-                        alert(error.message)
-                    })
-                }}
-                style={styles.button}
-            >
-                <Text style={{fontSize: 22, fontWeight: 'bold'}}>
-                    Sign Out
-                </Text>
-            </TouchableOpacity>
+            <Text> This is the Home Screen</Text>
             
         </SafeAreaView>
     : <SafeAreaView style={{flex: 1}}><Text>Loading...</Text></SafeAreaView>
