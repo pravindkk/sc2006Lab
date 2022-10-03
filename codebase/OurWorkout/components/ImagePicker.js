@@ -13,5 +13,7 @@ export default pickImage = async () => {
       if (!result.cancelled) {
         return result.uri
       }
-      return null
+      else {
+        return null
+      }
 }

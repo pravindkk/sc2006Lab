@@ -50,9 +50,15 @@ const App = () => {
 
 
   useEffect(() => {
-    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-    console.log(subscriber)
-    return subscriber;
+    const getLoggedInUser = async () => {
+      
+      const subscriber = await firebase.auth().onAuthStateChanged(onAuthStateChanged);
+      console.log(subscriber)
+      return subscriber;
+      // console.log(user);
+    }
+    getLoggedInUser().catch(console.error)
+
   }, []);
 
 

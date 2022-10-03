@@ -2,7 +2,8 @@ import { StyleSheet, Text, View, Image} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { GetUser } from '../components/UserComponent';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { getAuth, signOut } from 'firebase/auth'
 
 function ProfileScreen() {
   const[user, setUser] = useState('');
@@ -23,6 +24,7 @@ function ProfileScreen() {
 
   return hasLoaded ?
     <SafeAreaView style={styles.container}>
+      
       <View style={{alignItems: 'center'}}>
         <Image                 
           source={{
@@ -43,6 +45,23 @@ function ProfileScreen() {
         <Text style={styles.buttonText}>Notifications</Text>
       </TouchableOpacity>
       </View>
+
+      <TouchableOpacity
+        onPress={() => {
+            const auth = getAuth()
+            signOut(auth).then(() => {
+                alert("You have been signed out!")
+            }).catch((error) => {
+                alert(error.message)
+            })
+        }}
+        style={styles.signOutButton}
+      >
+        <Text style={{fontSize: 16, color: '#fff'}}>
+            Sign Out
+        </Text>
+      </TouchableOpacity>
+      
     </SafeAreaView>
   : <SafeAreaView style={{flex: 1}}><Text>Loading...</Text></SafeAreaView>
 }
@@ -77,8 +96,19 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: 'bold',  
+  },
+
+  signOutButton: {
+    marginTop: 20,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    backgroundColor: '#000',
+    padding: 20,
+    backgroundColor: '#303437',
+    borderRadius: 10,
     
+
   },
 })
 

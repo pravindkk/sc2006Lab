@@ -11,6 +11,7 @@ const RegisterScreen = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [isSelected, setSelection] = useState(false);
+    const [redirect, setRedirect] = useState(true);
 
     const [image, setImage] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
 
@@ -18,6 +19,7 @@ const RegisterScreen = () => {
 
     const chooseImage = async () => {
         const pickedImage = await pickImage();
+        if (pickedImage == null) setImage('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
         setImage(pickedImage)
         
     }
@@ -53,10 +55,16 @@ const RegisterScreen = () => {
             })
             .then(() => {
                 firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid).put(blob)
+                // setRedirect(true);
+            })
+            .catch(error => {
+                alert(error.message)
             })
         }).catch((error) => {
             alert(error.message)
+            // setRedirect(false)
         })
+        // if (redirect) navigation.replace("Login");
     }
 
 
@@ -121,7 +129,7 @@ const RegisterScreen = () => {
                             style={{width: 100, height: 100, borderRadius: 50 }} 
                         />
                         <TouchableOpacity onPress={chooseImage} style={{justifyContent: 'center'}}>
-                            <Text style={{fontSize: 17}}>Choose Picture</Text>
+                            <Text style={{fontSize: 17, backgroundColor: '#303437', padding: 10, borderRadius:10, color: '#fff'}}>Choose Picture</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
