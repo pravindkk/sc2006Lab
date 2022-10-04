@@ -1,69 +1,40 @@
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { firebase } from '../config'
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native'
-import Svg, { SvgFromUri, SvgWithCss } from 'react-native-svg'
 
 import Chat from '../assets/icons/Chat.svg'
-import Home from '../assets/icons/Search.svg'
+import { GetUser } from '../components/UserComponent';
 
 const HomeScreen = () => {
     const navigation = useNavigation()
-    const [name, setName] = useState('');
+    const [user, setUser] = useState('');
+    const [hasLoaded, setLoaded] = useState(false)
 
     useEffect(() => {
-        firebase.firestore().collection('users')
-        .doc(firebase.auth().currentUser.uid).get()
-        .then((snapshot) => {
-            if (snapshot.exists) {
-                setName(snapshot.data())
-            }
-            else {
-                console.log('user does not exist')
-            }
-        })
+        const getLoggedInUser = async () => {
+      
+            const loggedInUser = await GetUser();
+            setUser(loggedInUser);
+        }
+    
+        getLoggedInUser().then(setLoaded(true)).catch(console.error)
     }, [])
 
-    return (
+    return hasLoaded ?
         <SafeAreaView style={styles.container}>
-            {/* <SvgFromUri width="50" height="50" fill={'#000'} uri={'https://www.svgrepo.com/download/25994/chat.svg'} /> */}
-            {/* <Svg width={50} height={50} stroke={"#000"} source={require("../assets/icons/Chat.svg").default.src} /> */}
-
-            {/* <SvgFromXml xml={ChatIcon} /> */}
-            {/* <SvgUri width={25} height={25} source={require('../assets/icons/Chat.svg')} /> */}
-            <View style={{flexDirection: 'row', justifyContent:'space-evenly'}}>
+            <View style={{display: 'flex', flexDirection: 'row', justifyContent:'space-between', padding: 30, paddingTop: 0}}>
                 <Text style={styles.welcomeBanner}>
-                    Welcome Back, {name.firstName}
+                    Welcome {'\n'}Back, {user.firstName}
                 </Text>
-                <TouchableOpacity onPress={() => navigation.replace("Chat")}>
-                    <Chat width={25} height={25} fill={'#000'} />
+                <TouchableOpacity onPress={() => navigation.navigate("Chat")} style={{justifyContent: 'center'}}>
+                    <View style={styles.chatIconButton}><Chat width={25} height={25} fill={'#72777A'} /></View>
                 </TouchableOpacity>
-                
-                
             </View>
-            
-            
-            <TouchableOpacity
-                onPress={() => {
-                    const auth = getAuth()
-                    signOut(auth).then(() => {
-                        alert("You have been signed out!")
-                    }).catch((error) => {
-                        alert(error.message)
-                    })
-                }}
-                style={styles.button}
-            >
-                <Text style={{fontSize: 22, fontWeight: 'bold'}}>
-                    Sign Out
-                </Text>
-            </TouchableOpacity>
-            {/* <BottomNavBar /> */}
-            
+            <Text> This is the Home Screen</Text>
             
         </SafeAreaView>
-    )
+    : <SafeAreaView style={{flex: 1}}><Text>Loading...</Text></SafeAreaView>
 }
 
 export default HomeScreen
@@ -71,7 +42,7 @@ export default HomeScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        // alignItems: 'center',
         marginTop: 100,
     },
 
@@ -90,4 +61,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
     },
+    chatIconButton: {
+        justifyContent: 'center', 
+        borderWidth: 1, 
+        padding: 5, 
+        borderRadius: 40,
+        borderColor: '#E3E5E5'
+    }
 })
