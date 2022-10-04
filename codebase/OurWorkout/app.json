@@ -21,12 +21,14 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#FFFFFF"
-      }
+      "package": "com.SEZ440.OurWorkout",
+      "versionCode": 1
     },
-    "web": {
-      
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "aca283cd-f9c3-4958-ad65-9cba656142f7"
+      }
     }
   }
 }
