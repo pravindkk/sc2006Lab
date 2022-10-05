@@ -7,19 +7,20 @@ import Chat from '../assets/icons/Chat.svg'
 import { GetUser } from '../components/UserComponent';
 
 const HomeScreen = () => {
-    const navigation = useNavigation()
+    const navigation = useNavigation();
     const [user, setUser] = useState('');
-    const [hasLoaded, setLoaded] = useState(false)
+
+    const [hasLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
         const getLoggedInUser = async () => {
-      
             const loggedInUser = await GetUser();
             setUser(loggedInUser);
-        }
-    
-        getLoggedInUser().then(setLoaded(true)).catch(console.error)
+        };
+        getLoggedInUser().then(setLoaded(true)).catch(console.error);
     }, [])
+
+    //if (user == null) { setUser({firstName: "Adil"}); return }
 
     return hasLoaded ?
         <SafeAreaView style={styles.container}>
