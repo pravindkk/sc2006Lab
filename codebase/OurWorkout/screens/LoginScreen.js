@@ -1,12 +1,17 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { firebase } from '../config'
+import { StoreUser } from '../components/UserComponent'
 
 const LoginScreen = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    useEffect(() => {
+        StoreUser('');
+    }, [])
 
     loginUser = async (email, password) => {
         try {

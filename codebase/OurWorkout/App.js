@@ -21,11 +21,19 @@ const App = () => {
   const [userData, setUserData] = useState('');
 
   const onAuthStateChanged = async (user) => {
+    // if (user.emailVerified) console.log("user is verified");
+    // else console.log('user is not verified');
+
     if (user) {
-      setTimeout(async () => await updateLocalStorage(user.uid), 1000);
+      setTimeout(async () => {
+        await updateLocalStorage(user.uid).then(() => {
+          setUser(user);
+        });
+        
+      }, 2000);
       
     }
-    setUser(user);
+
     if (initalizing) setInitializing(false);
 
   }

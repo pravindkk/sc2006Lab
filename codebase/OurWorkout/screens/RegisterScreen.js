@@ -34,7 +34,7 @@ const RegisterScreen = () => {
         await firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(() => {
             firebase.auth().currentUser.sendEmailVerification({
-                handleCodeInApp: true,
+                // handleCodeInApp: true,
                 url: 'https://ourworkout-33235.firebaseapp.com'
             })
             .then(() => {
