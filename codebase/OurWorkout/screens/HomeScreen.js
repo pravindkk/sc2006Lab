@@ -28,7 +28,7 @@ const HomeScreen = () => {
         }
         setTimeout(() => {
             getLoggedInUser()
-        }, 1000);
+        }, 2000);
         
     }, [])
 
@@ -38,7 +38,7 @@ const HomeScreen = () => {
                 <Text style={styles.welcomeBanner}>
                     Welcome {'\n'}Back, {user.firstName}
                 </Text>
-                <TouchableOpacity onPress={() => navigation.navigate("Chat")} style={{justifyContent: 'center'}}>
+                <TouchableOpacity onPress={() => navigation.navigate("ChatScreen")} style={{justifyContent: 'center'}}>
                     <View style={styles.chatIconButton}><Chat width={25} height={25} fill={'#72777A'} /></View>
                 </TouchableOpacity>
             </View>

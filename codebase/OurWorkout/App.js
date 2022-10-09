@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator, HeaderStyleInterpolators } from "@react-navigation/stack";
 import React, { useState, useEffect } from 'react'
 import { firebase } from './config'
-import { StoreUser } from "./components/UserComponent";
+import { StoreUser, GetUser } from "./components/UserComponent";
 import { useGlobalState } from "./components/GlobalState";
 
 
@@ -11,8 +11,10 @@ import Register from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import Header from "./components/Header";
 import BottomNavBar from "./components/BottomNavBar";
-import ChatScreen from "./screens/ChatScreen";
-import ProfileInfoScreen from "./screens/profileScreens/ProfileInfoScreen";
+import ProfileInfoScreen from "./screens/profile/ProfileInfoScreen";
+import ChatScreen from "./screens/chat/ChatScreen";
+import AllUserScreen from "./screens/chat/AllUserScreen";
+
 
 const Stack = createStackNavigator();
 
@@ -62,6 +64,7 @@ const App = () => {
 
 
   useEffect(() => {
+    console.log(GetUser());
     // const getLoggedInUser = async () => {
       
     //   const subscriber = await firebase.auth().onAuthStateChanged(onAuthStateChanged);
@@ -102,9 +105,15 @@ const App = () => {
         component={BottomNavBar}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      <Stack.Screen name="ChatScreen" component={ChatScreen} options={{headerShown: false}} />
+      {/* <Stack.Screen
         name="Chat"
         component={ChatScreen}
+        options={{ headerShown: false }}
+      /> */}
+      <Stack.Screen
+        name="AllUsers"
+        component={AllUserScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen

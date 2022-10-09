@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
-  const[user, setUser] = useState('');
+  const [user, setUser] = useState('');
   const [hasLoaded, setLoaded] = useState(false);
 
   useEffect(() => {
