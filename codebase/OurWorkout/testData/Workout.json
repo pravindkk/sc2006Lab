@@ -1,0 +1,17 @@
+[
+    {
+        "type": "workout",
+        "internalUuid": "1cbfc82a-6c49-43c6-9f6f-bbaf3dff41d3",
+        "nameAkaTitle": "FirstWorkout"
+    },
+    {
+        "type": "workout",
+        "internalUuid": "6836e8f1-769c-479b-bb83-4c2f31aae8de",
+        "nameAkaTitle": "SecondWorkout"
+    },
+    {
+        "type": "workout",
+        "internalUuid": "6836e8f1-769c-479b-bb83-4c2f31aae534",
+        "nameAkaTitle": "ThirdWorkout"
+    }
+]

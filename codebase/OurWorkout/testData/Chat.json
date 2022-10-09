@@ -1,0 +1,17 @@
+[
+    {
+        "type": "chat",
+        "internalUuid": "3985aa4e-bcf7-47e0-937d-45e383b73062",
+        "nameAkaTitle": "FirstChat"
+    },
+    {
+        "type": "chat",
+        "internalUuid": "79d60447-f10e-4c4d-95fb-e745c18c6f95",
+        "nameAkaTitle": "SecondChat"
+    },
+    {
+        "type": "chat",
+        "internalUuid": "3ec3e307-f471-4c33-8524-d9d4a7cd1910",
+        "nameAkaTitle": "ThirdChat"
+    }
+]

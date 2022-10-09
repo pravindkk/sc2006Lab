@@ -3,6 +3,7 @@ import { createStackNavigator, HeaderStyleInterpolators } from "@react-navigatio
 import React, { useState, useEffect } from 'react'
 import { firebase } from './config'
 import { StoreUser } from "./components/UserComponent";
+import { putTestDataInDb } from "./components/DataBoilerplate";
 
 
 import Login from './screens/LoginScreen'
@@ -41,9 +42,17 @@ const Stack = createStackNavigator();
 };
 
 const App = () => {
-  const [initalizing, setInitializing] = useState(true);
+  const [initializing, setInitializing] = useState(true);
+  const [startUpOnce, setStartUpOnce] = useState(true);
   const [user, setUser] = useState('');
   const [userData, setUserData] = useState('');
+
+  if (startUpOnce)
+  {
+    //alert("asdsad");
+    //putTestDataInDb().catch(_ => alert(_)).then(_ => alert("Test data put in DB."));
+    setStartUpOnce(false);
+  }
 
   const updateLocalStorage = async (uid) => {
     //await updateLocalStorage_User(uid); 
@@ -56,7 +65,7 @@ const App = () => {
       await updateLocalStorage_User();
     }
     setUser(user);
-    if (initalizing) setInitializing(false);
+    if (initializing) setInitializing(false);
   }
 
   const [isSubscriber, setIsSubscriber] = useState(false);
@@ -79,7 +88,7 @@ const App = () => {
     });
   }, []);
 
-  if (initalizing) return null;
+  if (initializing) return null;
 
   if (!user) {
     return (
