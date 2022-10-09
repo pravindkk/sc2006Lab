@@ -30,7 +30,7 @@ const ProfileScreen = () => {
         <View style={{alignItems: 'center'}}>
           <Image                 
             source={{
-            uri: user.photo,
+            uri: user.photoURL,
             }}
             style={{ width: 100, height: 100, borderWidth: 0, borderRadius: 60 }}
           />
@@ -50,10 +50,11 @@ const ProfileScreen = () => {
       
         <TouchableOpacity
           onPress={() => {
-              StoreUser('');
+              
               const auth = getAuth()
               signOut(auth).then(() => {
                   alert("You have been signed out!")
+                  StoreUser('');
               }).catch((error) => {
                   alert(error.message)
               })

@@ -10,7 +10,7 @@ const EditProfileInfo = ({ user }) => {
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
 
-    updateUserDetails = async (uid) => {
+    const updateUserDetails = async (uid) => {
         await firebase.firestore().collection('users').doc(uid).update({
             firstName,
             lastName,
@@ -29,7 +29,7 @@ const EditProfileInfo = ({ user }) => {
             <View style={{alignItems: 'center'}}>
             <Image                 
                 source={{
-                uri: user.photo,
+                uri: user.photoURL,
                 }}
                 style={{ width: 100, height: 100, borderWidth: 0, borderRadius: 60 }}
             />

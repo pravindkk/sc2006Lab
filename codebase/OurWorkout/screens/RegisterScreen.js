@@ -43,28 +43,71 @@ const RegisterScreen = () => {
                 alert(error.message)
             })
             .then(() => {
-                firebase.firestore().collection('users')
-                .doc(firebase.auth().currentUser.uid)
-                .set({
-                    firstName,
-                    lastName,
-                    email,
+                var uploadTask = firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid).put(blob);
+                uploadTask.on('state_changed', function(snapshot){
+                    console.log('Upload is ' + progress + '% done');
+                    switch (snapshot.state) {
+                        case firebase.storage.TaskState.PAUSED: // or 'paused'
+                        console.log('Upload is paused');
+                        break;
+                        case firebase.storage.TaskState.RUNNING: // or 'running'
+                        console.log('Upload is running');
+                        break;
+                    }
+                }, (error) => {
+                    alert(error.message)
+                }, () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+                        firebase.firestore().collection('users')
+                        .doc(firebase.auth().currentUser.uid)
+                        .set({
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            photoURL: url,
+                        })
+                    })
                 })
-            }).catch((error) => {
-                alert(error.message)
             })
-            .then(() => {
-                firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid).put(blob)
-                // setRedirect(true);
-            })
-            .catch(error => {
-                alert(error.message)
-            })
+            // .then(() => {
+            //     firebase.firestore().collection('users')
+            //     .doc(firebase.auth().currentUser.uid)
+            //     .set({
+            //         firstName: firstName,
+            //         lastName: lastName,
+            //         email: email,
+            //         photoURL: '',
+            //     })
+            // }).catch((error) => {
+            //     alert(error.message)
+            // })
+            // .then(async () => {
+            //     await firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid).put(blob).then(async () => {
+            //         await addURl();
+            //     })
+            //     // setRedirect(true);
+            // })
+            // .catch(error => {
+            //     alert(error.message)
+            // })
         }).catch((error) => {
             alert(error.message)
             // setRedirect(false)
         })
+
+
         // if (redirect) navigation.replace("Login");
+    }
+
+    const addURl = async () => {
+        await firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid).getDownloadURL((res) => {
+            console.log("updating");
+            firebase.firestore().collection('users')
+                .doc(firebase.auth().currentUser.uid)
+                .update({
+                    photoURL: res,
+                })
+        })
     }
 
 

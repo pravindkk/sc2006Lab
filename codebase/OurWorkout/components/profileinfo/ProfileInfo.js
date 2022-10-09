@@ -9,7 +9,7 @@ const ProfileInfo = ({ user }) => {
             <View style={{alignItems: 'center'}}>
                 <Image                 
                     source={{
-                    uri: user.photo,
+                    uri: user.photoURL,
                     }}
                     style={{ width: 100, height: 100, borderWidth: 0, borderRadius: 60 }}
                 />

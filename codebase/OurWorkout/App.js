@@ -45,9 +45,6 @@ const App = () => {
         
         loggedInUser = snapshot.data()
         loggedInUser['uid'] = uid;
-        await firebase.storage().ref().child('users/' + uid).getDownloadURL().then((res) => {
-          loggedInUser['photo'] = res
-        })
         
         StoreUser(loggedInUser)
         console.log("login :" + loggedInUser.photo)
