@@ -15,10 +15,21 @@ const HomeScreen = () => {
         const getLoggedInUser = async () => {
       
             const loggedInUser = await GetUser();
-            setUser(loggedInUser);
+            console.log(loggedInUser);
+            if (loggedInUser == ''){
+                
+                setLoaded(false);
+            }
+            else {
+                setUser(loggedInUser);
+                setLoaded(true);
+            }
+            
         }
-    
-        getLoggedInUser().then(setLoaded(true)).catch(console.error)
+        setTimeout(() => {
+            getLoggedInUser()
+        }, 1000);
+        
     }, [])
 
     return hasLoaded ?

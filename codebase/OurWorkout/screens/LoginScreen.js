@@ -2,12 +2,14 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-nativ
 import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { firebase } from '../config'
-import { StoreUser } from '../components/UserComponent'
+import { StoreUser, updateLocalStorage } from '../components/UserComponent'
+import { useGlobalState } from '../components/GlobalState'
 
 const LoginScreen = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loggedIn, setLoggedIn] = useGlobalState('loggedIn');
 
     useEffect(() => {
         StoreUser('');
@@ -16,6 +18,9 @@ const LoginScreen = () => {
     loginUser = async (email, password) => {
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(async (userCredential) => {
+                    await updateLocalStorage(userCredential.user.uid).then(setLoggedIn(true));
+                })
         } catch (error) {
             alert(error.message)
         }

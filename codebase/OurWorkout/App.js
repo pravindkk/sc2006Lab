@@ -3,6 +3,7 @@ import { createStackNavigator, HeaderStyleInterpolators } from "@react-navigatio
 import React, { useState, useEffect } from 'react'
 import { firebase } from './config'
 import { StoreUser } from "./components/UserComponent";
+import { useGlobalState } from "./components/GlobalState";
 
 
 import Login from './screens/LoginScreen'
@@ -19,6 +20,7 @@ const App = () => {
   const [initalizing, setInitializing] = useState(true);
   const [user, setUser] = useState();
   const [userData, setUserData] = useState('');
+  const [loggedIn, setLoggedIn] = useGlobalState('loggedIn')
 
   const onAuthStateChanged = async (user) => {
     // if (user.emailVerified) console.log("user is verified");
@@ -60,21 +62,21 @@ const App = () => {
 
 
   useEffect(() => {
-    const getLoggedInUser = async () => {
+    // const getLoggedInUser = async () => {
       
-      const subscriber = await firebase.auth().onAuthStateChanged(onAuthStateChanged);
-      console.log(subscriber)
-      return subscriber;
-      // console.log(user);
-    }
-    getLoggedInUser().catch(console.error)
+    //   const subscriber = await firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    //   console.log(subscriber)
+    //   return subscriber;
+    //   // console.log(user);
+    // }
+    // getLoggedInUser().catch(console.error)
 
   }, []);
 
 
-  if (initalizing) return null;
+  // if (initalizing) return null;
 
-  if (!user) {
+  if (!loggedIn) {
     return (
       <Stack.Navigator>
         <Stack.Screen
