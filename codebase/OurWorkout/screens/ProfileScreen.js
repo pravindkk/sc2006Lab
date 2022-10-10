@@ -5,11 +5,13 @@ import { GetUser, StoreUser } from '../components/UserComponent';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { getAuth, signOut } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native';
+import { useGlobalState } from '../components/GlobalState';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const [user, setUser] = useState('');
   const [hasLoaded, setLoaded] = useState(false);
+  const [loggedIn, setLoggedIn] = useGlobalState('loggedIn')
 
   useEffect(() => {
     const getLoggedInUser = async () => {
@@ -53,7 +55,8 @@ const ProfileScreen = () => {
               
               const auth = getAuth()
               signOut(auth).then(() => {
-                  alert("You have been signed out!")
+                  alert("You have been signed out!");
+                  setLoggedIn(false);
                   StoreUser('');
               }).catch((error) => {
                   alert(error.message)

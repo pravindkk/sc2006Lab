@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import pickImage from '../components/ImagePicker'
 import { useGlobalState } from '../components/GlobalState';
 import { updateLocalStorage } from '../components/UserComponent';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const RegisterScreen = () => {
     const [email, setEmail] = useState('');
@@ -27,7 +28,7 @@ const RegisterScreen = () => {
         
     }
 
-    registerUser = async (email, password, firstName, lastName) => {
+    const registerUser = async (email, password, firstName, lastName) => {
         const response = await fetch(image)
         const blob = await response.blob();
         if (isSelected == false) {
@@ -128,7 +129,7 @@ const RegisterScreen = () => {
             <Text style={styles.title}>
                 Create an Account
             </Text>
-            
+            <ScrollView>
             <View style={{marginTop: 60}}>
                 <View style={styles.inputContainer}>
                     <Text style={styles.inputTitle}>First Name</Text>
@@ -136,7 +137,6 @@ const RegisterScreen = () => {
                         value={firstName}
                         placeholder="Your First Name"
                         onChangeText={text => setFirstName(text)}
-                        autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
                     />
@@ -147,7 +147,6 @@ const RegisterScreen = () => {
                         value={lastName}
                         placeholder="Your Last Name"
                         onChangeText={text => setLastName(text)}
-                        autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
                     />
@@ -211,6 +210,7 @@ const RegisterScreen = () => {
                     <Text style={{fontWeight: 'bold', fontSize: 16}}>Already have an account? Login here!</Text>
                 </TouchableOpacity>
             </View>
+            </ScrollView>
         </View>
     )
 }

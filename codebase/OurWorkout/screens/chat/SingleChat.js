@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image } from 'react-native'
 import React, { useState, useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { Icon } from 'react-native-elements';
 import { firebase } from '../../config'
 import moment from 'moment'
+import MsgComponent from './MsgComponent';
+import Icon  from 'react-native-vector-icons/Ionicons';
+import { Avatar } from 'react-native-elements';
 
 const SingleChat = (props) => {
     const {receiverData, senderData} = props.route.params;
@@ -64,22 +66,38 @@ const SingleChat = (props) => {
     }
 
     const renderItem = ({ item }) => (
-        <Text>{item.message}</Text>
+        <MsgComponent 
+            sender={item.from == firebase.auth().currentUser.uid}
+            item={item}
+        />
+        
         
       );
 
     return (
-        <SafeAreaView>
-            <Text>SingleChat</Text>
-            <TouchableOpacity onPress={() => props.navigation.goBack()}>
-                <Text>Go Back</Text>
-            </TouchableOpacity>
+        <SafeAreaView style={{backgroundColor: '#fff'}}>
+            <View style={{display: 'flex',flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10, justifyContent: 'center', height: 50}}>
+                
+                <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignSelf: 'center'}} onPress={() => props.navigation.goBack()}>
+                    <Icon
+                        name="arrow-back-circle-outline"
+                        color="#72777A"
+                        size={40}
+                    />
+                </TouchableOpacity>
+                <View style={{flex: 2,flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                    <Avatar source={{uri: receiverData.photoURL}} title={receiverData.firstName} rounded size="small" />
+                        
+                    <Text style={{fontSize: 20, paddingLeft: 10, marginRight: '10%'}}>{receiverData.firstName}</Text>
+                </View>
+            </View>
             <FlatList
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item, index) => index}
                 data={allChat}
                 renderItem={renderItem}
                 inverted
+                style={{height: '90%'}}
             />
             <View
                 style={{
@@ -92,8 +110,10 @@ const SingleChat = (props) => {
             >
                 <TextInput
                     style={{
-                        backgroundColor: '#fff',
+                        backgroundColor: '#F2F4F5',
                         width: '80%',
+                        minHeight: 30,
+                        maxHeight: 60,
                         borderRadius: 25,
                         borderWidth: 0.5,
                         borderColor: '#fff',
@@ -108,9 +128,9 @@ const SingleChat = (props) => {
                 />
                 <TouchableOpacity disabled={disabled} onPress={() => {sendMsg();}}>
                     <Icon
-                        color="#000"
                         name='paper-plane-sharp'
-                        type='ionicon'
+                        color="#72777A"
+                        size={20}
                     />
                 </TouchableOpacity>
             </View>

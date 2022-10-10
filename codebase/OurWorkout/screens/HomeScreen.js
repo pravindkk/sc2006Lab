@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import Chat from '../assets/icons/Chat.svg'
 import { GetUser } from '../components/UserComponent';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 const HomeScreen = () => {
     const navigation = useNavigation()
@@ -45,7 +46,7 @@ const HomeScreen = () => {
             <Text> This is the Home Screen</Text>
             
         </SafeAreaView>
-    : <SafeAreaView style={{flex: 1}}><Text>Loading...</Text></SafeAreaView>
+    : <LoadingIndicator />
 }
 
 export default HomeScreen

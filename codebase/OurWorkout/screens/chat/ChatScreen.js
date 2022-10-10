@@ -6,6 +6,10 @@ import { useNavigation } from '@react-navigation/native'
 import { GetUser } from '../../components/UserComponent'
 import { firebase } from '../../config'
 import { ListItem, Avatar } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/Ionicons'
+import Entypo from 'react-native-vector-icons/Entypo'
+
+import LoadingIndicator from '../../components/LoadingIndicator'
 
 const ChatScreen = ({navigation}) => {
   const [userData, setUserData] = useState('');
@@ -42,7 +46,7 @@ const ChatScreen = ({navigation}) => {
   }
 
   const renderItem = ({ item }) => (
-    <ListItem bottomDivider style={styles.listStyle} onPress={() => {navigation.navigate('SingleChat', {receiverData: item, senderData: loggedInUser})}}>
+    <ListItem style={{marginTop: 10}} onPress={() => {navigation.navigate('SingleChat', {receiverData: item, senderData: loggedInUser})}}>
       <Avatar source={{uri: item.photoURL}} title={item.firstName} rounded size="medium" />
       <ListItem.Content>
         <ListItem.Title style={{fontSize: 20}}>{item.firstName} {item.lastName}</ListItem.Title>
@@ -55,24 +59,38 @@ const ChatScreen = ({navigation}) => {
 
 
   return hasLoaded ? 
-    <SafeAreaView>
-      
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text>HoMe</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('AllUsers')}>
-        <Text>all users</Text>
-      </TouchableOpacity>
+    <SafeAreaView style={{backgroundColor: "#fff", paddingTop: 30}}>
+      <View style={{flexDirection: 'row', alignItems:'center', justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, backgroundColor: '#fff'}}>
+        
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon
+              name="arrow-back-circle-outline"
+              color="#72777A"
+              size={30}
+          />
+        </TouchableOpacity>
+        <Text style={{fontSize: 30, fontWeight: 'bold', marginLeft: 10}}>Chats</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('AllUsers')}>
+          <Entypo
+            name="new-message"
+            color="#72777A"
+            size={25}
+            
+          />
+        </TouchableOpacity>
+      </View>
+
       <FlatList
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id}
         data={chatList}
         renderItem={renderItem}
+        style={{height: '100%', paddingTop: 30}}
         
       />
 
     </SafeAreaView>
-  : <SafeAreaView><Text>Loading...</Text></SafeAreaView>
+  : <LoadingIndicator />
 }
 
 export default ChatScreen

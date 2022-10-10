@@ -5,7 +5,7 @@ export default pickImage = async () => {
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 0.005,
+        quality: 0.0001,
       });
   
       console.log(result);
