@@ -14,6 +14,7 @@ import BottomNavBar from "./components/BottomNavBar";
 import ProfileInfoScreen from "./screens/profile/ProfileInfoScreen";
 import ChatScreen from "./screens/chat/ChatScreen";
 import AllUserScreen from "./screens/chat/AllUserScreen";
+import SingleChat from "./screens/chat/SingleChat";
 
 
 const Stack = createStackNavigator();
@@ -117,10 +118,16 @@ const App = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="SingleChat"
+        component={SingleChat}
+        options= {{ headerShown: false }}
+      />
+      <Stack.Screen
         name="ProfileInfo"
         component={ProfileInfoScreen}
         options={{ headerShown: false }}
       />
+
       {/* // <BottomNavBar /> */}
     </Stack.Navigator>
   )

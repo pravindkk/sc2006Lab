@@ -72,7 +72,7 @@ const AllUserScreen = ({ navigation }) => {
           firebase.database().ref('/chatlist/' + userData.uid + '/' + data.id)
             .update(data)
             .then(() => console.log('Data updated'));
-
+          navigation.navigate('SingleChat', {receiverData: data, senderData: loggedInUser})
         }
         else {
           console.log("Chat already created");
@@ -86,7 +86,7 @@ const AllUserScreen = ({ navigation }) => {
       <Avatar source={{uri: item.photoURL}} title={item.firstName} rounded size="medium" />
       <ListItem.Content>
         <ListItem.Title style={{fontSize: 20}}>{item.firstName} {item.lastName}</ListItem.Title>
-        <ListItem.Subtitle style={{fontSize: 12}}>{item.email}</ListItem.Subtitle>
+        <ListItem.Subtitle style={{fontSize: 12}} numberOfLines={1}>{item.email}</ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
     
@@ -130,21 +130,21 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center'
     },
-    listStyle: {
-      paddingVertical: 7, 
-      marginVertical: 2
-    },
-    searchInput: {
-      fontSize: 15,
-      // fontFamily: FONTS.Regular,
-      // color: COLORS.black,
-      color: '#fff',
-      opacity: 0.7,
-    },
-    searchContainer: {
-      elevation: 2,
-      // backgroundColor: COLORS.white,
-      backgroundColor: '#FFF',
-      paddingHorizontal: 10,
-    },
+    // listStyle: {
+    //   paddingVertical: 7, 
+    //   marginVertical: 2
+    // },
+    // searchInput: {
+    //   fontSize: 15,
+    //   // fontFamily: FONTS.Regular,
+    //   // color: COLORS.black,
+    //   color: '#fff',
+    //   opacity: 0.7,
+    // },
+    // searchContainer: {
+    //   elevation: 2,
+    //   // backgroundColor: COLORS.white,
+    //   backgroundColor: '#FFF',
+    //   paddingHorizontal: 10,
+    // },
 })
