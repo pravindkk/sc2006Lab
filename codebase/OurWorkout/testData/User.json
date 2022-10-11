@@ -1,7 +1,7 @@
 [
     {
         "type": "User",
-        "email" : "pravind@example.com",
+        "userEmail" : "pravind@example.com",
         "authProvider" : "email",
         "usesEmailRegistration" : "true",
         "isEmailVerified" : true,
@@ -9,13 +9,16 @@
         "userDetails": {
             "name": "Pravind Lastname",
             "firstName" : "Pravind",
-            "lastName" : "Lastname"
+            "lastName" : "Lastname",
+            "tags" : "Hobby1 Fact1 Hobby2"
         },
         "workouts" : [
-            "1cbfc82a-6c49-43c6-9f6f-bbaf3dff41d3"
+            "1cbfc82a-6c49-43c6-9f6f-bbaf3dff41d3",
+            "6836e8f1-769c-479b-bb83-4c2f31aae534"
         ],
         "likeWorkouts" : [
-            "1cbfc82a-6c49-43c6-9f6f-bbaf3dff41d3"
+            "1cbfc82a-6c49-43c6-9f6f-bbaf3dff41d3",
+            "6836e8f1-769c-479b-bb83-4c2f31aae534"
         ],
         "gymsFollowed" : [
             "6345993b-4cca-4205-9501-bb8611b03a63"
@@ -39,15 +42,16 @@
     },
     {
         "type": "User",
-        "email" : "adil@example.com",
+        "userEmail" : "adil@example.com",
         "authProvider" : "email",
         "usesEmailRegistration" : "true",
         "isEmailVerified" : true,
-        "internalUuid" : "ac16b383-2e25-4908-9d36-9fc99f5824bf",
+        "internalUuid" : "69074676-f93f-49b1-9204-71a2d84b4021",
         "userDetails": {
             "name": "Adil Hasan",
             "firstName" : "Adil",
-            "lastName" : "Hasan"
+            "lastName" : "Hasan",
+            "tags" : "Hobby3 Fact2 Hobby2"
         },
         "workouts" : [
             "6836e8f1-769c-479b-bb83-4c2f31aae8de"
@@ -77,15 +81,16 @@
     },
     {
         "type": "User",
-        "email" : "subeen.com",
+        "userEmail" : "subeen.com",
         "authProvider" : "email",
         "usesEmailRegistration" : "true",
         "isEmailVerified" : true,
-        "internalUuid" : "ac16b383-2e25-4908-9d36-9fc99f5824bf",
+        "internalUuid" : "66a5ef50-0ae5-43b8-824f-8e060a486bec",
         "userDetails": {
             "name": "Subeen Lastname",
             "firstName" : "Subeen",
-            "lastName" : "Lastname"
+            "lastName" : "Lastname",
+            "tags" : "Hobby3 Fact1 Hobby1"
         },
         "workouts" : [
         ],

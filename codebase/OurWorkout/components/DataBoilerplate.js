@@ -4,7 +4,6 @@
 */
 
 import { firebase } from '../config'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class OurObject
 {
@@ -26,21 +25,24 @@ class OurObject
     }
 }
 
-class User extends OurObject {
+export class User extends OurObject {
     static fromObj(obj)
     {
         that = super.fromObj(obj);
         that.userDetails = UserDetails.fromObj(that.userDetails);
+        that.firstName = that.userDetails.firstName;
+        that.lastname = that.userDetails.lastname;
+        that.email = that.userDetails.userEmail;
         return that;
     }
 };
-class EmailUser extends User {};
-class UserDetails extends OurObject {};
-class Workout extends OurObject {};
-class Gym extends OurObject {};
-class Chat extends OurObject {};
+export class EmailUser extends User {};
+export class UserDetails extends OurObject {};
+export class Workout extends OurObject {};
+export class Gym extends OurObject {};
+export class Chat extends OurObject {};
 
-async function putStuffInDb()
+export async function putTestDataInDb()
 {
     await putUsersInDb();
     await putChatsInDb();
@@ -115,5 +117,3 @@ async function putGymsInDb()
             });
     }
 }
-
-export const putTestDataInDb = putStuffInDb; 

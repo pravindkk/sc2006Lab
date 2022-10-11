@@ -2,16 +2,19 @@
     {
         "type": "chat",
         "internalUuid": "3985aa4e-bcf7-47e0-937d-45e383b73062",
-        "nameAkaTitle": "FirstChat"
+        "nameAkaTitle": "FirstChat",
+        "creator": "ac16b383-2e25-4908-9d36-9fc99f5824bf"
     },
     {
         "type": "chat",
         "internalUuid": "79d60447-f10e-4c4d-95fb-e745c18c6f95",
-        "nameAkaTitle": "SecondChat"
+        "nameAkaTitle": "SecondChat",
+        "creator": "ac16b383-2e25-4908-9d36-9fc99f5824bf"
     },
     {
         "type": "chat",
         "internalUuid": "3ec3e307-f471-4c33-8524-d9d4a7cd1910",
-        "nameAkaTitle": "ThirdChat"
+        "nameAkaTitle": "ThirdChat",
+        "creator": "69074676-f93f-49b1-9204-71a2d84b4021"
     }
 ]
