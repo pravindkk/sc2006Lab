@@ -27,11 +27,6 @@ export class User extends OurObject {
         this.#messagesCreated = obj.messageCreated || null;
     }
 
-    static fromObj(obj)
-    {
-        return new User(obj);
-    }
-
     toObj()
     {
         obj = {};
