@@ -4,38 +4,8 @@
 */
 
 import { firebase } from '../config'
+import { User } from '../classes/User'
 
-class OurObject
-{
-    constructor(obj) {
-        fromObj(obj);
-    }
-
-    static fromObj(obj)
-    {
-        for (var item in obj) {
-            if (item === undefined) item = null;
-        }
-        return Object.assign(this, obj);
-    }
-
-    static toObj(obj)
-    {
-        return Object.assign({}, this);
-    }
-}
-
-export class User extends OurObject {
-    static fromObj(obj)
-    {
-        that = super.fromObj(obj);
-        that.userDetails = UserDetails.fromObj(that.userDetails);
-        that.firstName = that.userDetails.firstName;
-        that.lastname = that.userDetails.lastname;
-        that.email = that.userDetails.userEmail;
-        return that;
-    }
-};
 export class EmailUser extends User {};
 export class UserDetails extends OurObject {};
 export class Workout extends OurObject {};
