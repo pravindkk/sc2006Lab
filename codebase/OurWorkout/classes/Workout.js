@@ -11,6 +11,18 @@ export class Workout
     #photoUuidsForDb;
     #likeUsers;
 
+    /** 
+     * @typedef { Object } WorkoutPOJO
+     * @property { string } internalUuid
+     * @property { string } description
+     * @property { User } user
+     * @property { string } nameAkaTitle
+     * @property { string } description
+     * @property { WorkoutExerciseInfo[] } workoutExerciseInfos
+     * @property { string[] } photoUuidsForDb
+     * @property { User[] } likeUsers
+     * @param { WorkoutPOJO } obj
+     */
     constructor(obj)
     {
         this.#internalUuid = obj.internalUuid;
@@ -22,16 +34,19 @@ export class Workout
         this.#likeUsers = obj.likeUsers;
     }
 
+    /** 
+     * @returns { WorkoutPOJO } obj
+     */
     toObj()
     {
         obj = {};
-        obj.internalUuid = this.internalUuid;
-        obj.#user = this.user;
-        obj.#nameAkaTitle = this.nameAkaTitle;
-        obj.#description = this.description;
-        obj.#workoutExerciseInfos = this.workoutExerciseInfos;
-        obj.#photoUuidsForDb = this.photoUuidsForDb;
-        obj.#likeUsers = this.likeUsers;
+        obj.internalUuid = this.#internalUuid;
+        obj.user = this.#user;
+        obj.nameAkaTitle = this.#nameAkaTitle;
+        obj.description = this.#description;
+        obj.workoutExerciseInfos = this.#workoutExerciseInfos;
+        obj.photoUuidsForDb = this.#photoUuidsForDb;
+        obj.likeUsers = this.#likeUsers;
         return obj;
     }
 
