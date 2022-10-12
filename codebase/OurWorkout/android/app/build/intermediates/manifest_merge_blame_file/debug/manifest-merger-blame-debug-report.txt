@@ -1,0 +1,251 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.ourworkout"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="31" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:5:3-75
+11-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:5:20-73
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:3:3-64
+12-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:3:20-62
+13    <uses-permission android:name="android.permission.VIBRATE" /> <!-- These require runtime permissions on M -->
+13-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:6:3-63
+13-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:6:20-61
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:8:3-77
+14-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:8:20-75
+15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- END OPTIONAL PERMISSIONS -->
+15-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:9:3-78
+15-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:9:20-76
+16    <queries>
+16-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:12:3-19:13
+17
+18        <!-- Support checking for http(s) links via the Linking API -->
+19        <intent>
+19-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:14:5-18:14
+20            <action android:name="android.intent.action.VIEW" />
+20-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:15:7-59
+20-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:15:15-56
+21
+22            <category android:name="android.intent.category.BROWSABLE" />
+22-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:16:7-68
+22-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:16:17-65
+23
+24            <data android:scheme="https" />
+24-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:17:7-38
+24-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:17:13-35
+25        </intent>
+26
+27        <package android:name="host.exp.exponent" /> <!-- Query open documents -->
+27-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-53
+27-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:18-50
+28        <intent>
+28-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:9-19:18
+29            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+29-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-79
+29-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:21-76
+30        </intent>
+31    </queries>
+32
+33    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+33-->[com.facebook.flipper:flipper:0.125.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\0fc98b11c4641f005f09c95af9e0c4a7\transformed\jetified-flipper-0.125.0\AndroidManifest.xml:16:5-76
+33-->[com.facebook.flipper:flipper:0.125.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\0fc98b11c4641f005f09c95af9e0c4a7\transformed\jetified-flipper-0.125.0\AndroidManifest.xml:16:22-73
+34    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+34-->[com.android.installreferrer:installreferrer:1.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\93df56d496ab5e3dc5986d6fcf95efe8\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:5-110
+34-->[com.android.installreferrer:installreferrer:1.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\93df56d496ab5e3dc5986d6fcf95efe8\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:22-107
+35
+36    <application
+36-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:21:3-31:17
+37        android:name="com.ourworkout.MainApplication"
+37-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:21:16-47
+38        android:allowBackup="false"
+38-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:21:162-189
+39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+39-->[androidx.core:core:1.7.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\efc5fbdc5cddabff1e6dbe6ad771c56d\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+40        android:debuggable="true"
+41        android:icon="@mipmap/ic_launcher"
+41-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:21:81-115
+42        android:label="@string/app_name"
+42-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:21:48-80
+43        android:roundIcon="@mipmap/ic_launcher_round"
+43-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:21:116-161
+44        android:theme="@style/AppTheme"
+44-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:21:190-221
+45        android:usesCleartextTraffic="true" >
+45-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:21:222-257
+46        <meta-data
+46-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:22:5-103
+47            android:name="expo.modules.updates.EXPO_UPDATE_URL"
+47-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:22:16-67
+48            android:value="YOUR-APP-URL-HERE" />
+48-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:22:68-101
+49        <meta-data
+49-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:23:5-112
+50            android:name="expo.modules.updates.EXPO_SDK_VERSION"
+50-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:23:16-68
+51            android:value="YOUR-APP-SDK-VERSION-HERE" />
+51-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:23:69-110
+52
+53        <activity
+53-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:24:5-29:16
+54            android:name="com.ourworkout.MainActivity"
+54-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:24:15-43
+55            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+55-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:24:77-154
+56            android:exported="true"
+56-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:24:276-299
+57            android:label="@string/app_name"
+57-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:24:44-76
+58            android:launchMode="singleTask"
+58-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:24:155-186
+59            android:theme="@style/Theme.App.SplashScreen"
+59-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:24:230-275
+60            android:windowSoftInputMode="adjustResize" >
+60-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:24:187-229
+61            <intent-filter>
+61-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:25:7-28:23
+62                <action android:name="android.intent.action.MAIN" />
+62-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:26:9-60
+62-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:26:17-58
+63
+64                <category android:name="android.intent.category.LAUNCHER" />
+64-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:27:9-68
+64-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:27:19-66
+65            </intent-filter>
+66        </activity>
+67        <activity
+67-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:30:5-106
+68            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+68-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:30:15-79
+69            android:exported="false" />
+69-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:30:80-104
+70
+71        <meta-data
+71-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-16:37
+72            android:name="expo.modules.updates.AUTO_SETUP"
+72-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-59
+73            android:value="false" />
+73-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-34
+74
+75        <activity
+75-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:9-32:20
+76            android:name="expo.modules.devlauncher.launcher.DevLauncherActivity"
+76-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-81
+77            android:exported="true"
+77-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-36
+78            android:launchMode="singleTask"
+78-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-44
+79            android:screenOrientation="portrait"
+79-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-49
+80            android:theme="@style/Theme.DevLauncher.LauncherActivity" >
+80-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:13-70
+81            <intent-filter>
+81-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-31:29
+82                <action android:name="android.intent.action.VIEW" />
+82-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:15:7-59
+82-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:15:15-56
+83
+84                <category android:name="android.intent.category.DEFAULT" />
+84-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:17-76
+84-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:27-73
+85                <category android:name="android.intent.category.BROWSABLE" />
+85-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:16:7-68
+85-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:16:17-65
+86
+87                <data android:scheme="expo-dev-launcher" />
+87-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:17:7-38
+87-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:17:13-35
+88            </intent-filter>
+89        </activity>
+90        <activity
+90-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:33:9-36:70
+91            android:name="expo.modules.devlauncher.launcher.errors.DevLauncherErrorActivity"
+91-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:13-93
+92            android:screenOrientation="portrait"
+92-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:35:13-49
+93            android:theme="@style/Theme.DevLauncher.ErrorActivity" />
+93-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:13-67
+94        <activity
+94-->[:expo-dev-menu] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-menu\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-23:20
+95            android:name="expo.modules.devmenu.DevMenuActivity"
+95-->[:expo-dev-menu] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-menu\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-64
+96            android:exported="true"
+96-->[:expo-dev-menu] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-menu\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-36
+97            android:launchMode="singleTask"
+97-->[:expo-dev-menu] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-menu\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-44
+98            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar" >
+98-->[:expo-dev-menu] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-menu\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-75
+99            <intent-filter>
+99-->[:expo-dev-menu] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-menu\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-22:29
+100                <action android:name="android.intent.action.VIEW" />
+100-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:15:7-59
+100-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:15:15-56
+101
+102                <category android:name="android.intent.category.DEFAULT" />
+102-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:17-76
+102-->[:expo-dev-launcher] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-dev-launcher\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:27-73
+103                <category android:name="android.intent.category.BROWSABLE" />
+103-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:16:7-68
+103-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:16:17-65
+104
+105                <data android:scheme="expo-dev-menu" />
+105-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:17:7-38
+105-->C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\android\app\src\main\AndroidManifest.xml:17:13-35
+106            </intent-filter>
+107        </activity>
+108
+109        <provider
+109-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:9-32:20
+110            android:name="expo.modules.filesystem.FileSystemFileProvider"
+110-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-74
+111            android:authorities="com.ourworkout.FileSystemFileProvider"
+111-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-74
+112            android:exported="false"
+112-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-37
+113            android:grantUriPermissions="true" >
+113-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-47
+114            <meta-data
+114-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-31:70
+115                android:name="android.support.FILE_PROVIDER_PATHS"
+115-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:17-67
+116                android:resource="@xml/file_system_provider_paths" />
+116-->[:expo-file-system] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:17-67
+117        </provider>
+118
+119        <meta-data
+119-->[:expo-modules-core] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-12:89
+120            android:name="org.unimodules.core.AppLoader#react-native-headless"
+120-->[:expo-modules-core] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-79
+121            android:value="expo.modules.adapters.react.apploader.RNHeadlessAppLoader" />
+121-->[:expo-modules-core] C:\Users\Adil Hasan\Desktop\sc2006Lab1\codebase\OurWorkout\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-86
+122
+123        <provider
+123-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\a491fe997c62915d8b5e27cb1c7ee888\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+124            android:name="androidx.startup.InitializationProvider"
+124-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\a491fe997c62915d8b5e27cb1c7ee888\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+125            android:authorities="com.ourworkout.androidx-startup"
+125-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\a491fe997c62915d8b5e27cb1c7ee888\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+126            android:exported="false" >
+126-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\a491fe997c62915d8b5e27cb1c7ee888\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+127            <meta-data
+127-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\a491fe997c62915d8b5e27cb1c7ee888\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+128                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+128-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\a491fe997c62915d8b5e27cb1c7ee888\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+129                android:value="androidx.startup" />
+129-->[androidx.emoji2:emoji2:1.0.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\a491fe997c62915d8b5e27cb1c7ee888\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+130            <meta-data
+130-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\b4f96b26a07681f60e49336d55d7ad7c\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+131                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+131-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\b4f96b26a07681f60e49336d55d7ad7c\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+132                android:value="androidx.startup" />
+132-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\Adil Hasan\.gradle\caches\transforms-3\b4f96b26a07681f60e49336d55d7ad7c\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+133        </provider>
+134    </application>
+135
+136</manifest>
