@@ -1,0 +1,110 @@
+[
+    {
+        "type": "User",
+        "userEmail" : "pravind@example.com",
+        "authProvider" : "email",
+        "usesEmailRegistration" : "true",
+        "isEmailVerified" : true,
+        "internalUuid" : "ac16b383-2e25-4908-9d36-9fc99f5824bf",
+        "userDetails": {
+            "name": "Pravind Lastname",
+            "firstName" : "Pravind",
+            "lastName" : "Lastname",
+            "tags" : "Hobby1 Fact1 Hobby2"
+        },
+        "workouts" : [
+            "1cbfc82a-6c49-43c6-9f6f-bbaf3dff41d3",
+            "6836e8f1-769c-479b-bb83-4c2f31aae534"
+        ],
+        "likeWorkouts" : [
+            "1cbfc82a-6c49-43c6-9f6f-bbaf3dff41d3",
+            "6836e8f1-769c-479b-bb83-4c2f31aae534"
+        ],
+        "gymsFollowed" : [
+            "6345993b-4cca-4205-9501-bb8611b03a63"
+        ],
+        "gymPageItemsCreated" : [
+            "baf2c2b8-e57f-41d4-a04a-311b53cd8614",
+            "f4041af0-71b7-4df8-acfc-6d38912d0ca6"
+        ],
+        "chatsIn" : [
+            "3985aa4e-bcf7-47e0-937d-45e383b73062",
+            "79d60447-f10e-4c4d-95fb-e745c18c6f95",
+            "3ec3e307-f471-4c33-8524-d9d4a7cd1910"
+        ],
+        "chatsCreated" : [
+            "3985aa4e-bcf7-47e0-937d-45e383b73062",
+            "79d60447-f10e-4c4d-95fb-e745c18c6f95"
+        ],
+        "messageCreated" : [
+            "4d98c697-376d-407b-8787-66dfaf47c56e"
+        ]
+    },
+    {
+        "type": "User",
+        "userEmail" : "adil@example.com",
+        "authProvider" : "email",
+        "usesEmailRegistration" : "true",
+        "isEmailVerified" : true,
+        "internalUuid" : "69074676-f93f-49b1-9204-71a2d84b4021",
+        "userDetails": {
+            "name": "Adil Hasan",
+            "firstName" : "Adil",
+            "lastName" : "Hasan",
+            "tags" : "Hobby3 Fact2 Hobby2"
+        },
+        "workouts" : [
+            "6836e8f1-769c-479b-bb83-4c2f31aae8de"
+        ],
+        "likeWorkouts" : [
+            "1cbfc82a-6c49-43c6-9f6f-bbaf3dff41d3",
+            "6836e8f1-769c-479b-bb83-4c2f31aae8de"
+        ],
+        "gymsFollowed" : [
+            "6345993b-4cca-4205-9501-bb8611b03a63"
+        ],
+        "gymPageItemsCreated" : [
+            "c8e5458f-68af-4842-9eb2-3d0d5036304b",
+            "a17033d9-9375-4a6e-9ee4-68f6c9e10fb2",
+            "6379f04a-b3cb-4e8d-b7c1-9896beb1183b"
+        ],
+        "chatsIn" : [
+            "3985aa4e-bcf7-47e0-937d-45e383b73062",
+            "3ec3e307-f471-4c33-8524-d9d4a7cd1910"
+        ],
+        "chatsCreated" : [
+            "3ec3e307-f471-4c33-8524-d9d4a7cd1910"
+        ],
+        "messageCreated" : [
+            "98d8024b-f2d9-41c5-b141-bf5150b6b02f"
+        ]
+    },
+    {
+        "type": "User",
+        "userEmail" : "subeen.com",
+        "authProvider" : "email",
+        "usesEmailRegistration" : "true",
+        "isEmailVerified" : true,
+        "internalUuid" : "66a5ef50-0ae5-43b8-824f-8e060a486bec",
+        "userDetails": {
+            "name": "Subeen Lastname",
+            "firstName" : "Subeen",
+            "lastName" : "Lastname",
+            "tags" : "Hobby3 Fact1 Hobby1"
+        },
+        "workouts" : [
+        ],
+        "likeWorkouts" : [
+        ],
+        "gymsFollowed" : [
+        ],
+        "gymPageItemsCreated" : [
+        ],
+        "chatsIn" : [
+        ],
+        "chatsCreated" : [
+        ],
+        "messageCreated" : [
+        ]
+    }
+]

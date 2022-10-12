@@ -1,0 +1,17 @@
+[
+    {
+        "type": "gym",
+        "internalUuid": "6345993b-4cca-4205-9501-bb8611b03a63",
+        "name": "FirstGym"
+    },
+    {
+        "type": "gym",
+        "internalUuid": "6345993b-4cca-4205-8401-bb8611b03a63",
+        "name": "SecondGym"
+    },
+    {
+        "type": "gym",
+        "internalUuid": "6836e8f1-769c-369b-bb83-4c2f31aae534",
+        "name": "ThirdGym"
+    }
+]
