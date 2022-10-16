@@ -54,7 +54,7 @@ export class UserDetails extends OurObject
     deleteTag = _ => {
         const idx = this.#tags.indexOf(_);
         if (idx > -1) {
-          array.splice(idx, 1);
+            this.#tags.splice(idx, 1);
         }
     };
 

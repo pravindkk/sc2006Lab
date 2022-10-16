@@ -1,7 +1,6 @@
 import { OurObject } from "./OurObject";
-import { User } from "./User";
 
-export class Workout
+export class Workout extends OurObject
 {
     #internalUuid;
     #user;

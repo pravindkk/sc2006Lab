@@ -14,17 +14,21 @@ export class User extends OurObject {
 
     constructor(obj)
     {
-        this.#internalUuid = obj.internalUuid || null;
-        this.#usesEmailRegistration = obj.usesEmailRegistration || null;
-        this.#authProvider = obj.authProvider || null;
-        this.#userDetails = obj.userDetails || null;
-        this.#workouts = obj.workouts || null;
-        this.#gymsFollowed = obj.gymsFollowed || null;
-        this.#likeWorkouts = obj.likeWorkouts || null;
-        this.#gymPageItemsCreated = obj.gymPageItemsCreated || null;
-        this.#chatsCreated = obj.chatsCreated || null;
-        this.#chatsIn = obj.chats || null;
-        this.#messagesCreated = obj.messageCreated || null;
+      if (this.constructor == User)
+      {
+        throw new Error("Abstract class User cannot be constructed.");
+      }
+      this.#internalUuid = obj.internalUuid || null;
+      this.#usesEmailRegistration = obj.usesEmailRegistration || null;
+      this.#authProvider = obj.authProvider || null;
+      this.#userDetails = obj.userDetails || null;
+      this.#workouts = obj.workouts || null;
+      this.#gymsFollowed = obj.gymsFollowed || null;
+      this.#likeWorkouts = obj.likeWorkouts || null;
+      this.#gymPageItemsCreated = obj.gymPageItemsCreated || null;
+      this.#chatsCreated = obj.chatsCreated || null;
+      this.#chatsIn = obj.chats || null;
+      this.#messagesCreated = obj.messageCreated || null;
     }
 
     toObj()

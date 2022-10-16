@@ -12,6 +12,14 @@ export class EmailUser extends User
         this.#userEmail = obj.#userEmail;
     }
 
+    toObj()
+    {
+        obj = super.toObj();
+        obj.isEmailVerified = this.#isEmailVerified;
+        obj.userEmail = this.#userEmail;
+        return obj;
+    }
+
     getVerificationStatus = () => this.#isEmailVerified;
     setVerificationStatus = _ => this.isEmailVerified = _;
 
