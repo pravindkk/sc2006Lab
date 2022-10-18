@@ -1,5 +1,5 @@
 import { firebase } from '../config'
-import { User } from './DataBoilerplate'
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 /**
  * @param {{nameStart: string, emailStart: string}} searchObj 
@@ -29,10 +29,10 @@ export async function searchUsers(searchObj, limit, afterSnapshot)
         .where('userDetails.tags', 'in', searchObj.tags)
     if (afterSnapshot)
         query = query.startAfter(afterSnapshot);
-    return query
-        .getDocs()
-        .then(_ => _.map(_ => User.fromUser(_)))
-        .catch(_ => alert(_));
+    let query_return = await getDocs(query);
+    let our_return = query_return.docs.map(_ => ({ id: _.id, ..._.data() }));
+    //alert(JSON.stringify(our_return));
+    return our_return;
 }
 
 /**
@@ -59,9 +59,7 @@ export async function searchChats(searchObj, limit, afterSnapshot)
     if (afterSnapshot)
         query = query.startAfter(afterSnapshot);
     query = query.limit(limit);
-    return query
-        .getDocs()
-        .then(_ => _.map(_ => User.fromUser(_)))
+    return getDocs(query)
         .catch(_ => alert(_));
 }
 
@@ -85,9 +83,7 @@ export async function searchChats(searchObj, limit, afterSnapshot)
     if (afterSnapshot)
         query = query.startAfter(afterSnapshot);
     query = query.limit(limit);
-    return query
-        .getDocs()
-        .then(_ => _.map(_ => User.fromUser(_)))
+    return getDocs(query)
         .catch(_ => alert(_));
  }
  
@@ -117,8 +113,6 @@ export async function searchWorkouts(searchObj, limit, afterSnapshot)
     if (afterSnapshot)
         query = query.startAfter(afterSnapshot);
     query = query.limit(limit);
-    return query
-        .getDocs()
-        .then(_ => _.map(_ => User.fromUser(_)))
+    return getDocs(query)
         .catch(_ => alert(_));
  }
