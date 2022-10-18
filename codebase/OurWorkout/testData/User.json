@@ -1,7 +1,7 @@
 [
     {
         "type": "User",
-        "userEmail" : "pravind@example.com",
+        "userEmail" : "pravind-stest@example.com",
         "authProvider" : "email",
         "usesEmailRegistration" : "true",
         "isEmailVerified" : true,
@@ -42,7 +42,7 @@
     },
     {
         "type": "User",
-        "userEmail" : "adil@example.com",
+        "userEmail" : "adil-stest@example.com",
         "authProvider" : "email",
         "usesEmailRegistration" : "true",
         "isEmailVerified" : true,
@@ -81,7 +81,7 @@
     },
     {
         "type": "User",
-        "userEmail" : "subeen.com",
+        "userEmail" : "subeen-stest@example.com",
         "authProvider" : "email",
         "usesEmailRegistration" : "true",
         "isEmailVerified" : true,

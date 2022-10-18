@@ -1,5 +1,5 @@
 import { firebase } from '../config'
-import { User } from 'DataBoilerplate.js'
+import { User } from './DataBoilerplate'
 
 /**
  * @param {{nameStart: string, emailStart: string}} searchObj 

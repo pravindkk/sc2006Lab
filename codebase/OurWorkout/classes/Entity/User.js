@@ -8,7 +8,8 @@ export class User extends OurObject {
     #workouts;
     #gymsFollowed;
     #likeWorkouts;
-    #gymcChatsCreated;
+    #gymPageItemsCreated;
+    #chatsCreated;
     #chatsIn;
     #messagesCreated;
 
@@ -43,7 +44,7 @@ export class User extends OurObject {
         obj.likeWorkouts = this.#likeWorkouts || null;
         obj.gymPageItemsCreated = this.#gymPageItemsCreated || null;
         obj.chatsCreated = this.#chatsCreated || null;
-        obj.chatsIn = this.#chats || null;
+        obj.chatsIn = this.#chatsIn || null;
         obj.messageCreated = this.#messagesCreated || null;
         return obj;
     }

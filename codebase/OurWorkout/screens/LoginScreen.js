@@ -4,12 +4,26 @@ import { useNavigation } from '@react-navigation/native'
 import { firebase } from '../config'
 import { StoreUser, updateLocalStorage } from '../components/UserComponent'
 import { useGlobalState } from '../components/GlobalState'
+import { putTestDataInDb } from '../components/DataBoilerplate'
 
 const LoginScreen = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loggedIn, setLoggedIn] = useGlobalState('loggedIn');
+
+    /**
+    const [testDataPutInDb, setTestDataPutInDb] = useState(false);
+
+    if (!testDataPutInDb)
+    {
+        putTestDataInDb()
+            .then(_ => alert("test data put in db"))
+            .catch(_ => alert("error!"));
+        alert(testDataPutInDb);
+        setTestDataPutInDb(true);
+    }
+    */
 
     useEffect(() => {
         StoreUser('');

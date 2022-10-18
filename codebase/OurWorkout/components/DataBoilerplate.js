@@ -4,7 +4,8 @@
 */
 
 import { firebase } from '../config'
-import { User } from '../classes/User'
+import { OurObject } from '../classes/Entity/OurObject';
+import { User } from '../classes/Entity/User'
 
 export class EmailUser extends User {};
 export class UserDetails extends OurObject {};
@@ -29,6 +30,10 @@ async function putUsersInDb()
 
     for (let user of users)
     {
+        user.email = user.userEmail;
+        user.firstName = user.userDetails.firstName;
+        user.lastnName = user.userDetails.lastName;
+        user.photoUrl = "https://firebasestorage.googleapis.com/v0/b/ourworkout-33235.appspot.com/o/users%2Fr7BAEm76jzg5QB1R591IBXiT6K43?alt=media&token=0c74ccec-d60d-40fd-b385-e0b1c232b9f2"
         await firebase.firestore().collection('users')
             .doc(user.internalUuid)
             .set(user)
