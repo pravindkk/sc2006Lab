@@ -6,8 +6,9 @@ import { firebase } from '../../config'
 import { ListItem, Avatar } from 'react-native-elements'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { SearchBar } from 'react-native-elements'
-import { GetUser } from '../../components/UserComponent'
+import { GetUser } from '../../controller/UserComponent'
 import uuid from 'react-native-uuid';
+import Icon from 'react-native-vector-icons/Ionicons'
 
 
 const AllUserScreen = ({ navigation }) => {
@@ -96,21 +97,34 @@ const AllUserScreen = ({ navigation }) => {
   
   return hasLoaded ?
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <View style={{display: 'flex',flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10, justifyContent: 'center', height: 50}}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{flex: 1, justifyContent: 'center', alignSelf: 'center'}}>
+            <Icon
+                name="arrow-back-circle-outline"
+                color="#72777A"
+                size={30}
+            />
+        </TouchableOpacity>
+        <SearchBar
+          placeholder='Search by name ...'
+          containerStyle={styles.searchContainer}
+          inputStyle={styles.searchInput}
+          onChangeText={text => searchUser(text)}
+          value={search}
+          autoCapitalize={false}
+          autoComplete={false}
+          style={{flex: 2,flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%'}}
+        />
+
+      </View>
+
+      {/* <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text>HoMe</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => getAllUsers()}>
         <Text>all</Text>
-      </TouchableOpacity>
-      <SearchBar
-        placeholder='Search by name ...'
-        containerStyle={styles.searchContainer}
-        inputStyle={styles.searchInput}
-        onChangeText={text => searchUser(text)}
-        value={search}
-        autoCapitalize={false}
-        autoComplete={false}
-      />
+      </TouchableOpacity> */}
+
       <FlatList
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id}

@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/Ionicons'
-// import { fitnessImg } from '../../assets/icons/FitnessImg'
-import LoadingIndicator from '../../components/LoadingIndicator'
+import { FitnessImg } from '../../assets/icons/FitnessImg'
+import LoadingIndicator from '../LoadingIndicator'
 import { Image } from 'react-native-elements'
 import AutoHeightImage from 'react-native-auto-height-image';
 
@@ -23,7 +23,7 @@ const ExerciseScreen = (props) => {
     })
 
     const load = async () => {
-        const img = fitnessImg[Math.floor(Math.random() * fitnessImg.length)]
+        const img = FitnessImg[Math.floor(Math.random() * FitnessImg.length)]
         setRandomImg(img);
         exerciseInfo.description = exerciseInfo.description.replace("<p>", "");
         exerciseInfo.description = exerciseInfo.description.replace("</p>", "");

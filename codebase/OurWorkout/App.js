@@ -2,20 +2,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator, HeaderStyleInterpolators } from "@react-navigation/stack";
 import React, { useState, useEffect } from 'react'
 import { firebase } from './config'
-import { StoreUser, GetUser } from "./components/UserComponent";
-import { useGlobalState } from "./components/GlobalState";
+import { StoreUser, GetUser } from "./controller/UserComponent";
+import { useGlobalState } from "./controller/GlobalState";
 
 
-import Login from './screens/LoginScreen'
-import Register from "./screens/RegisterScreen";
-import HomeScreen from "./screens/HomeScreen";
-import Header from "./components/Header";
-import BottomNavBar from "./components/BottomNavBar";
-import ProfileInfoScreen from "./screens/profile/ProfileInfoScreen";
-import ChatScreen from "./screens/chat/ChatScreen";
-import AllUserScreen from "./screens/chat/AllUserScreen";
-import SingleChat from "./screens/chat/SingleChat";
-import ExerciseScreen from './screens/excercise/ExerciseScreen'
+import Login from './boundary/auth/LoginScreen'
+import Register from "./boundary/auth/RegisterScreen";
+import HomeScreen from "./boundary/HomeScreen";
+import BottomNavBar from "./boundary/BottomNavBar";
+import ProfileInfoScreen from "./boundary/profile/ProfileInfoScreen";
+import ChatScreen from "./boundary/chat/ChatScreen";
+import AllUserScreen from "./boundary/chat/AllUserScreen";
+import SingleChat from "./boundary/chat/SingleChat";
+import ExerciseScreen from './boundary/excercise/ExerciseScreen'
+import GymScreen from "./boundary/gym/GymScreen";
 
 
 const Stack = createStackNavigator();
@@ -109,6 +109,7 @@ const App = () => {
       />
       <Stack.Screen name="ChatScreen" component={ChatScreen} options={{headerShown: false}} />
       <Stack.Screen name="ExerciseScreen" component={ExerciseScreen} options={{headerShown: false}} />
+      <Stack.Screen name="GymScreen" component={GymScreen} options={{headerShown: false}} />
       {/* <Stack.Screen
         name="Chat"
         component={ChatScreen}

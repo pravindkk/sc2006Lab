@@ -1,5 +1,5 @@
 // firebase config key setup
-
+import * as geofirestore from 'geofirestore';
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
@@ -20,10 +20,15 @@ const firebaseConfig = {
 
 let app
 firebase.initializeApp(firebaseConfig)
+const firestore = firebase.firestore();
+
+// Create a GeoFirestore reference
+const GeoFirestore = geofirestore.initializeApp(firestore);
+const geocollection = GeoFirestore.collection('gyms');
 // if (firebase.app.length == 0) {
 //     app = firebase.initializeApp(firebaseConfig);
 // } else {
 //     app = firebase.app()
 // }
 
-export { firebase };
+export { firebase, geocollection };

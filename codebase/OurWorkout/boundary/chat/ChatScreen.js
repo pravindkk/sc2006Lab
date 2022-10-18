@@ -3,13 +3,13 @@ import React, { useState, useEffect }  from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
-import { GetUser } from '../../components/UserComponent'
+import { GetUser } from '../../controller/UserComponent'
 import { firebase } from '../../config'
 import { ListItem, Avatar } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
 
-import LoadingIndicator from '../../components/LoadingIndicator'
+import LoadingIndicator from '../LoadingIndicator'
 
 const ChatScreen = ({navigation}) => {
   const [userData, setUserData] = useState('');

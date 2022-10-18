@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, Image} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { GetUser, StoreUser } from '../components/UserComponent';
+import { GetUser, StoreUser } from '../../controller/UserComponent';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { getAuth, signOut } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native';
-import { useGlobalState } from '../components/GlobalState';
+import { useGlobalState } from '../../controller/GlobalState';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
