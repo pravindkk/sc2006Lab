@@ -2,15 +2,18 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image } from 'r
 import React, { useState, useEffect } from 'react'
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native'
+import { firebase } from '../config'
 
 import Chat from '../assets/icons/Chat.svg'
 import { GetUser } from '../components/UserComponent';
 import LoadingIndicator from '../components/LoadingIndicator';
+import ExercisePreview from './excercise/ExercisePreview'
 
 const HomeScreen = () => {
     const navigation = useNavigation()
     const [user, setUser] = useState('');
     const [hasLoaded, setLoaded] = useState(false)
+    const [exerciseList, setExerciseList] = useState([])
 
     useEffect(() => {
         const getLoggedInUser = async () => {
@@ -23,15 +26,28 @@ const HomeScreen = () => {
             }
             else {
                 setUser(loggedInUser);
-                setLoaded(true);
+
             }
             
         }
         setTimeout(() => {
-            getLoggedInUser()
+            getLoggedInUser().then(getExercise);
+            
         }, 2000);
         
     }, [])
+    const getExercise = async () => {
+        await firebase.database().ref('/exercise/').on('value' , snapshot => {
+            // console.log(snapshot.val());
+            if (snapshot.val() != null) {
+                const list = Object.values(snapshot.val());
+                let value = Math.floor(Math.random()*(list.length -10))
+                setExerciseList(list.splice(value, value + 2))
+                // console.log(exerciseList);
+                setLoaded(true);
+            }
+        })
+    }
 
     return hasLoaded ?
         <SafeAreaView style={styles.container}>
@@ -44,7 +60,7 @@ const HomeScreen = () => {
                 </TouchableOpacity>
             </View>
             <Text> This is the Home Screen</Text>
-            
+            <ExercisePreview exerciseList={exerciseList} />
         </SafeAreaView>
     : <LoadingIndicator />
 }
@@ -55,7 +71,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // alignItems: 'center',
-        marginTop: 100,
+        backgroundColor: '#fff',
+        // marginTop: 100,
+        
     },
 
     button: {

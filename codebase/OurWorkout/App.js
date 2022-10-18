@@ -15,6 +15,7 @@ import ProfileInfoScreen from "./screens/profile/ProfileInfoScreen";
 import ChatScreen from "./screens/chat/ChatScreen";
 import AllUserScreen from "./screens/chat/AllUserScreen";
 import SingleChat from "./screens/chat/SingleChat";
+import ExerciseScreen from './screens/excercise/ExerciseScreen'
 
 
 const Stack = createStackNavigator();
@@ -107,6 +108,7 @@ const App = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="ChatScreen" component={ChatScreen} options={{headerShown: false}} />
+      <Stack.Screen name="ExerciseScreen" component={ExerciseScreen} options={{headerShown: false}} />
       {/* <Stack.Screen
         name="Chat"
         component={ChatScreen}
