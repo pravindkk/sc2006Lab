@@ -1,14 +1,27 @@
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MapView from 'react-native-maps';
+import { LikeGymPage } from '../../controller/GymPageController';
+import { GetUser } from '../../controller/UserComponent';
 
 const GymScreen = (props) => {
-    const { gymInfo } = props.route.params;
+    const { gymInfo, user } = props.route.params;
+    const [liked, setLiked] = useState(user.likedGyms.includes(gymInfo.id))
     useEffect(() => {
         console.log(gymInfo.coordinates);
+        console.log(user);
+        // getLoggedInUser
+        // const getLoggedInUser = async () => {
+      
+        //     const loggedInUser = await GetUser();
+        //     // setUser(loggedInUser);
+        //     console.log(loggedInUser)
+        // }
+    
+        // getLoggedInUser()
     },[])
 
     return(
@@ -26,15 +39,44 @@ const GymScreen = (props) => {
                         {gymInfo.name}
                     </Text>
                 </View>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <TouchableOpacity onPress={() => {
+                        LikeGymPage(gymInfo.id, user);
+                        setLiked(!liked)
+                    }}>
+                        {liked ? 
+                            <Icon
+                                name="heart-sharp"
+                                color="#72777A"
+                                size={30}
+                                style={{marginRight: 10}}
+                            />
+                        :<Icon
+                            name="heart-outline"
+                            color="#72777A"
+                            size={30}
+                            style={{marginRight: 10}}
+                        />
+                        }
+                        
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{borderRadius: 40}} 
+                        onPress={() => props.navigation.navigate("GymDiscussionScreen", {gymInfo: gymInfo})}
+                    >
+                    <Icon
+                        name="chatbubbles-outline"
+                        color="#72777A"
+                        size={30}
+                        style={{}}
+                        
+                    />
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View>
-                <Text>Address</Text>
-                <Text>{gymInfo.blockNumber} {gymInfo.streetName} {gymInfo.floorNumber}</Text>
-                {gymInfo.desc!="" ? 
-                    <View>
-                        <Text>Description</Text>
-                        <Text>{gymInfo.desc}</Text>
-                    </View>
+            <View style={{marginTop: 50}}>
+            <Text style={{fontSize: 17}}>Address: {gymInfo.blockNumber} {gymInfo.streetName} {gymInfo.floorNumber} </Text>
+            {gymInfo.desc!="" ? 
+                <Text style={{fontSize: 17, marginTop: 20}}>Description: {gymInfo.desc}</Text>
                 :<></>}
             </View>
             <MapView style={styles.map}
@@ -68,5 +110,6 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width-60,
         height: 200,
         borderRadius: 30,
+        marginTop: 50,
     }
 })

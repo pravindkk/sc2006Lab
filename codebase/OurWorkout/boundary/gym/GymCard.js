@@ -3,11 +3,11 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const GymCard = ({ item }) => {
+const GymCard = ({ item, user }) => {
     const navigation = useNavigation();
 
     const navigateToExerciseScreen = (item) => {
-        navigation.navigate("GymScreen", {gymInfo: item});
+        navigation.navigate("GymScreen", {gymInfo: item, user: user});
     }
 
     return (

@@ -16,6 +16,7 @@ import AllUserScreen from "./boundary/chat/AllUserScreen";
 import SingleChat from "./boundary/chat/SingleChat";
 import ExerciseScreen from './boundary/excercise/ExerciseScreen'
 import GymScreen from "./boundary/gym/GymScreen";
+import GymDiscussionScreen from "./boundary/gym/GymDiscussionScreen";
 
 
 const Stack = createStackNavigator();
@@ -110,6 +111,7 @@ const App = () => {
       <Stack.Screen name="ChatScreen" component={ChatScreen} options={{headerShown: false}} />
       <Stack.Screen name="ExerciseScreen" component={ExerciseScreen} options={{headerShown: false}} />
       <Stack.Screen name="GymScreen" component={GymScreen} options={{headerShown: false}} />
+      <Stack.Screen name="GymDiscussionScreen" component={GymDiscussionScreen} options={{headerShown: false}} />
       {/* <Stack.Screen
         name="Chat"
         component={ChatScreen}

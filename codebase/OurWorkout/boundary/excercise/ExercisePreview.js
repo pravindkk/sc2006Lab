@@ -19,11 +19,6 @@ const ExercisePreview = ({ exerciseList }) => {
         // }
     }, [])
 
-    const navFunction = () => {
-        navigation.navigate("ExerciseScreen");
-        console.log('help');
-      };
-
     const renderItem = ({ item }) => (
         <ExerciseCard item={item} />
       );

@@ -138,7 +138,7 @@ const HomeScreen = () => {
                     </TouchableOpacity>
                 </View>
                 <ExercisePreview exerciseList={exerciseList} />
-                <GymPreview gymList={gymList} />
+                <GymPreview gymList={gymList} user={user} />
                 
             </View>
         </SafeAreaView>

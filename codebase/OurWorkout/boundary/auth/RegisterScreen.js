@@ -74,6 +74,7 @@ const RegisterScreen = () => {
                             lastName: lastName,
                             email: email,
                             photoURL: url,
+                            likedGyms: [],
                         }).then(async() => {
                             await updateLocalStorage(userCredential.user.uid).then(setLoggedIn(true));
                             
