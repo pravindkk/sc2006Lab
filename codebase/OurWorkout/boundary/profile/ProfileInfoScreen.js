@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React, { useState, useEffect} from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { GetUser } from '../../components/UserComponent'
-import ProfileInfo from '../../components/profileinfo/ProfileInfo'
-import EditProfileInfo from '../../components/profileinfo/EditProfileInfo'
+import { GetUser } from '../../controller/UserComponent'
+import ProfileInfo from './ProfileInfo'
+import EditProfileInfo from './EditProfileInfo'
 
 const ProfileInfoScreen = ({ navigation, route }) => {
     const [edit, setEdit] = useState(false);

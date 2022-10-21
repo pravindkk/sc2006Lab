@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { firebase } from '../config'
-import { StoreUser, updateLocalStorage } from '../components/UserComponent'
-import { useGlobalState } from '../components/GlobalState'
-import { putTestDataInDb } from '../components/DataBoilerplate'
+import { firebase } from '../../config'
+import { StoreUser, updateLocalStorage } from '../../controller/UserComponent'
+import { useGlobalState } from '../../controller/GlobalState'
 
 const LoginScreen = () => {
     const navigation = useNavigation();

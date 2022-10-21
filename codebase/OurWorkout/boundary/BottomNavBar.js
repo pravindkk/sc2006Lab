@@ -2,21 +2,23 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { SvgFromXml, SvgUri } from 'react-native-svg';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 
-import HomeScreen from '../screens/HomeScreen'
-import ProfileScreen from '../screens/ProfileScreen'
-import SearchScreen from '../screens/SearchScreen';
+import HomeScreen from './HomeScreen'
+import ProfileScreen from './profile/ProfileScreen'
+import SearchScreen from './SearchScreen';
 
 import SearchIcon from '../assets/icons/Search.svg'
 import ChatIcon from '../assets/icons/Chat.svg'
 import ProfileIcon from '../assets/icons/Profile.svg'
 import HomeIcon from '../assets/icons/Home.svg'
-import DiscussionScreen from '../screens/DiscussionScreen';
+import DiscussionScreen from './DiscussionScreen';
 
 const Tab = createBottomTabNavigator()
 
 const BottomNavBar = () => {
+  
   return (
     <Tab.Navigator
       screenOptions={{
@@ -69,12 +71,13 @@ const BottomNavBar = () => {
         options={{
           tabBarIcon: ({focused}) => (
             <View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
-              <ChatIcon width={25} height={25} fill={focused ? '#fff': '#303437'} />
+              <Icon name='fitness-center' color={focused ? '#fff' : '#303437'} size={25} />
+              {/* <ChatIcon width={25} height={25} fill={focused ? '#fff': '#303437'} /> */}
               { focused && 
                 <Text
                   style={{color: focused ? '#fff' : '#72777A', fontSize: 12}}
                 >
-                  Search
+                  Discuss
                 </Text>
               }
             </View>
@@ -118,6 +121,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     height: 60,
     borderRadius: 24,
+    shadowRadius: 20,
+    shadowOpacity: 0.3,
+    shadowColor: '#72777A'
     
   },
   navIconGroup: {

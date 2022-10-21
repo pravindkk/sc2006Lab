@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native'
 import { React, useEffect, useState } from 'react'
-import { searchUsers } from '../../components/Search';
+import { searchUsers } from '../../controller/Search';
 
 const SearchUsersScreen = () => {
   const [nameFrag, setNameFrag] = useState("");

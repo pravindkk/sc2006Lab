@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { firebase } from '../../config'
-import { StoreUser } from '../UserComponent'
+import { StoreUser } from '../../controller/UserComponent'
 
 const EditProfileInfo = ({ user }) => {
     const [email, setEmail] = useState(user.email);

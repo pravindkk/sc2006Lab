@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native'
 import Checkbox from 'expo-checkbox';
 import React, { useState } from 'react'
-import { firebase } from '../config'
+import { firebase } from '../../config'
 import { useNavigation } from '@react-navigation/native';
-import pickImage from '../components/ImagePicker'
-import { useGlobalState } from '../components/GlobalState';
-import { updateLocalStorage } from '../components/UserComponent';
+import pickImage from '../../controller/ImagePicker'
+import { useGlobalState } from '../../controller/GlobalState';
+import { updateLocalStorage } from '../../controller/UserComponent';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const RegisterScreen = () => {
@@ -74,6 +74,7 @@ const RegisterScreen = () => {
                             lastName: lastName,
                             email: email,
                             photoURL: url,
+                            likedGyms: [],
                         }).then(async() => {
                             await updateLocalStorage(userCredential.user.uid).then(setLoggedIn(true));
                             

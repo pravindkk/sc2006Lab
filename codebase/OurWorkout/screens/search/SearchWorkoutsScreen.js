@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { React, useEffect, useState } from 'react'
-import { searchWorkouts } from '../../components/Search';
+import { searchWorkouts } from '../../controller/Search';
 
 const SearchWorkoutsScreen = () => {
 

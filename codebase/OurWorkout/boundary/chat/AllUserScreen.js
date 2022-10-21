@@ -6,8 +6,9 @@ import { firebase } from '../../config'
 import { ListItem, Avatar } from 'react-native-elements'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { SearchBar } from 'react-native-elements'
-import { GetUser } from '../../components/UserComponent'
+import { GetUser } from '../../controller/UserComponent'
 import uuid from 'react-native-uuid';
+import Icon from 'react-native-vector-icons/Ionicons'
 
 
 const AllUserScreen = ({ navigation }) => {
@@ -96,21 +97,31 @@ const AllUserScreen = ({ navigation }) => {
   
   return hasLoaded ?
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text>HoMe</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => getAllUsers()}>
-        <Text>all</Text>
-      </TouchableOpacity>
-      <SearchBar
-        placeholder='Search by name ...'
-        containerStyle={styles.searchContainer}
-        inputStyle={styles.searchInput}
-        onChangeText={text => searchUser(text)}
-        value={search}
-        autoCapitalize={false}
-        autoComplete={false}
-      />
+      <View style={styles.nav}>
+        <View style={{flex: 1}} >
+          <TouchableOpacity onPress={() => navigation.goBack()} >
+              <Icon
+                  name="arrow-back-circle-outline"
+                  color="#72777A"
+                  size={30}
+              />
+          </TouchableOpacity>
+        </View>
+        <View style={{flex: 10}}>
+          <SearchBar
+            placeholder='Search by name ...'
+            containerStyle={styles.searchContainer}
+            inputStyle={styles.searchInput}
+            onChangeText={text => searchUser(text)}
+            value={search}
+            autoCapitalize={false}
+            autoComplete={false}
+          />
+        </View>
+
+
+      </View>
+
       <FlatList
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id}
@@ -128,23 +139,35 @@ export default AllUserScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+    },
+    nav: {
+      display: 'flex',
+      flexDirection: 'row', 
+      alignItems: 'center', 
+      paddingLeft: 10, 
+      paddingRight: 10, 
+      justifyContent: 'space-around', 
+      height: 50,
     },
     // listStyle: {
     //   paddingVertical: 7, 
     //   marginVertical: 2
     // },
-    // searchInput: {
-    //   fontSize: 15,
-    //   // fontFamily: FONTS.Regular,
-    //   // color: COLORS.black,
-    //   color: '#fff',
-    //   opacity: 0.7,
-    // },
-    // searchContainer: {
-    //   elevation: 2,
-    //   // backgroundColor: COLORS.white,
-    //   backgroundColor: '#FFF',
-    //   paddingHorizontal: 10,
-    // },
+    searchInput: {
+      fontSize: 15,
+      // fontFamily: FONTS.Regular,
+      // color: COLORS.black,
+      color: '#fff',
+      opacity: 0.7,
+    },
+    searchContainer: {
+      elevation: 2,
+      // backgroundColor: COLORS.white,
+      backgroundColor: '#FFF',
+      paddingHorizontal: 10,
+      borderRadius: 20,
+      borderColor: '#fff',
+    },
 })

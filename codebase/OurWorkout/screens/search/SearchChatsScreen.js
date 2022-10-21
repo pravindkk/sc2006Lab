@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { React, useEffect, useState } from 'react'
-import { searchChats } from '../../components/Search';
+import { searchChats } from '../../controller/Search';
 
 const SearchChatsScreen = () => {
 

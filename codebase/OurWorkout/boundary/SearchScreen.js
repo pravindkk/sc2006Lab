@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { React, useEffect, useState } from 'react'
 
-import { putTestDataInDb } from '../components/DataBoilerplate';
+import { putTestDataInDb } from '../controller/DataBoilerplate';
 
-import { searchUsers, searchChats, searchGyms, searchWorkouts } from '../components/Search';
-import SearchUsersScreen from './search/SearchUsersScreen';
-import SearchGymsScreen from './search/SearchGymsScreen';
-import SearchWorkoutsScreen from './search/SearchWorkoutsScreen';
-import SearchChatsScreen from './search/SearchChatsScreen';
+import { searchUsers, searchChats, searchGyms, searchWorkouts } from '../controller/Search';
+import SearchUsersScreen from '../screens/search/SearchUsersScreen';
+import SearchGymsScreen from '../screens/search/SearchGymsScreen';
+import SearchWorkoutsScreen from '../screens/search/SearchWorkoutsScreen';
+import SearchChatsScreen from '../screens/search/SearchChatsScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
