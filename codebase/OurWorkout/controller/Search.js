@@ -1,5 +1,6 @@
 import { firebase } from '../config'
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, onSnapshot } from "firebase/firestore";
+import elasticlunr from "../node_modules/elasticlunr/release/elasticlunr"
 
 /**
  * @param {{nameStart: string, emailStart: string}} searchObj 
@@ -8,31 +9,74 @@ import { collection, query, where, getDocs } from "firebase/firestore";
  * @param {QuerySnapshot} afterSnapshot
  * @returns 
  */
+
+elasticlunr.clearStopWords();
+let alreadySetup = false;
+let unsubscribe = _ => _;
+const index = elasticlunr(function () {
+    this.addField('name');
+    this.addField('email');
+    this.addField('tags');
+    this.addField('uuid');
+    this.setRef('id');
+});
+const docs_store = [];
+
+const hashCode = function(that) {
+    var hash = 0,
+      i, chr;
+    if (that.length === 0) return hash;
+    for (i = 0; i < that.length; i++) {
+      chr = that.charCodeAt(i);
+      hash = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return Math.round(hash);
+  }
+
+async function setup_lunr(docs)
+{
+    if (unsubscribe) unsubscribe();
+
+    let query = firebase.firestore().collection('users');
+    const unsubscribe = await onSnapshot(query, (snapshot) => {
+        snapshot.docChanges().forEach((change) =>
+        {
+            if (change.type === "added") {
+                let data = change.doc.data();
+                let to_be_added = {
+                    "id": docs_store.length,
+                    "uuid": data.internalUuid,
+                    "name": data.firstName + ' ' + data.lastName,
+                    "email": data.email || data.userEmail,
+                    "tags": data.userDetails ? data.userDetails.tags : "undefined"
+                };
+                docs_store.push(to_be_added);
+                index.addDoc(docs_store[docs_store.length-1]);                
+            } 
+        });
+    });
+    alreadySetup = true;
+}
+
 export async function searchUsers(searchObj, limit, afterSnapshot)
 {
+    if (!alreadySetup)
+        await setup_lunr();
+
     if (!searchObj.nameStart && !searchObj.emailStart && !searchObj.tags)
         return;
     if (!limit)
         limit = 10;
-    let query = firebase.firestore().collection('users');
-    if (searchObj.nameStart)
-        query = query
-            .where('userDetails.name', '>=', searchObj.nameStart)
-            .where('userDetails.name', '<=', searchObj.nameStart+ '\uf8ff');
-    if (searchObj.emailStart)
-        query = query
-            .where('userEmail', '>=', searchObj.emailStart)
-            .where('userEmail', '<=', searchObj.emailStart+ '\uf8ff');
-            if (searchObj.emailStart)
-    if (searchObj.tags)    
-    query = query
-        .where('userDetails.tags', 'in', searchObj.tags)
-    if (afterSnapshot)
-        query = query.startAfter(afterSnapshot);
-    let query_return = await getDocs(query);
-    let our_return = query_return.docs.map(_ => ({ id: _.id, ..._.data() }));
-    //alert(JSON.stringify(our_return));
-    return our_return;
+    
+    let our_return = index.search([
+        searchObj.nameStart,
+        searchObj.emailStart,
+        searchObj.tags ? searchObj.tags.join(" ") : ""
+    ].join(""), {expand: true});
+    
+    //return our_return;
+    return our_return.map(_ => docs_store[parseInt(_["ref"])]);
 }
 
 /**

@@ -26,9 +26,9 @@ const SearchUsersScreen = () => {
   return (
     <View>
       <Text>SearchUsersScreen</Text>
-      <TextInput name="nameFrag" placeholder="Name" value={nameFrag}
+      <TextInput name="nameFrag" placeholder="The user's name" value={nameFrag}
         onChangeText={changeHandler(setNameFrag)} />
-      <TextInput name="emailFrag" placeholder="email" value={emailFrag}
+      <TextInput name="emailFrag" placeholder="The user's email address" value={emailFrag}
         onChangeText={changeHandler(setEmailFrag)} />
       <Text>{JSON.stringify(searchData)}</Text>
     </View>
