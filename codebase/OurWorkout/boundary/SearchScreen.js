@@ -15,8 +15,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 const Tab = createMaterialTopTabNavigator();
 
 const SearchScreen = () => {
-  if (SearchUsersScreen == undefined) alert("undefined!");
-
   return (
     <NavigationContainer  independent={true}>
       <Text>SearchScreen</Text>
