@@ -1,30 +1,33 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import { Avatar, ListItem } from 'react-native-elements';
 import React from 'react'
-import TimeDelivery from './TimeDelivery'
-import { Avatar, ListItem } from 'react-native-elements'
-import moment from 'moment'
+import moment from 'moment';
 
-const MsgComponent = (props) => {
-    const { sender, item } = props
-    return (
+const GymDiscussionMsgComponent = (props) => {
+    const {sender, item} = props;
+
+    return  (
         <ListItem>
-            <Avatar />
-            <ListItem.Content 
-                right={sender} 
-                style={{backgroundColor: sender ? '#303437' : '#fff', padding: 10, borderRadius: 20}}
+            <Avatar source={{uri: item.user.photoURL}} title={item.user.firstName} rounded size="small" />
+            <ListItem.Content>
+                <ListItem.Subtitle style={{fontSize: 10}}>{item.user.firstName}</ListItem.Subtitle>
                 
-            >
+                {item.msgType == 'picture' ? 
+                <Image source={{uri: item.img}} style={{width: Dimensions.get('window').width/2+10, height: 120, resizeMode: 'stretch'}} />
+                    
+                :
+                <ListItem.Title right={true} style={{color: '#000', fontSize: 14}}>{item.message}</ListItem.Title>
+                }
+                <ListItem.Subtitle style={{fontSize: 10, marginTop: 5}}>{moment(item.sendTime).format('D/M h:mm a')}</ListItem.Subtitle>
                 
-                <ListItem.Title right={true} style={{color: sender ? '#fff' : '#303437', fontSize: 14}}>{item.message}</ListItem.Title>
-                <ListItem.Subtitle style={{fontSize: 10, color: sender ? '#fff' : '#303437'}}>{moment(item.sendTime).format('D/M h:mm a')}</ListItem.Subtitle>
             </ListItem.Content>
         </ListItem>
-        // <Pressable
-        //     style={{ marginVertical: 0 }}
-        // >
+    )
+        // <Pressable style={{ marginVertical: 0 }}>
         //     <View
         //         style={sender ? styles.right : styles.left}
         //     />
+        //     <Text>{item.user.firstName}</Text>
         //     <View
         //         style={[styles.masBox, {alignSelf: sender ? 'flex-end' : 'flex-start', backgroundColor: sender ? '#303437' : "#F2F4F5", flexDirection: 'row'}]}
         //     >
@@ -37,10 +40,10 @@ const MsgComponent = (props) => {
         //         /> */}
         //     </View>
         // </Pressable>
-    )
+    
 }
 
-export default MsgComponent
+export default GymDiscussionMsgComponent
 
 const styles = StyleSheet.create({
     masBox: {
@@ -51,7 +54,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         padding: 10,
         borderRadius: 24,
-        minWidth: 200,
+        minWidth: 150,
         maxWidth: 400,
 
         // outerHeight: 30,

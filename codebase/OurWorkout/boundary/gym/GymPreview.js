@@ -6,9 +6,6 @@ import { FlatList } from 'react-native-gesture-handler'
 import GymCard from './GymCard'
 
 const GymPreview = ({ gymList, user }) => {
-    useEffect(() => {
-        console.log("this is the gym list: ", gymList);
-    },[])
     const renderItem = ({ item }) => (
         <GymCard item={item} user={user} />
     )

@@ -61,7 +61,7 @@ const GymScreen = (props) => {
                         
                     </TouchableOpacity>
                     <TouchableOpacity style={{borderRadius: 40}} 
-                        onPress={() => props.navigation.navigate("GymDiscussionScreen", {gymInfo: gymInfo})}
+                        onPress={() => props.navigation.navigate("GymDiscussionScreen", {gymInfo: gymInfo, user: user})}
                     >
                     <Icon
                         name="chatbubbles-outline"

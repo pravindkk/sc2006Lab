@@ -23,6 +23,7 @@ const SingleChat = (props) => {
             firebase.database().ref('/messages/' + receiverData.roomId)
                 .on('child_added', snapshot => {
                     setAllChat((state) => [snapshot.val(), ...state]);
+                    console.log("Hell there",allChat);
                 })
         return () => firebase.database().ref('/messages/' + receiverData.roomId).off('child_added', onChildAdd);
         

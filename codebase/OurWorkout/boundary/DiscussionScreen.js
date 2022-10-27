@@ -3,78 +3,83 @@ import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import LoadingIndicator from './LoadingIndicator';
 import { GetUser } from '../controller/UserComponent';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { firebase } from '../config'
+import { ListItem } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 const DiscussionScreen = () => {
+  const navigation = useNavigation();
   const [user, setUser] = useState('');
+  const [gymList, setGymList] = useState([]);
   const [hasLoaded, setLoaded] = useState(false);
-  const [gymList, setGymList] = useState([]); 
 
   useEffect(() => {
-    const startup = async () => {
-      await getLoggedInUser()
-      
-    }
-
-
-    startup().then(() => {
-      
-      console.log("This is the liked gym list",gymList);
-    });
-    
+    getLoggedInUser().then();
   },[])
-  const getGymList = async(user) => {
-    console.log(user);
-    const snapshot = await firebase.firestore().collection('gyms')
-                      .where(firebase.firestore.FieldPath.documentId(), 'in', user.likedGyms).get();
-    console.log(snapshot.docs[0].data());
-    snapshot.docs.map(item => {
-      setGymList(arr => [...arr, item.data()]);
-    })
-    setLoaded(true)
-    
-    // const snapshot = await firebase
-    // .firestore()
-    //     .collection('gyms')
-    //     .where(firebase.firestore.FieldPath.documentId(), 'in', user.likedGyms)
-    //     .get();
-    // console.log(snapshot.docs[0].data());
-    // snapshot.docs.map(doc => {
-    //   setGymList( arr => [...arr, doc.data()]);
-    // })
-    // console.log(gymList);
-  }
+
   const getLoggedInUser = async () => {
-    // setGymList([]);
-    const loggedInUser = await GetUser();
-    console.log(loggedInUser);
-    if (loggedInUser == ''){
+    setGymList([]);
+    await GetUser().then(async (user) => {
+      setUser(user);
+      console.log("Discusion Screen user: ",user);
+      console.log("This is the user gym",user.likedGyms);
+      await getLikedGyms(user).then(console.log("Final gymList",gymList));
+    })
+
+  }
+
+  const getLikedGyms = async (user) => {
+    await firebase.firestore().collection('gyms')
+    .where(firebase.firestore.FieldPath.documentId(), 'in', user.likedGyms).get()
+    .then((snapshot) => {
+      console.log(snapshot.docs[0].data());
+      snapshot.docs.forEach(doc => {
+        setGymList( arr => [...arr, doc.data()]);
+      })
+      setLoaded(true);
+      
+    })
+    .catch((err) => {
+      setGymList([]);
+      setLoaded(true);
+    });
+
+
+  }
+
+  const navigateToExerciseScreen = (item) => {
+    navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user});
+  }
+
+  const renderItem = ({ item }) => (
+    // <TouchableOpacity onPress={() => navigateToExerciseScreen(item)} style={styles.button}>
+    //   <Text>{item.name}</Text>
+    // </TouchableOpacity>
+    <ListItem style={styles.listStyle} onPress={() => {navigateToExerciseScreen(item)}}>
+      
+      <ListItem.Content>
+        <ListItem.Title style={{fontSize: 16}}>{item.name}</ListItem.Title>
         
-        setLoaded(false);
-    }
-    else {
-        setUser(loggedInUser);
-        getGymList(loggedInUser);
-    }
-    // console.log(gymList);
-  }
+      </ListItem.Content>
+    </ListItem>
+  )
 
-  const renderItem = ({item}) => {
-    <Text>{item.name}</Text> 
-  }
-
-  return hasLoaded ? 
+  return hasLoaded ?
     <SafeAreaView style={styles.container}>
       <View style={{padding: 30}}>
-        <Text style={styles.title}>Followed Gyms</Text>
-        {/* <FlatList
+        <Text style={styles.title}>Liked Gyms</Text>
+        <FlatList
+          horizontal={false}
           showsVerticalScrollIndicator={false}
           keyExtractor={item => item.id}
           data={gymList}
           renderItem={renderItem}
-        /> */}
-        <Text>Hellp</Text>
+          style={{marginTop: 50}}
+          // contentContainerStyle={{alignSelf: 'center', flex: 1}}
+            
+        />
+        
       </View>
     </SafeAreaView>
   : <LoadingIndicator />
@@ -90,5 +95,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-},
+  },
+  listStyle: {
+    padding: 5,
+    paddingLeft: 0,
+
+  }
 })
