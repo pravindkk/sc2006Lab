@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import HomeScreen from './HomeScreen'
 import ProfileScreen from './profile/ProfileScreen'
-import SearchScreen from './SearchScreen';
+import SearchScreen from './search/SearchScreen';
 
 import SearchIcon from '../assets/icons/Search.svg'
 import ChatIcon from '../assets/icons/Chat.svg'

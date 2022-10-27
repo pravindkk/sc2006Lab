@@ -69,7 +69,7 @@ const ChatScreen = ({navigation}) => {
               size={30}
           />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: 'bold', marginLeft: 10}}>Chats</Text>
+        <Text style={{fontSize: 30, fontWeight: 'bold'}}>Chats</Text>
         <TouchableOpacity onPress={() => navigation.navigate('AllUsers')}>
           <Entypo
             name="new-message"

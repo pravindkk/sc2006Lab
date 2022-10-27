@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { GetUser } from '../../controller/UserComponent'
 import ProfileInfo from './ProfileInfo'
 import EditProfileInfo from './EditProfileInfo'
+import Icon  from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicon  from 'react-native-vector-icons/Ionicons';
 
 const ProfileInfoScreen = ({ navigation, route }) => {
     const [edit, setEdit] = useState(false);
@@ -26,10 +28,18 @@ const ProfileInfoScreen = ({ navigation, route }) => {
         <>
             <SafeAreaView style={{flexDirection: 'row', justifyContent: 'space-between', padding: 20}}>
                 <TouchableOpacity onPress={() => navigation.goBack()} >
-                    <Text> Go Back</Text>
+                    <Ionicon
+                        name="arrow-back-circle-outline"
+                        color="#72777A"
+                        size={30}
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setEdit(!edit)} >
-                    <Text>Edit?</Text>
+                    <Icon
+                        name={edit ? "account-check" : "account-edit"}
+                        color="#72777A"
+                        size={30}
+                    />
                 </TouchableOpacity>
             </SafeAreaView>
             {isLoaded ? 

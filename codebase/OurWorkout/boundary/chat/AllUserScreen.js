@@ -34,12 +34,12 @@ const AllUserScreen = ({ navigation }) => {
   const getAllUsers = async () => {
     const snapshot = await firebase.firestore().collection('users').where("email", "!=", firebase.auth().currentUser.email).get()
     const tempDoc = []
-      snapshot.forEach((doc) => {
-         tempDoc.push({ id: doc.id, ...doc.data() })
-      })
-      setAllUser(tempDoc);
-      setAllUserBackup(tempDoc);
-      console.log(tempDoc)
+    snapshot.forEach((doc) => {
+        tempDoc.push({ id: doc.id, ...doc.data() })
+    })
+    setAllUser(tempDoc);
+    setAllUserBackup(tempDoc);
+    console.log(tempDoc)
 
   }
 

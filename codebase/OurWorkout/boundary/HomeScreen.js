@@ -51,7 +51,7 @@ const HomeScreen = () => {
         // Create a GeoFirestore reference
         const GeoFirestore = geofirestore.initializeApp(firestore);
         const geocollection = GeoFirestore.collection('gyms');
-        const query = geocollection.near({ center: new firebase.firestore.GeoPoint(location.coords.latitude, location.coords.longitude), radius: 10, limit: 10 });
+        const query = geocollection.near({ center: new firebase.firestore.GeoPoint(location.coords.latitude, location.coords.longitude), radius: 10, limit: 9 });
         query.get().then(async (value) => {
             // All GeoDocument returned by GeoQuery, like the GeoDocument added above
             value.docs.forEach(item => {
@@ -62,8 +62,11 @@ const HomeScreen = () => {
             const snapshot = await firebase
                             .firestore()
                                 .collection('gyms')
-                                .where(firebase.firestore.FieldPath.documentId(), 'in', gymsId)
-                                .get();
+                                .where(firebase.firestore.FieldPath.documentId(), 'in', gymsId).limit(10)
+                                .get()
+                                .catch(err => {
+                                    alert(err.message)
+                                })
             // firebase.firestore().collection('gyms').
             // snapshot.forEach((doc) => {
             //     // tempDoc.push({ id: doc.id, ...doc.data() })

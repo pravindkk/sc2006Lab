@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, Platform, KeyboardAvoidingView } from 'react-native'
 import React, { useState, useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,22 +8,28 @@ import MsgComponent from './MsgComponent';
 import Icon  from 'react-native-vector-icons/Ionicons';
 import { Avatar } from 'react-native-elements';
 
+
 const SingleChat = (props) => {
+    
     const {receiverData, senderData} = props.route.params;
-    const { navigation } = props.navigation;
+    // const { navigation } = props.navigation;
 
     console.log('received data: ', receiverData);
 
     const [msg, setMsg] = useState('');
     const [disabled, setDisabled] = useState(false);
     const [allChat, setAllChat] = React.useState([]);
+    const [keyboardFocused, setKeyboardFocused] = useState(false);
+
+    // const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
     useEffect(() => {
+        setAllChat([]);
         const onChildAdd = 
             firebase.database().ref('/messages/' + receiverData.roomId)
                 .on('child_added', snapshot => {
                     setAllChat((state) => [snapshot.val(), ...state]);
-                    console.log("Hell there",allChat);
+                    // console.log("Hell there",allChat);
                 })
         return () => firebase.database().ref('/messages/' + receiverData.roomId).off('child_added', onChildAdd);
         
@@ -92,13 +98,16 @@ const SingleChat = (props) => {
                     <Text style={{fontSize: 20, paddingLeft: 10, marginRight: '10%'}}>{receiverData.firstName}</Text>
                 </View>
             </View>
+            <KeyboardAvoidingView behavior='position' >
             <FlatList
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item, index) => index}
                 data={allChat}
                 renderItem={renderItem}
                 inverted
-                style={{height: '90%'}}
+                style={{height: keyboardFocused ? '90%': '90%'}}
+                StickyHeaderComponent={(<Text>Hello</Text>)}
+                
             />
             <View
                 style={{
@@ -119,8 +128,10 @@ const SingleChat = (props) => {
                         borderWidth: 0.5,
                         borderColor: '#fff',
                         paddingHorizontal: 15,
+                        paddingBottom: 0,
                         color: '#000',
                     }}
+                    onFocus={() => {setKeyboardFocused(!keyboardFocused)}}
                     placeholder="Type a message"
                     placeholderTextColor='#000'
                     multiline={true}
@@ -135,6 +146,7 @@ const SingleChat = (props) => {
                     />
                 </TouchableOpacity>
             </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     )
 }

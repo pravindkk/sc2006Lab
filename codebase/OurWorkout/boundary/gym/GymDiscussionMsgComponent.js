@@ -11,36 +11,15 @@ const GymDiscussionMsgComponent = (props) => {
             <Avatar source={{uri: item.user.photoURL}} title={item.user.firstName} rounded size="small" />
             <ListItem.Content>
                 <ListItem.Subtitle style={{fontSize: 10}}>{item.user.firstName}</ListItem.Subtitle>
-                
                 {item.msgType == 'picture' ? 
-                <Image source={{uri: item.img}} style={{width: Dimensions.get('window').width/2+10, height: 120, resizeMode: 'stretch'}} />
-                    
+                <Image source={{uri: item.img}} style={{width: Dimensions.get('window').width/2+10, height: 120, resizeMode: 'stretch'}} /> 
                 :
                 <ListItem.Title right={true} style={{color: '#000', fontSize: 14}}>{item.message}</ListItem.Title>
                 }
                 <ListItem.Subtitle style={{fontSize: 10, marginTop: 5}}>{moment(item.sendTime).format('D/M h:mm a')}</ListItem.Subtitle>
-                
             </ListItem.Content>
         </ListItem>
-    )
-        // <Pressable style={{ marginVertical: 0 }}>
-        //     <View
-        //         style={sender ? styles.right : styles.left}
-        //     />
-        //     <Text>{item.user.firstName}</Text>
-        //     <View
-        //         style={[styles.masBox, {alignSelf: sender ? 'flex-end' : 'flex-start', backgroundColor: sender ? '#303437' : "#F2F4F5", flexDirection: 'row'}]}
-        //     >
-        //         <Text style={{ paddingLeft: 5, color: sender ? '#fff' : '#000',flex: 1, flexWrap: 'wrap'}}>
-        //             {item.message}
-        //         </Text>
-        //         {/* <TimeDelivery
-        //             sender={sender}
-        //             item={item}
-        //         /> */}
-        //     </View>
-        // </Pressable>
-    
+    )    
 }
 
 export default GymDiscussionMsgComponent

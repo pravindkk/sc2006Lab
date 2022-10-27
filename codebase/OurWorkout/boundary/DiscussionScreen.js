@@ -56,13 +56,21 @@ const DiscussionScreen = () => {
     // <TouchableOpacity onPress={() => navigateToExerciseScreen(item)} style={styles.button}>
     //   <Text>{item.name}</Text>
     // </TouchableOpacity>
-    <ListItem style={styles.listStyle} onPress={() => {navigateToExerciseScreen(item)}}>
+
+    // <ListItem style={styles.listStyle} onPress={() => {navigateToExerciseScreen(item)}}>
       
-      <ListItem.Content>
-        <ListItem.Title style={{fontSize: 16}}>{item.name}</ListItem.Title>
+    //   <ListItem.Content>
+    //     <ListItem.Title style={{fontSize: 16}}>{item.name}</ListItem.Title>
         
-      </ListItem.Content>
-    </ListItem>
+    //   </ListItem.Content>
+    // </ListItem>
+      <ListItem bottomDivider style={{marginTop: 5}} onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
+        
+        <ListItem.Content>
+          <ListItem.Title style={{fontSize: 16}}>{item.name}</ListItem.Title>
+          
+        </ListItem.Content>
+      </ListItem>
   )
 
   return hasLoaded ?
@@ -75,7 +83,8 @@ const DiscussionScreen = () => {
           keyExtractor={item => item.id}
           data={gymList}
           renderItem={renderItem}
-          style={{marginTop: 50}}
+          style={{marginTop: 30, height: '100%'}}
+          
           // contentContainerStyle={{alignSelf: 'center', flex: 1}}
             
         />
@@ -98,7 +107,7 @@ const styles = StyleSheet.create({
   },
   listStyle: {
     padding: 5,
-    paddingLeft: 0,
+    // paddingLeft: 0,
 
   }
 })

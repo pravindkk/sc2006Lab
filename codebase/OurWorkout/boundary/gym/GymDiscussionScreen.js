@@ -39,7 +39,7 @@ const GymDiscussionScreen = (props) => {
           firebase.database().ref('/discussion/' + gymInfo.id)
               .on('child_added', snapshot => {
                   setAllChat((state) => [snapshot.val(), ...state]);
-                  console.log(allChat);
+                  // console.log(allChat);
               })
       return () => firebase.database().ref('/discussion/' + gymInfo.id).off('child_added', onChildAdd);
       
@@ -83,7 +83,7 @@ const GymDiscussionScreen = (props) => {
   }
 
   const sendMsg = (img, type) => {
-    console.log(allChat);
+    // console.log(allChat);
     if ((msg == '' || msgvalid(msg) == 0) && (type == 'text')) {
         alert('Enter something');
         return false
@@ -114,16 +114,18 @@ const GymDiscussionScreen = (props) => {
   )
   
   return (
-    <SafeAreaView style={{backgroundColor: '#fff'}}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <TouchableOpacity onPress={() => props.navigation.goBack()}>
-          <Icon
-            name="arrow-back-circle-outline"
-            color="#72777A"
-            size={30}
-          />
-        </TouchableOpacity>
-        <Text>{gymInfo.name}</Text>
+    <SafeAreaView style={{backgroundColor: '#fff', padding: 10, paddingBottom: 0}}>
+      <View style={{display: 'flex',flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10, justifyContent: 'center', height: 50}}>
+          <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignSelf: 'center'}} onPress={() => props.navigation.goBack()}>
+              <Icon
+                  name="arrow-back-circle-outline"
+                  color="#72777A"
+                  size={40}
+              />
+          </TouchableOpacity>
+          <View style={{flex: 2,flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{fontSize: 20, paddingLeft: 10, marginRight: '17%'}}>{gymInfo.name}</Text>
+          </View>
       </View>
       <FlatList
         showsVerticalScrollIndicator={false}
