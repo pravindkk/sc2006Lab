@@ -67,8 +67,8 @@ const BottomNavBar = () => {
       />
 
       <Tab.Screen
-        name="DiscussAndChat" 
-        component={DiscussionAndChatScreen}
+        name="Discuss" 
+        component={DiscussionScreen}
         options={{
           tabBarIcon: ({focused}) => (
             <View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
