@@ -5,7 +5,7 @@ import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
 import { firebase } from '../../config'
 import { ListItem, Avatar } from 'react-native-elements'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { SearchBar } from 'react-native-elements'
+import { Searchbar } from 'react-native-paper'
 import { GetUser } from '../../controller/UserComponent'
 import uuid from 'react-native-uuid';
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -45,7 +45,7 @@ const AllUserScreen = ({ navigation }) => {
 
   const searchUser = (search) => {
     setSearch(search);
-    setAllUser(allUserBackup.filter(it => it.firstName.match(search)));
+    setAllUser(allUserBackup.filter(it => it.firstName.toLowerCase().match(search)));
   }
 
   const createChatList = (data) => {
@@ -108,20 +108,19 @@ const AllUserScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={{flex: 10}}>
-          <SearchBar
-            placeholder='Search by name ...'
-            containerStyle={styles.searchContainer}
-            inputStyle={styles.searchInput}
-            onChangeText={text => searchUser(text)}
-            value={search}
-            autoCapitalize={false}
-            autoComplete={false}
-          />
+        <Searchbar
+          placeholder="Search User..."
+          onChangeText={searchUser}
+          value={search}
+          autoCapitalize={false}
+          autoComplete={false}
+          style={{shadowOpacity: 0}}
+        />
         </View>
 
 
       </View>
-
+      
       <FlatList
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id}

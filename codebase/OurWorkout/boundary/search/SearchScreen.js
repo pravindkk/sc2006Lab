@@ -2,8 +2,9 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import LoadingIndicator from '../LoadingIndicator'
 import { firebase } from '../../config'
-import { SearchBar, ListItem, Avatar } from 'react-native-elements'
+import { ListItem, Avatar } from 'react-native-elements'
 import { FlatList } from 'react-native-gesture-handler'
+import { Searchbar } from 'react-native-paper';
 
 
 const SearchScreen = () => {
@@ -30,7 +31,7 @@ const SearchScreen = () => {
 
   const searchUser = (search) => {
     setSearch(search);
-    setAllUser(allUserBackup.filter(it => it.firstName.match(search)));
+    setAllUser(allUserBackup.filter(it => it.firstName.toLowerCase().match(search)));
   }
   const renderItem = ({ item }) => (
     <ListItem bottomDivider style={styles.listStyle} onPress={() => {}}>
@@ -45,14 +46,15 @@ const SearchScreen = () => {
 
 
   return hasLoaded ?
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: '#fff'}}>
       <Text>Search Screen</Text>
-      <SearchBar
-        placeholder='Search...'
-        onChangeText={text => searchUser(text)}
+      <Searchbar
+        placeholder="Search..."
+        onChangeText={searchUser}
         value={search}
         autoCapitalize={false}
         autoComplete={false}
+        style={{shadowOpacity :0}}
       />
       <FlatList
         showsVerticalScrollIndicator={false}
@@ -60,6 +62,7 @@ const SearchScreen = () => {
         data={allUser}
         renderItem={renderItem}
       />
+      {/* {allUser.map(user => (<renderItem item={user} />))} */}
     </SafeAreaView>
   : <LoadingIndicator />
 }
