@@ -139,6 +139,7 @@ const SearchScreen = () => {
           <ExerciseCard item={exercise} />
         ))}
       </ScrollView>
+      <View style={{backgroundColor: '#fff', padding: 30}}></View>
 
     </SafeAreaView>
   : <LoadingIndicator />

@@ -15,7 +15,7 @@ const UserPage = (props) => {
           <Ionicon
             name="arrow-back-circle-outline"
             color="#72777A"
-            size={30}
+            size={35}
           />
         </TouchableOpacity>
       </View>
@@ -26,7 +26,7 @@ const UserPage = (props) => {
                     }}
                     style={{ width: 100, height: 100, borderWidth: 0, borderRadius: 60 }}
                 />
-                <Text style={styles.name}>{user.firstName}</Text>
+                <Text style={{fontSize: 30, marginBottom: 30, marginTop: 10, fontWeight: 'bold'}}>{user.firstName}</Text>
             </View>
             <View style={styles.inputContainer}>
                 <Text style={styles.inputTitle}>First Name</Text>
