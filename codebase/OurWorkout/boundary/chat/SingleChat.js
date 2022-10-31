@@ -92,10 +92,12 @@ const SingleChat = (props) => {
                         size={40}
                     />
                 </TouchableOpacity>
-                <View style={{flex: 2,flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{flex: 2 }}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate("UserPage", {user: receiverData})} style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}} >
                     <Avatar source={{uri: receiverData.photoURL}} title={receiverData.firstName} rounded size="small" />
                         
                     <Text style={{fontSize: 20, paddingLeft: 10, marginRight: '10%'}}>{receiverData.firstName}</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             <KeyboardAvoidingView behavior='position' >

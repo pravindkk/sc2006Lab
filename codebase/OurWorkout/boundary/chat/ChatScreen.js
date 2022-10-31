@@ -40,7 +40,7 @@ const ChatScreen = ({navigation}) => {
         }
         
         if (snapshot.val() != null) {
-          setChatList(Object.values(snapshot.val()))
+          setChatList(Object.values(snapshot.val()).sort())
         }
       })
   }
@@ -66,7 +66,7 @@ const ChatScreen = ({navigation}) => {
           <Icon
               name="arrow-back-circle-outline"
               color="#72777A"
-              size={30}
+              size={35}
           />
         </TouchableOpacity>
         <Text style={{fontSize: 30, fontWeight: 'bold'}}>Chats</Text>

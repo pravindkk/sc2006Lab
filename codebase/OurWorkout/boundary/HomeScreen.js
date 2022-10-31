@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { firebase } from '../config'
 import * as Location from 'expo-location';
 import * as geofirestore from 'geofirestore';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 // import firebasing from 'firebase'
 
 
@@ -19,6 +20,7 @@ const HomeScreen = () => {
     const [user, setUser] = useState('');
     const [hasLoaded, setLoaded] = useState(false);
     const [exerciseList, setExerciseList] = useState([]);
+    const [allExerciseList, setAllExerciseList] = useState([]);
     const [gymList, setGymList] = useState([]);
     const [location, setLocation] = useState(null);
 
@@ -99,6 +101,7 @@ const HomeScreen = () => {
             // console.log(snapshot.val());
             if (snapshot.val() != null) {
                 const list = Object.values(snapshot.val());
+                setAllExerciseList(list);
                 let value = Math.floor(Math.random()*(list.length -10))
                 setExerciseList(list.splice(value, value + 2))
                 // console.log(exerciseList);
@@ -128,6 +131,18 @@ const HomeScreen = () => {
                     <Text style={styles.welcomeBanner}>
                         Welcome {'\n'}Back, {user.firstName}
                     </Text>
+                    <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity onPress={() => navigation.navigate("WorkoutLog", { user: user, exerciseList: allExerciseList })} style={{justifyContent: 'center'}}>
+                        <View style={[styles.chatIconButton,{marginRight: 15}]}>
+                            <FontAwesome5Icon
+                                name="dumbbell"
+                                color="#72777A"
+                                size={25}
+                            />
+                        </View>
+                        {/* <View style={styles.chatIconButton}><Chat width={25} height={25} fill={'#72777A'} /></View> */}
+                        
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate("ChatScreen")} style={{justifyContent: 'center'}}>
                         <View style={styles.chatIconButton}>
                             <Icon
@@ -139,6 +154,8 @@ const HomeScreen = () => {
                         {/* <View style={styles.chatIconButton}><Chat width={25} height={25} fill={'#72777A'} /></View> */}
                         
                     </TouchableOpacity>
+                    </View>
+                    
                 </View>
                 <ExercisePreview exerciseList={exerciseList} />
                 <GymPreview gymList={gymList} user={user} />

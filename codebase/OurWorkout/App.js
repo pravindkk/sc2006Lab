@@ -17,6 +17,9 @@ import SingleChat from "./boundary/chat/SingleChat";
 import ExerciseScreen from './boundary/excercise/ExerciseScreen'
 import GymScreen from "./boundary/gym/GymScreen";
 import GymDiscussionScreen from "./boundary/gym/GymDiscussionScreen";
+import UserPage from "./boundary/user/UserPage";
+import WorkoutLogScreen from "./boundary/log/WorkoutLogScreen";
+import CreateWorkoutLog from "./boundary/log/CreateWorkoutLog";
 
 
 const Stack = createStackNavigator();
@@ -112,6 +115,9 @@ const App = () => {
       <Stack.Screen name="ExerciseScreen" component={ExerciseScreen} options={{headerShown: false}} />
       <Stack.Screen name="GymScreen" component={GymScreen} options={{headerShown: false}} />
       <Stack.Screen name="GymDiscussionScreen" component={GymDiscussionScreen} options={{headerShown: false}} />
+      <Stack.Screen name="UserPage" component={UserPage} options={{headerShown: false}} />
+      <Stack.Screen name="WorkoutLog" component={WorkoutLogScreen} options={{headerShown: false}} />
+      <Stack.Screen name="CreateWorkoutLog" component={CreateWorkoutLog} options={{headerShown: false}} />
       {/* <Stack.Screen
         name="Chat"
         component={ChatScreen}

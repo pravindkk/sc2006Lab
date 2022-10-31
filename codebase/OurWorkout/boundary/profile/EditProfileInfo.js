@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         alignSelf:'center',
         width: '90%',
-        backgroundColor: 'white',
+        backgroundColor: '#f2f2f2',
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 10,

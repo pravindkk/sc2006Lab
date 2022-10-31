@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import LoadingIndicator from './LoadingIndicator';
@@ -7,6 +7,8 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { firebase } from '../config'
 import { ListItem } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons'
+import { GymImg } from '../assets/icons/GymImg'
 
 const DiscussionScreen = () => {
   const navigation = useNavigation();
@@ -30,6 +32,7 @@ const DiscussionScreen = () => {
   }
 
   const getLikedGyms = async (user) => {
+    console.log(GymImg[Math.floor(Math.random() * GymImg.length)]);
     await firebase.firestore().collection('gyms')
     .where(firebase.firestore.FieldPath.documentId(), 'in', user.likedGyms).get()
     .then((snapshot) => {
@@ -53,37 +56,47 @@ const DiscussionScreen = () => {
   }
 
   const renderItem = ({ item }) => (
-    // <TouchableOpacity onPress={() => navigateToExerciseScreen(item)} style={styles.button}>
-    //   <Text>{item.name}</Text>
-    // </TouchableOpacity>
-
-    // <ListItem style={styles.listStyle} onPress={() => {navigateToExerciseScreen(item)}}>
-      
-    //   <ListItem.Content>
-    //     <ListItem.Title style={{fontSize: 16}}>{item.name}</ListItem.Title>
+    <TouchableOpacity onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
+      <View style={{borderRadius: 40, display: 'flex', alignItems: 'center', marginBottom: 20, shadowOpacity: 0.3, shadowRadius: 10}}>
         
-    //   </ListItem.Content>
-    // </ListItem>
-      <ListItem bottomDivider style={{marginTop: 5}} onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
+        <Image source={{uri: GymImg[Math.floor(Math.random() * GymImg.length)]}} style={{width: Dimensions.get('window').width/2+100, height: 170, resizeMode: 'stretch'}} />
+        <Text style={{marginTop: 20}}>{item.name}</Text>
         
-        <ListItem.Content>
-          <ListItem.Title style={{fontSize: 16}}>{item.name}</ListItem.Title>
+      </View>
+    </TouchableOpacity>
+      // <ListItem bottomDivider style={{marginTop: 5}} onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
+        
+      //   <ListItem.Content>
+      //     <ListItem.Title style={{fontSize: 16}}>{item.name}</ListItem.Title>
           
-        </ListItem.Content>
-      </ListItem>
+      //   </ListItem.Content>
+      // </ListItem>
   )
+  
 
   return hasLoaded ?
     <SafeAreaView style={styles.container}>
       <View style={{padding: 30}}>
-        <Text style={styles.title}>Liked Gyms</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent:'space-between'}}>
+          <Text style={styles.title}>Liked Gyms</Text>
+          <TouchableOpacity onPress={() => {getLoggedInUser();}}>
+            <Icon
+              name='reload-circle-outline'
+              color='#72777A'
+              size={30}
+            />
+          </TouchableOpacity>
+        </View>
+        {/* {gymList.map((item, index) => (
+          <RenderItem item={item} />
+        ))} */}
         <FlatList
           horizontal={false}
           showsVerticalScrollIndicator={false}
           keyExtractor={item => item.id}
           data={gymList}
           renderItem={renderItem}
-          style={{marginTop: 30, height: '100%'}}
+          style={{marginTop: 30, height: '87%'}}
           
           // contentContainerStyle={{alignSelf: 'center', flex: 1}}
             

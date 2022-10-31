@@ -74,9 +74,15 @@ const GymScreen = (props) => {
                 </View>
             </View>
             <View style={{marginTop: 50}}>
-            <Text style={{fontSize: 17}}>Address: {gymInfo.blockNumber} {gymInfo.streetName} {gymInfo.floorNumber} </Text>
+            <View style={styles.inputContainer}>
+                <Text style={styles.inputTitle}>Address</Text>
+                <Text>{gymInfo.blockNumber} {gymInfo.streetName} {gymInfo.floorNumber} </Text>
+            </View>
             {gymInfo.desc!="" ? 
-                <Text style={{fontSize: 17, marginTop: 20}}>Description: {gymInfo.desc}</Text>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.inputTitle}>Description</Text>
+                    <Text>{gymInfo.desc}</Text>
+                </View>
                 :<></>}
             </View>
             <MapView style={styles.map}
@@ -111,5 +117,21 @@ const styles = StyleSheet.create({
         height: 200,
         borderRadius: 30,
         marginTop: 50,
-    }
+        
+    },
+    inputContainer: {
+        alignSelf:'center',
+        width: '90%',
+        backgroundColor: '#f2f2f2',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginTop: 10,
+        borderWidth: 1,
+        borderColor: "#CFD3D4"
+    },
+    inputTitle: {
+        color: "#5E6366",
+        marginBottom: 5
+    },
 })

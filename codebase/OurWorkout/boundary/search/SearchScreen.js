@@ -7,6 +7,8 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import { Searchbar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native'
 import { GetUser } from '../../controller/UserComponent'
+import FontAwesome from 'react-native-vector-icons/FontAwesome5'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 
 const SearchScreen = () => {
@@ -65,11 +67,12 @@ const SearchScreen = () => {
     setAllGym(allGymBackup.filter(it => it.name.toLowerCase().match(search.toLowerCase())));
     setExerciseList(exerciseListBackup.filter(it => it.name.toLowerCase().match(search.toLowerCase())));
   }
+
   const UserCard = ({ item }) => (
-    <ListItem bottomDivider style={styles.listStyle} onPress={() => {}}>
+    <ListItem bottomDivider style={styles.listStyle} onPress={() => {navigation.navigate("UserPage", {user: item})}}>
       <Avatar source={{uri: item.photoURL}} title={item.firstName} rounded size="medium" />
       <ListItem.Content>
-        <ListItem.Title style={{fontSize: 20}}>{item.firstName} {item.lastName}</ListItem.Title>
+        <ListItem.Title style={{fontSize: 14}}>{item.firstName} {item.lastName}</ListItem.Title>
         <ListItem.Subtitle style={{fontSize: 12}} numberOfLines={1}>{item.email}</ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
@@ -77,11 +80,16 @@ const SearchScreen = () => {
   );
 
   const GymCard = ({ item }) => (
-    // <Text>{item.name}</Text>
     <ListItem bottomDivider style={styles.listStyle} onPress={() => {navigation.navigate("GymScreen", {gymInfo: item, user: user})}}>
-      <Avatar size="medium" />
+      <View style={{backgroundColor: '#303437', padding: 10, borderRadius: 90}}>
+        <AntDesign
+          name='home'
+          size={30}
+          color="#fff"
+        />
+      </View>
       <ListItem.Content>
-        <ListItem.Title style={{fontSize: 20}}>{item.name}</ListItem.Title>
+        <ListItem.Title style={{fontSize: 14}}>{item.name}</ListItem.Title>
         <ListItem.Subtitle style={{fontSize: 12}} numberOfLines={1}>{item.streetName}</ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
@@ -90,9 +98,17 @@ const SearchScreen = () => {
   const ExerciseCard = ({ item }) => (
     // <Text>{item.name}</Text>
     <ListItem bottomDivider style={styles.listStyle} onPress={() => {navigation.navigate("ExerciseScreen", {exerciseInfo: item})}}>
-      <Avatar size="medium" />
+      {/* <Avatar size="medium" />*/}
+      <View style={{backgroundColor: '#303437', padding: 10, borderRadius: 90}}>
+      <FontAwesome
+        name='dumbbell'
+        size={25}
+        color="#fff"
+        style={{transform: [{ rotate: '-20deg'}]}}
+      />
+      </View>
       <ListItem.Content>
-        <ListItem.Title style={{fontSize: 20}}>{item.name}</ListItem.Title>
+        <ListItem.Title style={{fontSize: 14}}>{item.name}</ListItem.Title>
         {/* <ListItem.Subtitle style={{fontSize: 12}} numberOfLines={1}>{item.streetName}</ListItem.Subtitle> */}
       </ListItem.Content>
     </ListItem>
@@ -109,11 +125,12 @@ const SearchScreen = () => {
         autoComplete={false}
         style={{shadowOpacity :0}}
       />
-      <ScrollView style={{height: '90%'}}>
+      <ScrollView style={{height: '80%'}}>
 
         {allUser.slice(0, 3).map((user, index) => (
           <UserCard item={user} />
         ))}
+        
         {allGym.slice(0, 3).map((gym, index) => (
           // <Text>{gym.name}</Text> 
           <GymCard item={gym} />
