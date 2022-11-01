@@ -20,6 +20,20 @@ export const StoreUser = async (value) => {
     }
   }
 
+  export const getSettingsForUser = (user) => {
+    return user.settings != undefined ?
+      user.settings : { allowNotifications: true };
+  }
+
+  export const setSettingsForUser = async (uid, settings) => {
+    const user = await GetUser();
+    user.settings = settings;
+    await firebase.firestore().collection('users')
+      .doc(uid)
+      .set(user);
+    updateLocalStorage(uid);
+  }
+
   export const updateLocalStorage = async (uid) => {
     await firebase.firestore().collection('users').doc(uid).get()
     .then(async (snapshot) => {

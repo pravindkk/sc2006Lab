@@ -11,6 +11,7 @@ import Register from "./boundary/auth/RegisterScreen";
 import HomeScreen from "./boundary/HomeScreen";
 import BottomNavBar from "./boundary/BottomNavBar";
 import ProfileInfoScreen from "./boundary/profile/ProfileInfoScreen";
+import SettingsScreen from "./boundary/profile/SettingsScreen.js";
 import ChatScreen from "./boundary/chat/ChatScreen";
 import AllUserScreen from "./boundary/chat/AllUserScreen";
 import SingleChat from "./boundary/chat/SingleChat";
@@ -136,6 +137,11 @@ const App = () => {
       <Stack.Screen
         name="ProfileInfo"
         component={ProfileInfoScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
         options={{ headerShown: false }}
       />
 
