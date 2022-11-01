@@ -7,6 +7,8 @@ import pickImage from '../../controller/ImagePicker'
 import { useGlobalState } from '../../controller/GlobalState';
 import { updateLocalStorage } from '../../controller/UserComponent';
 import { ScrollView } from 'react-native-gesture-handler';
+import * as FileSystem from 'expo-file-system';
+import { DefaultImg } from '../../assets/icons/DefaultImg';
 
 const RegisterScreen = () => {
     const [email, setEmail] = useState('');
@@ -17,14 +19,23 @@ const RegisterScreen = () => {
     const [redirect, setRedirect] = useState(true);
     const [loggedIn, setLoggedIn] = useGlobalState('loggedIn');
 
-    const [image, setImage] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
+    const [image, setImage] = useState(DefaultImg);
+    // const [image, setImage] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
 
     const navigation = useNavigation();
 
     const chooseImage = async () => {
-        const pickedImage = await pickImage();
-        if (pickedImage == null) setImage('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
-        setImage(pickedImage)
+        await pickImage().then(async (pickedImage) => {
+            if (pickedImage == null) setImage(DefaultImg);
+            else {
+            const base64 = await FileSystem.readAsStringAsync(pickedImage, { encoding: 'base64' });
+            // console.log(base64);
+            let source = 'data:image/jpeg;base64,' + base64;
+            setImage(source)
+            }
+        })
+        // if (pickedImage == null) setImage('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
+        // setImage(pickedImage)
         
     }
 
@@ -47,40 +58,52 @@ const RegisterScreen = () => {
                 alert(error.message)
             })
             .then(() => {
-                var uploadTask = firebase.storage().ref().child('users/' + userCredential.user.uid).put(blob);
-                uploadTask.on('state_changed', function(snapshot){
-                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
-                    switch (snapshot.state) {
-                        case firebase.storage.TaskState.PAUSED: // or 'paused'
-                        console.log('Upload is paused');
-                        break;
-                        case firebase.storage.TaskState.RUNNING: // or 'running'
-                        console.log('Upload is running');
-                        break;
-                        case firebase.storage.TaskState.SUCCESS: // or 'running'
-                        console.log('Upload is running');
-                        break;
-                    }
-                }, (error) => {
-                    alert(error.message)
+                firebase.firestore().collection('users')
+                .doc(firebase.auth().currentUser.uid)
+                .set({
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    photoURL: image,
+                    likedGyms: [],
+                }).then(async() => {
+                    await updateLocalStorage(userCredential.user.uid).then(setLoggedIn(true));
+                    
                 })
-                uploadTask.then(() => {
-                    uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-                        firebase.firestore().collection('users')
-                        .doc(firebase.auth().currentUser.uid)
-                        .set({
-                            firstName: firstName,
-                            lastName: lastName,
-                            email: email,
-                            photoURL: url,
-                            likedGyms: [],
-                        }).then(async() => {
-                            await updateLocalStorage(userCredential.user.uid).then(setLoggedIn(true));
+                // var uploadTask = firebase.storage().ref().child('users/' + userCredential.user.uid).put(blob);
+                // uploadTask.on('state_changed', function(snapshot){
+                //     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                //     console.log('Upload is ' + progress + '% done');
+                //     switch (snapshot.state) {
+                //         case firebase.storage.TaskState.PAUSED: // or 'paused'
+                //         console.log('Upload is paused');
+                //         break;
+                //         case firebase.storage.TaskState.RUNNING: // or 'running'
+                //         console.log('Upload is running');
+                //         break;
+                //         case firebase.storage.TaskState.SUCCESS: // or 'running'
+                //         console.log('Upload is running');
+                //         break;
+                //     }
+                // }, (error) => {
+                //     alert(error.message)
+                // })
+                // uploadTask.then(() => {
+                //     uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+                //         firebase.firestore().collection('users')
+                //         .doc(firebase.auth().currentUser.uid)
+                //         .set({
+                //             firstName: firstName,
+                //             lastName: lastName,
+                //             email: email,
+                //             photoURL: url,
+                //             likedGyms: [],
+                //         }).then(async() => {
+                //             await updateLocalStorage(userCredential.user.uid).then(setLoggedIn(true));
                             
-                        })
-                    })
-                })
+                //         })
+                //     })
+                // })
 
             })
             // .then(() => {

@@ -9,6 +9,7 @@ import { ListItem } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { GymImg } from '../assets/icons/GymImg'
+import DiscussionCard from './gym/DiscussionCard';
 
 const DiscussionScreen = () => {
   const navigation = useNavigation();
@@ -32,21 +33,27 @@ const DiscussionScreen = () => {
   }
 
   const getLikedGyms = async (user) => {
-    console.log(GymImg[Math.floor(Math.random() * GymImg.length)]);
-    await firebase.firestore().collection('gyms')
-    .where(firebase.firestore.FieldPath.documentId(), 'in', user.likedGyms).get()
-    .then((snapshot) => {
-      console.log(snapshot.docs[0].data());
-      snapshot.docs.forEach(doc => {
-        setGymList( arr => [...arr, doc.data()]);
+    // console.log(GymImg[Math.floor(Math.random() * GymImg.length)]);
+    try {
+      await firebase.firestore().collection('gyms')
+      .where(firebase.firestore.FieldPath.documentId(), 'in', user.likedGyms).get()
+      .then((snapshot) => {
+        console.log(snapshot.docs[0].data());
+        snapshot.docs.forEach(doc => {
+          setGymList( arr => [...arr, doc.data()]);
+        })
+        setLoaded(true);
+        
       })
-      setLoaded(true);
-      
-    })
-    .catch((err) => {
+      .catch((err) => {
+        setGymList([]);
+        setLoaded(true);
+      });
+    }
+    catch(err) {
       setGymList([]);
       setLoaded(true);
-    });
+    }
 
 
   }
@@ -56,14 +63,15 @@ const DiscussionScreen = () => {
   }
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
-      <View style={{borderRadius: 40, display: 'flex', alignItems: 'center', marginBottom: 20, shadowOpacity: 0.3, shadowRadius: 10}}>
+    <DiscussionCard item={item} user={user} />
+    // <TouchableOpacity onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
+    //   <View style={{borderRadius: 40, display: 'flex', alignItems: 'center', marginBottom: 20, shadowOpacity: 0.3, shadowRadius: 10}}>
         
-        <Image source={{uri: GymImg[Math.floor(Math.random() * GymImg.length)]}} style={{width: Dimensions.get('window').width/2+100, height: 170, resizeMode: 'stretch'}} />
-        <Text style={{marginTop: 20}}>{item.name}</Text>
+    //     <Image source={{uri: GymImg[Math.floor(Math.random() * GymImg.length)]}} style={{width: Dimensions.get('window').width/2+100, height: 170, resizeMode: 'stretch'}} />
+    //     <Text style={{marginTop: 20}}>{item.name}</Text>
         
-      </View>
-    </TouchableOpacity>
+    //   </View>
+    // </TouchableOpacity>
       // <ListItem bottomDivider style={{marginTop: 5}} onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
         
       //   <ListItem.Content>
@@ -76,6 +84,7 @@ const DiscussionScreen = () => {
 
   return hasLoaded ?
     <SafeAreaView style={styles.container}>
+      
       <View style={{padding: 30}}>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent:'space-between'}}>
           <Text style={styles.title}>Liked Gyms</Text>
@@ -90,19 +99,24 @@ const DiscussionScreen = () => {
         {/* {gymList.map((item, index) => (
           <RenderItem item={item} />
         ))} */}
-        <FlatList
-          horizontal={false}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={item => item.id}
-          data={gymList}
-          renderItem={renderItem}
-          style={{marginTop: 30, height: '87%'}}
-          
-          // contentContainerStyle={{alignSelf: 'center', flex: 1}}
+        {gymList.length != 0 ? 
+          <FlatList
+            horizontal={false}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={item => item.id}
+            data={gymList}
+            renderItem={renderItem}
+            style={{marginTop: 30, height: '87%'}}
             
-        />
-        
+            // contentContainerStyle={{alignSelf: 'center', flex: 1}}
+              
+          />
+          :<View style={{marginTop: 30, height: '87%'}}><Text style={{justifyContent: 'center', alignSelf:'center'}}>You do not have any favourite gyms!</Text></View>
+          
+        }
       </View>
+      
+
     </SafeAreaView>
   : <LoadingIndicator />
 }
