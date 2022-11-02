@@ -25,9 +25,9 @@ const DiscussionScreen = () => {
     setGymList([]);
     await GetUser().then(async (user) => {
       setUser(user);
-      console.log("Discusion Screen user: ",user);
-      console.log("This is the user gym",user.likedGyms);
-      await getLikedGyms(user).then(console.log("Final gymList",gymList));
+      // console.log("Discusion Screen user: ",user);
+      // console.log("This is the user gym",user.likedGyms);
+      await getLikedGyms(user);
     })
 
   }
@@ -38,7 +38,7 @@ const DiscussionScreen = () => {
       await firebase.firestore().collection('gyms')
       .where(firebase.firestore.FieldPath.documentId(), 'in', user.likedGyms).get()
       .then((snapshot) => {
-        console.log(snapshot.docs[0].data());
+        // console.log(snapshot.docs[0].data());
         snapshot.docs.forEach(doc => {
           setGymList( arr => [...arr, doc.data()]);
         })

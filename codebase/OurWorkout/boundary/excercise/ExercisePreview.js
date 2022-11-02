@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { firebase } from '../../config'
 import { FlatList } from 'react-native-gesture-handler'
@@ -6,7 +6,17 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import ExerciseCard from './ExerciseCard'
 import {TouchableOpacity} from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native';
+import { FlashList } from '@shopify/flash-list'
 
+const DATA = [
+    {
+      title: "First Item",
+    },
+    {
+      title: "Second Item",
+    },
+  ];
+  
 
 
 const ExercisePreview = ({ exerciseList }) => {
@@ -19,9 +29,14 @@ const ExercisePreview = ({ exerciseList }) => {
         // }
     }, [])
 
-    const renderItem = ({ item }) => (
-        <ExerciseCard item={item} />
-      );
+    const renderItem = ({ item }) => {
+        return (
+            <ExerciseCard item={item} />
+        )
+        
+    }
+
+    const keyExtractor = (item) => item.uuid.toString();
 
     return (
         <SafeAreaView>
@@ -30,9 +45,10 @@ const ExercisePreview = ({ exerciseList }) => {
                 horizontal={true}
                 data={exerciseList}
                 renderItem={renderItem}
-                keyExtractor={item => item.uuid}
+                keyExtractor={keyExtractor}
                 initialNumToRender={10}
-                maxToRenderPerBatch={30}
+                maxToRenderPerBatch={10}
+                windowSize={Dimensions.get('window').width*2}
             />
             {/* <FlatList
                 showsVerticalScrollIndicator={false}

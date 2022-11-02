@@ -120,7 +120,9 @@ const CreateWorkoutLog = (props) => {
                 <View style={styles.inputContainer}>
                     <Text style={styles.inputTitle}>Date & Time</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <Text style={{color: dateTime ? '#000': '#bfc1c4'}}>{dateTime ? dateTime: 'Please enter the date...'}</Text>
+                    <TouchableOpacity onPress={() => setCalendar(!calendar)}>
+                        <Text style={{color: dateTime ? '#000': '#bfc1c4'}}>{dateTime ? dateTime.toString(): 'Please enter the date...'}</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => setCalendar(!calendar)}>
                         <Icon name="calendar-outline" color="#2B2F32" size={20} />
                     </TouchableOpacity>

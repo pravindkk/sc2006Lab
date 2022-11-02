@@ -113,7 +113,7 @@ const AllUserScreen = ({ navigation }) => {
           onChangeText={searchUser}
           value={search}
           autoCapitalize={false}
-          autoComplete={false}
+          // autoComplete={false}
           style={{shadowOpacity: 0}}
         />
         </View>

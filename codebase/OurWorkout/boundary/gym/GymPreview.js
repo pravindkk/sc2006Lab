@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { FlatList } from 'react-native-gesture-handler'
@@ -18,6 +18,9 @@ const GymPreview = ({ gymList, user }) => {
                 keyExtractor={item => item.id}
                 data={gymList}
                 renderItem={renderItem}
+                initialNumToRender={10}
+                maxToRenderPerBatch={10}
+                windowSize={Dimensions.get('window').width*2}
                 // style={{height: 200}}
                 // contentContainerStyle={{alignSelf: 'center', flex: 1}}
                 
