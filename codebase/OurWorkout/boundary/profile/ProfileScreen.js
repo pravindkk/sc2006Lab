@@ -42,12 +42,6 @@ const ProfileScreen = () => {
           <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("ProfileInfo")} >
             <Text style={styles.buttonText}>Profile Information</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonContainer} >
-            <Text style={styles.buttonText}>Preferences</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonContainer} >
-            <Text style={styles.buttonText}>Notifications</Text>
-          </TouchableOpacity>
         </View>
       
         <TouchableOpacity

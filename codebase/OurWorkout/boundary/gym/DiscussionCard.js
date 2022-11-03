@@ -9,7 +9,7 @@ const DiscussionCard = ({ item, user}) => {
 
     return (
         <TouchableOpacity style={{marginBottom: 20}} onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
-            <View style={{alignItems: 'center', borderColor: '#e5f0fa', borderWidth: 1, borderRwadius: 20}}>
+            <View style={{alignItems: 'center', borderColor: '#e5f0fa', borderWidth: 1, borderRadius: 20}}>
                 <Image
                     source={{uri: GymImg[Math.floor(Math.random() * GymImg.length)]}}
                     style={{width: '100%', height: 200, resizeMode: 'cover', borderRadius: 20 }} 
