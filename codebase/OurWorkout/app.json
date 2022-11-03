@@ -4,7 +4,7 @@
     "slug": "OurWorkout",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/Home.png",
+    "icon": "./assets/app-icon.png",
     "userInterfaceStyle": "light",
     "plugins": [
       [
@@ -15,7 +15,7 @@
       ]
     ],
     "splash": {
-      "image": "./assets/icons/Home.png",
+      "image": "./assets/splash-screen.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

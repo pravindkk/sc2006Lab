@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity, FlatList, TextInput } from 'react-native-gesture-handler';
@@ -11,6 +11,7 @@ import { launchImageLibraryAsync } from 'expo-image-picker';
 import pickImage from '../../controller/ImagePicker'
 import ImgToBase64 from 'react-native-image-base64';
 import * as FileSystem from 'expo-file-system';
+
 
 
 const GymDiscussionScreen = (props) => {
@@ -127,6 +128,7 @@ const GymDiscussionScreen = (props) => {
               <Text style={{fontSize: 20, paddingLeft: 10, marginRight: '17%'}}>{gymInfo.name}</Text>
           </View>
       </View>
+      <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={Platform.OS === 'ios' ? -200 : -240} >
       <FlatList
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index}
@@ -170,7 +172,7 @@ const GymDiscussionScreen = (props) => {
           />
         </TouchableOpacity>
       </View>
-
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

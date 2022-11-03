@@ -100,7 +100,7 @@ const SingleChat = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <KeyboardAvoidingView behavior='position' >
+            <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={Platform.OS === 'ios' ? -200 : -240} >
             <FlatList
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item, index) => index}
@@ -111,6 +111,8 @@ const SingleChat = (props) => {
                 StickyHeaderComponent={(<Text>Hello</Text>)}
                 
             />
+            
+
             <View
                 style={{
                     elevation: 5,
@@ -120,6 +122,7 @@ const SingleChat = (props) => {
                     justifyContent: 'space-evenly',
                 }}
             >
+                
                 <TextInput
                     style={{
                         backgroundColor: '#F2F4F5',

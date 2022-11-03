@@ -53,7 +53,7 @@ const RegisterScreen = () => {
                 url: 'https://ourworkout-33235.firebaseapp.com'
             })
             .then(() => {
-                alert('Verification email sent')
+                alert('User has been created!')
             }).catch((error) => {
                 alert(error.message)
             })
@@ -70,63 +70,8 @@ const RegisterScreen = () => {
                     await updateLocalStorage(userCredential.user.uid).then(setLoggedIn(true));
                     
                 })
-                // var uploadTask = firebase.storage().ref().child('users/' + userCredential.user.uid).put(blob);
-                // uploadTask.on('state_changed', function(snapshot){
-                //     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                //     console.log('Upload is ' + progress + '% done');
-                //     switch (snapshot.state) {
-                //         case firebase.storage.TaskState.PAUSED: // or 'paused'
-                //         console.log('Upload is paused');
-                //         break;
-                //         case firebase.storage.TaskState.RUNNING: // or 'running'
-                //         console.log('Upload is running');
-                //         break;
-                //         case firebase.storage.TaskState.SUCCESS: // or 'running'
-                //         console.log('Upload is running');
-                //         break;
-                //     }
-                // }, (error) => {
-                //     alert(error.message)
-                // })
-                // uploadTask.then(() => {
-                //     uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-                //         firebase.firestore().collection('users')
-                //         .doc(firebase.auth().currentUser.uid)
-                //         .set({
-                //             firstName: firstName,
-                //             lastName: lastName,
-                //             email: email,
-                //             photoURL: url,
-                //             likedGyms: [],
-                //         }).then(async() => {
-                //             await updateLocalStorage(userCredential.user.uid).then(setLoggedIn(true));
-                            
-                //         })
-                //     })
-                // })
 
             })
-            // .then(() => {
-            //     firebase.firestore().collection('users')
-            //     .doc(firebase.auth().currentUser.uid)
-            //     .set({
-            //         firstName: firstName,
-            //         lastName: lastName,
-            //         email: email,
-            //         photoURL: '',
-            //     })
-            // }).catch((error) => {
-            //     alert(error.message)
-            // })
-            // .then(async () => {
-            //     await firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid).put(blob).then(async () => {
-            //         await addURl();
-            //     })
-            //     // setRedirect(true);
-            // })
-            // .catch(error => {
-            //     alert(error.message)
-            // })
         }).catch((error) => {
             alert(error.message)
             // setRedirect(false)
@@ -153,7 +98,7 @@ const RegisterScreen = () => {
             <Text style={styles.title}>
                 Create an Account
             </Text>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{marginTop: 60}}>
                 <View style={styles.inputContainer}>
                     <Text style={styles.inputTitle}>First Name</Text>
@@ -234,6 +179,7 @@ const RegisterScreen = () => {
                     <Text style={{fontWeight: 'bold', fontSize: 16}}>Already have an account? Login here!</Text>
                 </TouchableOpacity>
             </View>
+            <View style={{paddingBottom: 100}} />
             </ScrollView>
         </View>
     )

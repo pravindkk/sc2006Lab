@@ -179,7 +179,7 @@ const SearchScreen = () => {
           ))}
         </ScrollView>
         :
-        <ScrollView style={{padding: 30}}>
+        <ScrollView style={{padding: 30}} showsVerticalScrollIndicator={false}>
           <View>
             <Text style={{fontWeight: 'bold', fontSize: 20}}>Exercises</Text>
             <ExercisePreview exerciseList={exerciseList.splice(0, 15)} />

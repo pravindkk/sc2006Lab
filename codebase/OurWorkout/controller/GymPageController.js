@@ -4,16 +4,19 @@ import { firebase } from '../config'
 const LikeGymPage = async(gymId, user) => {
     // const user = await GetUser().then(console.log(user))
     // const user = 
+    var liked=false;
     console.log(user);
     const likedGymsArray = user.likedGyms != undefined ? user.likedGyms : [];
     if (likedGymsArray.includes(gymId)) {
         var index = likedGymsArray.indexOf(gymId);
         if (index >= 0) {
             likedGymsArray.splice( index, 1 );
+            liked=false;
         }
     }
     else {
         likedGymsArray.push(gymId);
+        liked=true;
     }
     
     
@@ -23,7 +26,7 @@ const LikeGymPage = async(gymId, user) => {
     }).then(() =>{
         user.likedGyms = likedGymsArray;
         StoreUser(user)
-        alert("updated!")
+        alert(liked ? "Liked Gym!" : "Unliked Gym!")
     })
     // await firebase.firestore().collection('users').doc(user.uid).update({
     //     firstName: user.firstName,
