@@ -26,15 +26,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jackdbean.OurWorkout"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.jackdbean.OurWorkout"
     },
-    "web": {
-      
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "a92f49da-4132-4a83-bc4a-e1f9fcc507cb"
+      }
     }
   }
 }

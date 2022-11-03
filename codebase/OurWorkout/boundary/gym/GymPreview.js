@@ -11,7 +11,7 @@ const GymPreview = ({ gymList, user }) => {
     )
     return (
         <View>
-            <Text style={{fontWeight: 'bold', fontSize: 20}}>Gyms near you</Text>
+            
             <FlatList
                 horizontal={true}
                 showsVerticalScrollIndicator={false}

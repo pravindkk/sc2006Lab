@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import LoadingIndicator from '../LoadingIndicator'
 import { firebase } from '../../config'
@@ -123,7 +123,7 @@ const SearchScreen = () => {
         value={search}
         autoCapitalize={false}
         // autoComplete={false}
-        style={{shadowOpacity :0}}
+        style={{shadowOpacity :0, paddingTop: Platform.OS == 'ios' ? 0 : 30}}
         autoFocus={false}
         isFocused={false}
         // cursorColor='#034'
@@ -131,15 +131,15 @@ const SearchScreen = () => {
       <ScrollView style={{height: '80%'}}>
 
         {allUser.slice(0, 3).map((user, index) => (
-          <UserCard item={user} />
+          <UserCard key={index} item={user} />
         ))}
         
         {allGym.slice(0, 3).map((gym, index) => (
           // <Text>{gym.name}</Text> 
-          <GymCard item={gym} />
+          <GymCard key={index} item={gym} />
         ))}
         {exerciseList.slice(10, 13).map((exercise, index) => (
-          <ExerciseCard item={exercise} />
+          <ExerciseCard key={index} item={exercise} />
         ))}
       </ScrollView>
       <View style={{backgroundColor: '#fff', padding: 30}}></View>
