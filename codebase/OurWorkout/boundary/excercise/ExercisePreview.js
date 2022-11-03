@@ -39,8 +39,8 @@ const ExercisePreview = ({ exerciseList }) => {
     const keyExtractor = (item) => item.uuid.toString();
 
     return (
-        <SafeAreaView>
-            <Text style={{fontWeight: 'bold', fontSize: 20}}>Exercises</Text>
+        <View>
+            
             <FlatList
                 horizontal={true}
                 data={exerciseList}
@@ -59,7 +59,7 @@ const ExercisePreview = ({ exerciseList }) => {
                 style={{height: '100%', paddingTop: 30}}
                 
             /> */}
-        </SafeAreaView>
+        </View>
     )
 }
 

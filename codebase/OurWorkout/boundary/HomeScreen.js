@@ -24,6 +24,7 @@ const HomeScreen = () => {
     const [gymList, setGymList] = useState([]);
     const [location, setLocation] = useState(null);
     const [hasGymLoaded, setGymLoaded] = useState(false);
+    const [hasExerciseLoaded, setExerciseLoaded] = useState(false);
 
     useEffect(() => {
         
@@ -50,36 +51,42 @@ const HomeScreen = () => {
         let location = await Location.getCurrentPositionAsync({});
         setLocation(location);
         const firestore = firebase.firestore();
-        const gymsId = []
+        var gymsId = []
         // Create a GeoFirestore reference
         const GeoFirestore = geofirestore.initializeApp(firestore);
         const geocollection = GeoFirestore.collection('gyms');
         console.log("This is the coords: ", location.coords.latitude, location.coords.longitude);
-        const query = geocollection.near({ center: new firebase.firestore.GeoPoint(location.coords.latitude, location.coords.longitude), radius: 10, limit: 9 });
+        const query = geocollection.near({ center: new firebase.firestore.GeoPoint(location.coords.latitude, location.coords.longitude), radius: 10, limit: 8 });
         query.get().then(async (value) => {
             // All GeoDocument returned by GeoQuery, like the GeoDocument added above
             value.docs.forEach(item => {
-                if (item.exists) gymsId.push(item.id);
+                if (item.exists) {
+                    gymsId.push(item.id);
+                    // console.log('this is the item.id: ', item.id);
+                }
             })
+            gymsId = gymsId.splice(0, 10)
+            console.log(gymsId.length);
             // console.log(gymsId);
             // const snapshot = await firebase.firestore().collection('users').where("id", "in", ["ed6c3224-cd0b-43c2-8bec-a486e722e4d2", "797846b3-4e99-4aeb-83fb-1733649ed93d"]).get()
-            try {
-                const snapshot = await firebase
-                                .firestore()
-                                    .collection('gyms')
-                                    .where(firebase.firestore.FieldPath.documentId(), 'in', gymsId).limit(10)
-                                    .get()
-                                    .catch(err => {
-                                        alert(err.message)
-                                    })
-                snapshot.docs.map(doc => {
-                    setGymList( arr => [...arr, doc.data()]);
-                })
-                console.log(gymList);
-            }
-            catch(err) {
-                setGymList([]);
-            }
+            // try {
+            const snapshot = await firebase
+                            .firestore()
+                                .collection('gyms')
+                                .where("id", 'in', [...gymsId]).limit(10)
+                                .get()
+                                .catch(err => {
+                                    console.log(err.message)
+                                })
+            console.log(snapshot.docs[0].data());
+            snapshot.docs.map(doc => {
+                setGymList( arr => [...arr, doc.data()]);
+            })
+            console.log(gymList);
+            // }
+            // catch(err) {
+            //     setGymList([]);
+            // }
             setGymLoaded(true);
         });
 
@@ -93,6 +100,7 @@ const HomeScreen = () => {
                 setAllExerciseList(list);
                 let value = Math.floor(Math.random()*(list.length -10))
                 setExerciseList(list.splice(value, value + 2))
+                setExerciseLoaded(true);
             }
         })
     }
@@ -142,8 +150,13 @@ const HomeScreen = () => {
                     </View>
                     
                 </View>
-                <ExercisePreview exerciseList={exerciseList} />
-                <View style={{alignItems: 'center',flexDirection: 'row', justifyContent: 'space-between', marginTop: Platform.OS == 'ios' ? 0 : 20}}>
+                <Text style={{fontWeight: 'bold', fontSize: 20, marginTop: 30}}>Exercises</Text>
+                {hasExerciseLoaded ? 
+                    <ExercisePreview exerciseList={exerciseList} />:
+                    <LoadingIndicator />
+                }
+                
+                <View style={{alignItems: 'center',flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
                     <Text style={{fontWeight: 'bold', fontSize: 20}}>Gyms near you</Text>
                     <TouchableOpacity onPress={() => getNearByGyms()}>
                     <Icon

@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     bottom: 30,
     left: 15,
     right: 15,
-    elevation: 0,
+    // elevation: 40,
     backgroundColor: '#fff',
     height: 60,
     borderRadius: 24,
@@ -136,5 +136,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent:'space-evenly',
     padding: 5,
+    
   }
 })
