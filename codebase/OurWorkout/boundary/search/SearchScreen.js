@@ -1,4 +1,4 @@
-import { Keyboard, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Keyboard, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import LoadingIndicator from '../LoadingIndicator'
 import { firebase } from '../../config'
@@ -134,7 +134,9 @@ const SearchScreen = () => {
   )
 
   const renderItem = ({ item }) => (
-    <Avatar containerStyle={{marginRight: 20}} source={{uri: item.photoURL}} rounded size="medium" />
+    <TouchableOpacity onPress={() => navigation.navigate("UserPage", {user: item})}>
+      <Avatar containerStyle={{marginRight: 20}} source={{uri: item.photoURL}} rounded size="medium" />
+    </TouchableOpacity>
   )
 
 

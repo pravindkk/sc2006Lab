@@ -69,7 +69,7 @@ const HomeScreen = () => {
             console.log(gymsId.length);
             // console.log(gymsId);
             // const snapshot = await firebase.firestore().collection('users').where("id", "in", ["ed6c3224-cd0b-43c2-8bec-a486e722e4d2", "797846b3-4e99-4aeb-83fb-1733649ed93d"]).get()
-            // try {
+            try {
             const snapshot = await firebase
                             .firestore()
                                 .collection('gyms')
@@ -83,10 +83,10 @@ const HomeScreen = () => {
                 setGymList( arr => [...arr, doc.data()]);
             })
             console.log(gymList);
-            // }
-            // catch(err) {
-            //     setGymList([]);
-            // }
+            }
+            catch(err) {
+                setGymList([]);
+            }
             setGymLoaded(true);
         });
 
@@ -152,7 +152,7 @@ const HomeScreen = () => {
                 </View>
                 <Text style={{fontWeight: 'bold', fontSize: 20, marginTop: 30}}>Exercises</Text>
                 {hasExerciseLoaded ? 
-                    <ExercisePreview exerciseList={exerciseList} />:
+                    <ExercisePreview exerciseList={exerciseList.splice(0, 15)} />:
                     <LoadingIndicator />
                 }
                 
@@ -169,7 +169,7 @@ const HomeScreen = () => {
                 {hasGymLoaded ?
                 gymList.length != 0 ? 
                     <GymPreview gymList={gymList} user={user} /> :
-                    <Text style={{marginTop: 30}}>There is no gyms near you!</Text>
+                    <Text style={{marginTop: 30}}>There are no gyms near you!</Text>
                 :   <LoadingIndicator />
                 }
                 

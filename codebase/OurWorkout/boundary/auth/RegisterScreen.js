@@ -40,8 +40,9 @@ const RegisterScreen = () => {
     }
 
     const registerUser = async (email, password, firstName, lastName) => {
-        const response = await fetch(image)
-        const blob = await response.blob();
+        // const response = await fetch(image)
+        // const blob = await response.blob();
+        console.log("creating");
         if (isSelected == false) {
             alert("Please accept the T&C of OurWorkout")
             return
@@ -72,8 +73,22 @@ const RegisterScreen = () => {
                 })
 
             })
-        }).catch((error) => {
-            alert(error.message)
+        }).catch((e) => {
+            if (e.code == 'auth/account-exists-with-different-credential') {
+                alert("Account already exists with this email")
+            }
+            else if (e.code == 'auth/email-already-in-use') {
+                alert("An account with the same email is in use");
+            }
+            else if (e.code == 'auth/weak-password') {
+                alert("The password is too week. Please enter at least:\nSix digits,\nOne uppercase character,\nOne symbol");
+            }
+            else if (e.code == 'auth/invalid-email') {
+                alert("Please enter a valid email");
+            }
+            else {
+                alert(e.code);
+            }
             // setRedirect(false)
         })
 
