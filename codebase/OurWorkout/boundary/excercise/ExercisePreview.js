@@ -8,27 +8,17 @@ import {TouchableOpacity} from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list'
 
-const DATA = [
-    {
-      title: "First Item",
-    },
-    {
-      title: "Second Item",
-    },
-  ];
-  
 
 
 const ExercisePreview = ({ exerciseList }) => {
     // const [exerciseList, setExerciseList] = useState([])
     const navigation = useNavigation();
-    useEffect(() => {
-        // console.log(exerciseList);
-        // for (var i=0; i<exerciseList.length; i++) {
-        //     console.log(exerciseList[i].name);
-        // }
-    }, [])
 
+    /**
+     * displays the specific exercise card
+     * @param {*} item - Render List Item 
+     * @returns 
+     */
     const renderItem = ({ item }) => {
         return (
             <ExerciseCard item={item} />

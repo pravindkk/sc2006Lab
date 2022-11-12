@@ -7,6 +7,10 @@ import { GymCardIcon } from '../../assets/gymIcons/GymCardIcon'
 const GymCard = ({ item, user }) => {
     const navigation = useNavigation();
 
+    /**
+     * navigates to corresponding GymScreen
+     * @param {*} item 
+     */
     const navigateToExerciseScreen = (item) => {
         navigation.navigate("GymScreen", {gymInfo: item, user: user});
     }

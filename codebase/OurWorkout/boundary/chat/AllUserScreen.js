@@ -18,6 +18,9 @@ const AllUserScreen = ({ navigation }) => {
   const [hasLoaded, setLoaded] = useState(false);
   const [search, setSearch] = useState('');
 
+  /**
+   * Runs when the component is loaded
+   */
   useEffect(() => {
     const getLoggedInUser = async () => {
       
@@ -31,6 +34,9 @@ const AllUserScreen = ({ navigation }) => {
     
   },[])
 
+  /**
+   * Gets all the users who are registered with OurWorkout from the firebase API so users can create chats
+   */
   const getAllUsers = async () => {
     const snapshot = await firebase.firestore().collection('users').where("email", "!=", firebase.auth().currentUser.email).get()
     const tempDoc = []
@@ -43,11 +49,19 @@ const AllUserScreen = ({ navigation }) => {
 
   }
 
+  /**
+   * Filter the array of users according to the search text
+   * @param {*} search - search text
+   */
   const searchUser = (search) => {
     setSearch(search);
     setAllUser(allUserBackup.filter(it => it.firstName.toLowerCase().match(search)));
   }
 
+  /**
+   * To create a new chat with the sender data
+   * @param {*} data - sender data
+   */
   const createChatList = (data) => {
     firebase.database().ref('/chatlist/' + userData.uid + '/' + data.id)
       .once('value')
@@ -82,6 +96,11 @@ const AllUserScreen = ({ navigation }) => {
       })
   }
 
+  /**
+   * Runs for each item in the userList
+   * @param {*} item - Render List Item
+   * @returns 
+   */
   const renderItem = ({ item }) => (
     <ListItem bottomDivider style={styles.listStyle} onPress={() => {createChatList(item)}}>
       <Avatar source={{uri: item.photoURL}} title={item.firstName} rounded size="medium" />

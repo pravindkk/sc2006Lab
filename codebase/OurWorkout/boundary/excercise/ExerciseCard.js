@@ -10,6 +10,10 @@ const backgroundColor = ['#f0f0ff', '#FFF9F0']
 const ExerciseCard = ({ item }) => {
     const navigation = useNavigation();
 
+    /**
+     * navigates to the specific exercise screen
+     * @param {*} item - Specific exercise item
+     */
     const navigateToExerciseScreen = (item) => {
         navigation.navigate("ExerciseScreen", {exerciseInfo: item});
     }

@@ -3,6 +3,11 @@ import React from 'react'
 import moment from 'moment';
 import { Icon } from 'react-native-elements';
 
+/**
+ * Displays the send time
+ * @param {*} props 
+ * @returns 
+ */
 const TimeDelivery = (props) => {
     const { sender, item } = props;
     return (

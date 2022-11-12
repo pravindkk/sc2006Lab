@@ -4,7 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicon from 'react-native-vector-icons/Ionicons'
 
-
+/**
+ * displays the user details
+ * @param {*} props - passed in to get user details
+ * @returns 
+ */
 const UserPage = (props) => {
   const { user } = props.route.params;
 
@@ -36,11 +40,6 @@ const UserPage = (props) => {
             <View style={styles.inputContainer}>
                 <Text style={styles.inputTitle}>Last Name</Text>
                 <Text>{user.lastName}</Text>
-            </View>
-
-            <View style={styles.inputContainer}>
-                <Text style={styles.inputTitle}>Email</Text>
-                <Text>{user.email}</Text>
             </View>
     </SafeAreaView>
   )

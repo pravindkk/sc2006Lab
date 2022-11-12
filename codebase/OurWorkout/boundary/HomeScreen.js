@@ -26,6 +26,9 @@ const HomeScreen = () => {
     const [hasGymLoaded, setGymLoaded] = useState(false);
     const [hasExerciseLoaded, setExerciseLoaded] = useState(false);
 
+    /**
+     * Runs when the component is loaded
+     */
     useEffect(() => {
         
         const startup = async () => {
@@ -40,6 +43,10 @@ const HomeScreen = () => {
 
         
     }, [])
+
+    /**
+     * gets the nearby gyms near the user's current location
+     */
     const getNearByGyms = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
@@ -92,19 +99,25 @@ const HomeScreen = () => {
 
     }
 
-
+    /**
+     * Gets a random list of exercises from the wger.de dataset
+     */
     const getExercise = async () => {
         await firebase.database().ref('/exercise/').on('value' , snapshot => {
             if (snapshot.val() != null) {
                 const list = Object.values(snapshot.val());
                 setAllExerciseList(list);
                 let value = Math.floor(Math.random()*(list.length -10))
-                setExerciseList(list.splice(value, value + 2))
+                let exerciseArr = list.splice(value, value + 2)
+                setExerciseList(exerciseArr.splice(0, 11 ))
                 setExerciseLoaded(true);
             }
         })
     }
 
+    /**
+     * gets the current logged in user
+     */
     const getLoggedInUser = async () => {
         const loggedInUser = await GetUser();
         console.log(loggedInUser);
@@ -150,9 +163,18 @@ const HomeScreen = () => {
                     </View>
                     
                 </View>
-                <Text style={{fontWeight: 'bold', fontSize: 20, marginTop: 30}}>Exercises</Text>
+                <View style={{alignItems: 'center',flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+                    <Text style={{fontWeight: 'bold', fontSize: 20}}>Exercises</Text>
+                    <TouchableOpacity onPress={() => getExercise()}>
+                    <Icon
+                    name='reload-circle-outline'
+                    color='#72777A'
+                    size={25}
+                    />
+                    </TouchableOpacity>
+                </View>
                 {hasExerciseLoaded ? 
-                    <ExercisePreview exerciseList={exerciseList.splice(0, 15)} />:
+                    <ExercisePreview exerciseList={exerciseList} />:
                     <LoadingIndicator />
                 }
                 

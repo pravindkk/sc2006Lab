@@ -3,6 +3,11 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
+/**
+ * displays the user details from the passed user
+ * @param {*} user  - user details
+ * @returns 
+ */
 const ProfileInfo = ({ user }) => {
     return (
         <SafeAreaView style={styles.container}>

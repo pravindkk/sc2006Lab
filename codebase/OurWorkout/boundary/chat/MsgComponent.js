@@ -4,6 +4,11 @@ import TimeDelivery from './TimeDelivery'
 import { Avatar, ListItem } from 'react-native-elements'
 import moment from 'moment'
 
+/**
+ * Displays the different chats in the chat
+ * @param {*} props 
+ * @returns 
+ */
 const MsgComponent = (props) => {
     const { sender, item } = props
     return (

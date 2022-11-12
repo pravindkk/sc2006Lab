@@ -11,10 +11,18 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('')
     const [loggedIn, setLoggedIn] = useGlobalState('loggedIn');
 
+    /**
+     * Runs all the functions when component loads
+     */
     useEffect(() => {
         StoreUser('');
     }, [])
 
+    /**
+     * Logins the user by calling the firebase API
+     * @param {*} email 
+     * @param {*} password 
+     */
     loginUser = async (email, password) => {
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password)

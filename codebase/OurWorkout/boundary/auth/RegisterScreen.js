@@ -18,12 +18,11 @@ const RegisterScreen = () => {
     const [isSelected, setSelection] = useState(false);
     const [redirect, setRedirect] = useState(true);
     const [loggedIn, setLoggedIn] = useGlobalState('loggedIn');
-
     const [image, setImage] = useState(DefaultImg);
-    // const [image, setImage] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
-
     const navigation = useNavigation();
-
+    /**
+     * This function calls the ImagePicker Controller to pick a image, converts it to base64 and sets the image as such
+     */
     const chooseImage = async () => {
         await pickImage().then(async (pickedImage) => {
             if (pickedImage == null) setImage(DefaultImg);
@@ -33,11 +32,17 @@ const RegisterScreen = () => {
             let source = 'data:image/jpeg;base64,' + base64;
             setImage(source)
             }
-        })
-        // if (pickedImage == null) setImage('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
-        // setImage(pickedImage)
-        
+        })      
     }
+
+    /**
+     * This function creates a new user in firebase using the email, firstName, lastName, email
+     * and image
+     * @param {*} email 
+     * @param {*} password 
+     * @param {*} firstName 
+     * @param {*} lastName 
+     */
 
     const registerUser = async (email, password, firstName, lastName) => {
         // const response = await fetch(image)
@@ -94,17 +99,6 @@ const RegisterScreen = () => {
 
 
         // if (redirect) navigation.replace("Login");
-    }
-
-    const addURl = async () => {
-        await firebase.storage().ref().child('users/' + firebase.auth().currentUser.uid).getDownloadURL((res) => {
-            console.log("updating");
-            firebase.firestore().collection('users')
-                .doc(firebase.auth().currentUser.uid)
-                .update({
-                    photoURL: res,
-                })
-        })
     }
 
 

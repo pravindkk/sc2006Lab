@@ -22,7 +22,9 @@ const SingleChat = (props) => {
     const [keyboardFocused, setKeyboardFocused] = useState(false);
 
     // const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
-
+    /**
+     * runs when the component is loaded
+     */
     useEffect(() => {
         setAllChat([]);
         const onChildAdd = 
@@ -35,8 +37,17 @@ const SingleChat = (props) => {
         
     }, [receiverData.roomId])
 
+    /**
+     * Checks if the text is valid
+     * @param {*} txt - Text message of the message
+     * @returns true or false
+     */
     const msgvalid = txt => txt && txt.replace(/\s/g, '').length;
 
+    /**
+     * To send message when send is clicked
+     * @returns 
+     */
     const sendMsg = () => {
         console.log(allChat);
         if (msg == '' || msgvalid(msg) == 0) {
@@ -72,6 +83,11 @@ const SingleChat = (props) => {
         })
     }
 
+    /**
+     * To display the item
+     * @param {*} item - Render List item 
+     * @returns 
+     */
     const renderItem = ({ item }) => (
         <MsgComponent 
             sender={item.from == firebase.auth().currentUser.uid}

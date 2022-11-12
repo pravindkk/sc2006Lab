@@ -33,6 +33,9 @@ const SearchScreen = () => {
   const [exerciseList, setExerciseList] = useState([]);
   const [exerciseListBackup, setExerciseListBackup] = useState([]);
 
+  /**
+   * Runs when the component is loaded (get exercises from wger.de dataset, all the registered users, all the gyms)
+   */
   useEffect(() => {
     const fetchData = async () => {
       const loggedInUser = await GetUser();
@@ -69,6 +72,10 @@ const SearchScreen = () => {
     fetchData().then(setLoaded(true));
   },[])
 
+  /**
+   * Searches according to the search text
+   * @param {*} search - filter the userList, gymList and exerciseList according to the search
+   */
   const searchUser = (search) => {
     setSearch(search);
     if (search == '') {
@@ -87,6 +94,10 @@ const SearchScreen = () => {
     setExerciseList(exerciseListBackup.filter(it => it.name.toLowerCase().match(search.toLowerCase())));
   }
 
+  /**
+   * displays the user item from userList
+   * @param {*} item - user item from userList
+   */
   const UserCard = ({ item }) => (
     <ListItem bottomDivider style={styles.listStyle} onPress={() => {navigation.navigate("UserPage", {user: item})}}>
       <Avatar source={{uri: item.photoURL}} title={item.firstName} rounded size="medium" />
@@ -98,6 +109,10 @@ const SearchScreen = () => {
     
   );
 
+  /**
+   * displays the gym item from gymList
+   * @param {*} item - gym item from gymList
+   */
   const GymCard = ({ item }) => (
     <ListItem bottomDivider style={styles.listStyle} onPress={() => {navigation.navigate("GymScreen", {gymInfo: item, user: user})}}>
       <View style={{backgroundColor: '#303437', padding: 10, borderRadius: 90}}>
@@ -113,7 +128,10 @@ const SearchScreen = () => {
       </ListItem.Content>
     </ListItem>
   )
-
+  /**
+   * displays the exercise item from exerciseList
+   * @param {*} item - exercise item from exerciseList
+   */
   const ExerciseCard = ({ item }) => (
     // <Text>{item.name}</Text>
     <ListItem bottomDivider style={styles.listStyle} onPress={() => {navigation.navigate("ExerciseScreen", {exerciseInfo: item})}}>
@@ -133,6 +151,11 @@ const SearchScreen = () => {
     </ListItem>
   )
 
+  /**
+   * Renders the list of users from userList
+   * @param {*} param0 - Render List item
+   * @returns 
+   */
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate("UserPage", {user: item})}>
       <Avatar containerStyle={{marginRight: 20}} source={{uri: item.photoURL}} rounded size="medium" />

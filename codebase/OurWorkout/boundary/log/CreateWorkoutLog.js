@@ -20,6 +20,10 @@ const CreateWorkoutLog = (props) => {
     const [calendar, setCalendar] = useState(false);
     const [workout, setWorkout] = useState();
 
+    /**
+     * Submit the workout log using firebase API
+     * @returns 
+     */
     const submitLog = async () => {
         if (workoutName == '' || dateTime==null || duration==0 || notes == '') {
             alert("Please enter all the details");

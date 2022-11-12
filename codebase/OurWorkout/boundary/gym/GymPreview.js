@@ -5,6 +5,12 @@ import { FlatList } from 'react-native-gesture-handler'
 
 import GymCard from './GymCard'
 
+/**
+ * displays all the component of the gymlist
+ * @param {*} gymList
+ * @param {*} user 
+ * @returns 
+ */
 const GymPreview = ({ gymList, user }) => {
     const renderItem = ({ item }) => (
         <GymCard item={item} user={user} />

@@ -14,7 +14,9 @@ const ProfileInfoScreen = ({ navigation, route }) => {
     const [user, setUser] = useState('');
     const [isLoaded, setLoaded] = useState(false);
 
-
+    /**
+     * Runs when the component is loaded
+     */
     useEffect(() => {
         const getLoggedInUser = async () => {
       

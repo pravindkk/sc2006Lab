@@ -13,6 +13,9 @@ const ProfileScreen = () => {
   const [hasLoaded, setLoaded] = useState(false);
   const [loggedIn, setLoggedIn] = useGlobalState('loggedIn')
 
+  /**
+   * Runs when the component is loaded
+   */
   useEffect(() => {
     const getLoggedInUser = async () => {
       

@@ -15,6 +15,9 @@ const ExerciseScreen = (props) => {
     const [hasLoaded, setLoaded] = useState(false);
     const [randomImg, setRandomImg] = useState('')
 
+    /**
+     * Runs when the component is loaded
+     */
     useEffect(() => {
         // const imgArray = require('../../assets/icons/FitnessImg')
         load().then(setLoaded(true));
@@ -22,6 +25,9 @@ const ExerciseScreen = (props) => {
         // setFitnessImg(FitnessImgArray[Math.floor(Math.random() * FitnessImgArray.length)])
     })
 
+    /**
+     * Gets the image for the exercise and formats the description for the exercise description
+     */
     const load = async () => {
         const img = FitnessImg[Math.floor(Math.random() * FitnessImg.length)]
         setRandomImg(img);

@@ -17,6 +17,10 @@ import DiscussionScreen from './DiscussionScreen';
 
 const Tab = createBottomTabNavigator()
 
+/**
+ * displays the bottom navigation bar
+ * @returns 
+ */
 const BottomNavBar = () => {
   
   return (
