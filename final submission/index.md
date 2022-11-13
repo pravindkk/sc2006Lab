@@ -4,6 +4,7 @@
 |   +-- out 
 |   |   +-- global.html (Shows the code documentation)
 |   +-- OurWorkout (source code for the app)
+|   +-- OurWorkout.1.0.apk (downloadable version of the app)
 +-- diagrams
 |   +-- Use Case diagrams
 |   |   +-- User access.png
