@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: boundary/chat/AllUserScreen.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: boundary/chat/AllUserScreen.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { TouchableOpacity, FlatList } from 'react-native-gesture-handler'
+import { firebase } from '../../config'
+import { ListItem, Avatar } from 'react-native-elements'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { Searchbar } from 'react-native-paper'
+import { GetUser } from '../../controller/UserComponent'
+import uuid from 'react-native-uuid';
+import Icon from 'react-native-vector-icons/Ionicons'
+
+
+/**
+ * AllUserScreen shows a searchable list of Users for chatting with.
+ * It handles all UI interactions with this list and navigates to individual (user-to-user) chat.
+
+ * @param { props } props passed from the previous component to be destructed.  
+ * @param { navigation } props.navigation The parent component's navigation prop, used for navigation between pages.   
+ * @returns { View } The UI displayed to the user by React.
+ */
+const AllUserScreen = ({ navigation }) => {
+  const [userData, setUserData] = useState('');
+  const [allUser, setAllUser] = useState([]);
+  const [allUserBackup, setAllUserBackup] = useState([]);
+  const [hasLoaded, setLoaded] = useState(false);
+  const [search, setSearch] = useState('');
+
+  /**
+   * Runs when the component is loaded
+   */
+  useEffect(() => {
+    const getLoggedInUser = async () => {
+      
+      const loggedInUser = await GetUser();
+      setUserData(loggedInUser);
+      
+      // console.log(user);
+    }
+
+    getLoggedInUser().then(getAllUsers().then(setLoaded(true)));
+    
+  },[])
+
+  /**
+   * Gets all the users who are registered with OurWorkout from the firebase API so users can create chats
+   */
+  const getAllUsers = async () => {
+    const snapshot = await firebase.firestore().collection('users').where("email", "!=", firebase.auth().currentUser.email).get()
+    const tempDoc = []
+    snapshot.forEach((doc) => {
+        tempDoc.push({ id: doc.id, ...doc.data() })
+    })
+    setAllUser(tempDoc);
+    setAllUserBackup(tempDoc);
+    console.log(tempDoc)
+
+  }
+
+  /**
+   * Filter the array of users according to the search text
+   * @param {*} search - search text
+   */
+  const searchUser = (search) => {
+    setSearch(search);
+    setAllUser(allUserBackup.filter(it => it.firstName.toLowerCase().match(search)));
+  }
+
+  /**
+   * To create a new chat with the sender data
+   * @param {*} data - sender data
+   */
+  const createChatList = (data) => {
+    firebase.database().ref('/chatlist/' + userData.uid + '/' + data.id)
+      .once('value')
+      .then(snapshot => {
+        console.log('user data: ', snapshot.val());
+
+        if (snapshot.val() == null) {
+          let roomId = uuid.v4();
+          let myData = {
+            roomId,
+            id: userData.uid,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            photoURL: userData.photoURL,
+            email: userData.email,
+            lastMsg: '',
+          }
+          firebase.database().ref('/chatlist/' + data.id + '/' + userData.uid)
+            .update(myData)
+            .then(() => console.log('Data Updated'));
+          data.lastMsg = '';
+          data.roomId = roomId;
+          firebase.database().ref('/chatlist/' + userData.uid + '/' + data.id)
+            .update(data)
+            .then(() => console.log('Data updated'));
+          navigation.navigate('SingleChat', {receiverData: data, senderData: loggedInUser})
+        }
+        else {
+          console.log("Chat already created");
+        }
+
+      })
+  }
+
+  /**
+   * Runs for each item in the userList
+   * @param {*} item - Render List Item
+   * @returns 
+   */
+  const renderItem = ({ item }) => (
+    &lt;ListItem bottomDivider style={styles.listStyle} onPress={() => {createChatList(item)}}>
+      &lt;Avatar source={{uri: item.photoURL}} title={item.firstName} rounded size="medium" />
+      &lt;ListItem.Content>
+        &lt;ListItem.Title style={{fontSize: 20}}>{item.firstName} {item.lastName}&lt;/ListItem.Title>
+        &lt;ListItem.Subtitle style={{fontSize: 12}} numberOfLines={1}>{item.email}&lt;/ListItem.Subtitle>
+      &lt;/ListItem.Content>
+    &lt;/ListItem>
+    
+  );
+
+
+  
+  return hasLoaded ?
+    &lt;SafeAreaView style={styles.container}>
+      &lt;View style={styles.nav}>
+        &lt;View style={{flex: 1}} >
+          &lt;TouchableOpacity onPress={() => navigation.goBack()} >
+              &lt;Icon
+                  name="arrow-back-circle-outline"
+                  color="#72777A"
+                  size={30}
+              />
+          &lt;/TouchableOpacity>
+        &lt;/View>
+        &lt;View style={{flex: 10}}>
+        &lt;Searchbar
+          placeholder="Search User..."
+          onChangeText={searchUser}
+          value={search}
+          autoCapitalize={false}
+          // autoComplete={false}
+          style={{shadowOpacity: 0}}
+        />
+        &lt;/View>
+
+
+      &lt;/View>
+      
+      &lt;FlatList
+        showsVerticalScrollIndicator={false}
+        keyExtractor={item => item.id}
+        data={allUser}
+        renderItem={renderItem}
+      />
+
+
+    &lt;/SafeAreaView>
+  : &lt;SafeAreaView>&lt;Text>Loading&lt;/Text>&lt;/SafeAreaView>
+}
+
+export default AllUserScreen
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+    },
+    nav: {
+      display: 'flex',
+      flexDirection: 'row', 
+      alignItems: 'center', 
+      paddingLeft: 10, 
+      paddingRight: 10, 
+      justifyContent: 'space-around', 
+      height: 50,
+    },
+    // listStyle: {
+    //   paddingVertical: 7, 
+    //   marginVertical: 2
+    // },
+    searchInput: {
+      fontSize: 15,
+      // fontFamily: FONTS.Regular,
+      // color: COLORS.black,
+      color: '#fff',
+      opacity: 0.7,
+    },
+    searchContainer: {
+      elevation: 2,
+      // backgroundColor: COLORS.white,
+      backgroundColor: '#FFF',
+      paddingHorizontal: 10,
+      borderRadius: 20,
+      borderColor: '#fff',
+    },
+})</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-pickChatImage.html">pickChatImage</a></li><li><a href="module-pickImage.html">pickImage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AllUserScreen">AllUserScreen</a></li><li><a href="global.html#BottomNavBar">BottomNavBar</a></li><li><a href="global.html#ChatScreen">ChatScreen</a></li><li><a href="global.html#ChatUser">ChatUser</a></li><li><a href="global.html#CreateWorkoutLog">CreateWorkoutLog</a></li><li><a href="global.html#DiscussionCard">DiscussionCard</a></li><li><a href="global.html#DiscussionScreen">DiscussionScreen</a></li><li><a href="global.html#EditProfileInfo">EditProfileInfo</a></li><li><a href="global.html#ExerciseCard">ExerciseCard</a></li><li><a href="global.html#ExercisePreview">ExercisePreview</a></li><li><a href="global.html#ExerciseScreen">ExerciseScreen</a></li><li><a href="global.html#GetUser">GetUser</a></li><li><a href="global.html#GymCard">GymCard</a></li><li><a href="global.html#GymDiscussionMsgComponent">GymDiscussionMsgComponent</a></li><li><a href="global.html#GymDiscussionScreen">GymDiscussionScreen</a></li><li><a href="global.html#GymPreview">GymPreview</a></li><li><a href="global.html#GymScreen">GymScreen</a></li><li><a href="global.html#HomeScreen">HomeScreen</a></li><li><a href="global.html#LikeGymPage">LikeGymPage</a></li><li><a href="global.html#LoadingIndicator">LoadingIndicator</a></li><li><a href="global.html#LogCard">LogCard</a></li><li><a href="global.html#LoginScreen">LoginScreen</a></li><li><a href="global.html#MsgComponent">MsgComponent</a></li><li><a href="global.html#ProfileInfo">ProfileInfo</a></li><li><a href="global.html#ProfileInfoScreen">ProfileInfoScreen</a></li><li><a href="global.html#ProfileScreen">ProfileScreen</a></li><li><a href="global.html#RegisterScreen">RegisterScreen</a></li><li><a href="global.html#SearchScreen">SearchScreen</a></li><li><a href="global.html#Settings">Settings</a></li><li><a href="global.html#SettingsScreen">SettingsScreen</a></li><li><a href="global.html#SingleChat">SingleChat</a></li><li><a href="global.html#StoreUser">StoreUser</a></li><li><a href="global.html#TimeDelivery">TimeDelivery</a></li><li><a href="global.html#UserPage">UserPage</a></li><li><a href="global.html#WorkoutLogScreen">WorkoutLogScreen</a></li><li><a href="global.html#getSettingsForUser">getSettingsForUser</a></li><li><a href="global.html#setSettingsForUser">setSettingsForUser</a></li><li><a href="global.html#updateLocalStorage">updateLocalStorage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Nov 13 2022 16:28:02 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
