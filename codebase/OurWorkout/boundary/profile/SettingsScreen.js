@@ -8,6 +8,14 @@ import Ionicon  from 'react-native-vector-icons/Ionicons';
 import LoadingIndicator from '../LoadingIndicator'
 import Settings from './Settings'
 
+/**
+ * Displays the UI screen to show inside it the Settings of the User that is logged in.
+ * 
+ * Assumption: The User viewing this screen has already been logged in.   
+ * @param { Navigator } navigation The React Navigator passed in by the parent component.
+ * @param { Object } route The route params (currently unused).
+ * @returns { SafeAreaView } The UI displayed by React for this screen.
+ */
 const SettingsScreen = ({ navigation, route }) => {
     const [edit, setEdit] = useState(false);
     const [user, setUser] = useState('');

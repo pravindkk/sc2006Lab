@@ -12,7 +12,26 @@ import pickImage from '../../controller/ImagePicker'
 import ImgToBase64 from 'react-native-image-base64';
 import * as FileSystem from 'expo-file-system';
 
+/**
+ * @typedef { Object } GymInfo The non-array data corresponding to a Gym.
+ * @property { string } name The name of the Gym
+ * @property { string } desc The description of the Gym
+ */
 
+/**
+ * Displays the Gym discussion page and all messages contained within it.
+ * 
+ * Assumption: The user viewing this UI component has been logged in.
+ * @param { Object } props - The navigation route parameters.
+ * @param { Object } props.route
+ * @param { Object } props.route.params
+ * @param { GymInfo } props.route.params.gymInfo - Some data regarding the Gym.
+ * @param { Object } props.route.params.user - Some data regarding the user viewing the GymDiscussionScreen.
+ * @param { string } props.route.params.user.firstName - The first name of the corresponding User.
+ * @param { string } props.route.params.user.lastName - The last name of the corresponding User.
+ * @param { string } props.route.params.user.photoURL - The URL of the profile image of the corresponding User.
+ * @returns { SafeAreaView } The UI displayed by React for this GymScreen.
+ */
 
 const GymDiscussionScreen = (props) => {
   const {gymInfo, user} = props.route.params;

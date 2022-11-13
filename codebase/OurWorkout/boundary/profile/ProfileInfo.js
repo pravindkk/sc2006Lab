@@ -4,11 +4,16 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 /**
- * displays the user details from the passed user
- * @param {*} user  - user details
- * @returns 
+ * Displays the UI component to show the email, firstName, and lastName of the User that is logged in.
+ * 
+ * Assumption: The User viewing this screen has already been logged in.   
+ * @param { Object } user The details of the User who is currently logged in.
+ * @param { string } user.email The current email of the User.
+ * @param { string } user.firstName The current firstName of the User.
+ * @param { string } user.lastName The current lastName of the User.
+ * @returns { SafeAreaView } The UI section displayed by React for this component.
  */
-const ProfileInfo = ({ user }) => {
+ const ProfileInfo = ({ user }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={{alignItems: 'center'}}>

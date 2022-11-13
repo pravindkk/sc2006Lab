@@ -9,7 +9,27 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 import { firebase } from '../../config'
 import uuid from 'react-native-uuid'
 
+/**
+ * @typedef { Object } WorkoutLogItem An individual item in a User's Workout Log.
+ * @property { string } workoutName The name of the corresponding Exercise.
+ * @property { string } notes Notes entered by the User for this WorkoutLogItem.
+ * @property { string } duration Intensity entered by the User for this WorkoutLogItem.
+ */
 
+/**
+ * Creates and inserts a new item in the workout log.
+ * 
+ * Assumption: The user viewing this component has already been logged in and has permission to view this Workout Log.
+ * @param { Object } props Navigation route params
+ * @param { Object } props.route
+ * @param { Object } props.route.params 
+ * @param { Object } props.route.params.user - Some data regarding the user who owns the Workout Log.
+ * @param { string } props.route.params.user.firstName - The first name of the corresponding User.
+ * @param { string } props.route.params.user.lastName - The last name of the corresponding User.
+ * @param { string } props.route.params.user.photoURL - The URL of the profile image of the corresponding User.
+ * @param { Array<WorkoutLogItem> } props.route.params.exerciseList The individual items to be displayed, each informing of i.e. the exercise the user attempted.
+ * @returns { SafeAreaView } The UI displayed by React for the workout log.
+ */
 const CreateWorkoutLog = (props) => {
     const { navigation } = props;
     const { user, exerciseList } = props.route.params

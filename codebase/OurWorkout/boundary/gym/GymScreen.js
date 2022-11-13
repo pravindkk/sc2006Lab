@@ -7,6 +7,29 @@ import MapView from 'react-native-maps';
 import { LikeGymPage } from '../../controller/GymPageController';
 import { GetUser } from '../../controller/UserComponent';
 
+/**
+ * @typedef { Object } GymInfo The non-array data corresponding to a Gym.
+ * @property { string } name The name of the Gym
+ * @property { string } desc The description of the Gym
+ */
+
+/**
+ * Displays the top-level information regarding a Gym,
+ * but not the messages in the gym page discussion.
+ * Allows for navigation to the GymDiscussionScreen.
+ * 
+ * Assumption: The user viewing this UI component has been logged in.
+ * @param { Object } props - The navigation route parameters.
+ * @param { Object } props.route
+ * @param { Object } props.route.params
+ * @param { GymInfo } props.route.params.gymInfo - Some data regarding the Gym.
+ * @param { Object } props.route.params.user - Some data regarding the user viewing the Gym.
+ * @param { string } props.route.params.user.firstName - The first name of the corresponding User.
+ * @param { string } props.route.params.user.lastName - The last name of the corresponding User.
+ * @param { string } props.route.params.user.photoURL - The URL of the profile image of the corresponding User.
+ * @returns { SafeAreaView } The UI displayed by React for this GymScreen.
+ */
+
 const GymScreen = (props) => {
     const { gymInfo, user } = props.route.params;
     const [liked, setLiked] = useState(user.likedGyms.includes(gymInfo.id))

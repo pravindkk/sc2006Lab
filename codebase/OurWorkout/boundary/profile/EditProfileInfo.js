@@ -5,6 +5,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { firebase } from '../../config'
 import { StoreUser } from '../../controller/UserComponent'
 
+/**
+ * Displays the UI component for changing the email, firstName, and lastName of the User that is logged in.
+ * 
+ * Assumption: The User viewing this screen has already been logged in.   
+ * @param { Object } user The details of the User who is currently logged in.
+ * @param { string } user.email The current email of the User.
+ * @param { string } user.firstName The current firstName of the User.
+ * @param { string } user.lastName The current lastName of the User.
+ * @returns { SafeAreaView } The UI section displayed by React for this component.
+ */
 const EditProfileInfo = ({ user }) => {
     const [email, setEmail] = useState(user.email);
     const [firstName, setFirstName] = useState(user.firstName);

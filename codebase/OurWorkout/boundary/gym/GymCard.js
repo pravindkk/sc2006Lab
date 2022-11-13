@@ -4,6 +4,24 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GymCardIcon } from '../../assets/gymIcons/GymCardIcon'
 
+/**
+ * @typedef { Object } GymInfo The non-array data corresponding to a Gym.
+ * @property { string } name The name of the Gym
+ * @property { string } desc The description of the Gym
+ */
+
+/**
+ * Displays a card UI idiom for a Gym.
+ * Allows for navigation to the corresponding GymScreen.
+ * 
+ * Assumption: The user viewing this UI component has been logged in.
+ * @param { GymInfo } item - The data to display regarding the Gym discussion.
+ * @param { Object } user - Details of the current User.
+ * @param { string } user.firstName - The first name of the corresponding User.
+ * @param { string } user.lastName - The last name of the corresponding User.
+ * @param { string } user.photoURL - The URL of the profile image of the corresponding User.
+ * @returns { TouchableOpacity } The UI section displayed by React for this DiscussionCard.
+ */
 const GymCard = ({ item, user }) => {
     const navigation = useNavigation();
 

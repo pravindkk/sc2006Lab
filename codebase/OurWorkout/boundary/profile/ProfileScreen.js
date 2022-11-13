@@ -7,6 +7,16 @@ import { getAuth, signOut } from 'firebase/auth'
 import { useNavigation } from '@react-navigation/native';
 import { useGlobalState } from '../../controller/GlobalState';
 
+/**
+ * Displays the profile of the currently logged-in user.
+ * - Displays the profile photo of the currently logged-in user.
+ * - Provides a button for navigating to the User's ProfileInfoScreen.
+ * - Provides a button for the logged-in User to log out.
+ * - Upon logging out, navigation to the LoginScreen takes place automatically.
+ * 
+ * Assumption: The user viewing this screen has already been logged in.
+ * @returns { SafeAreaView } The UI displayed by React for this screen.
+ */
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const [user, setUser] = useState('');

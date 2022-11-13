@@ -4,9 +4,21 @@ import React from 'react'
 import moment from 'moment';
 
 /**
- * displays the message in the discussion page
- * @param {*} props 
- * @returns 
+ * Displays a single message in the GymDiscussionScreen,
+ * as opposed to in the SingleChat UI component.
+ * 
+ * Assumption: The user viewing this UI component has been logged in,
+ * and is allowed to view this message.
+ * @param { Object } item - Some data regarding the message.
+ * @param { string } item.img - URI of any image that was sent in the message.
+ * @param { string } item.message - The text of the message body.
+ * @param { string } item.sendTime - The time the message was sent.
+ * @param { Object } item.user - Some data regarding the user sending the message.
+ * @param { string } item.user.firstName - The first name of the corresponding User.
+ * @param { string } item.user.lastName - The last name of the corresponding User.
+ * @param { string } item.user.photoURL - The URL of the profile image of the corresponding User.
+ * @returns { TouchableOpacity } The UI section displayed by React for this DiscussionCard.
+ * @returns { JSX.Element } The UI section displayed by React for this gym discussion page message.
  */
 const GymDiscussionMsgComponent = (props) => {
     const {sender, item} = props;

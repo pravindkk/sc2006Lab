@@ -7,6 +7,20 @@ import { WorkoutImg } from '../../assets/workoutIcons/WorkoutImg'
 
 const backgroundColor = ['#f0f0ff', '#FFF9F0']
 
+/**
+ * @typedef ExerciseListItem Represents one individual Exercise to display.
+ * @property { string } name The name of the Exercise
+ * @property { string } description The description of the Exercise
+ * @property { string } photoUrl The URL of the image to display for this Exercise.
+ */
+
+/**
+ * Used to display one Exercise on the HomeScreen.
+ * Navigates to the corresponding ExerciseScreen on tap.
+ *  
+ * Assumption: The user viewing this UI component has been logged in.
+ * @param { ExerciseListItem } item Represents the Exercise to display.
+ */
 const ExerciseCard = ({ item }) => {
     const navigation = useNavigation();
 

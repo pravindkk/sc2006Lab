@@ -5,8 +5,21 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { getSettingsForUser, setSettingsForUser } from '../../controller/UserComponent'
 import { Button } from 'react-native-elements'
 
+/**
+ * Displays the UI component to show and edit the Settings of the User that is logged in.
+ * 
+ * Allows for turning notifications on or off.
+
+ * Allows for changing the logged-in User's password.
+ * 
+ * Assumption: The User viewing this screen has already been logged in.   
+ * @param { Navigator } navigation The React Navigator passed in by the parent component.
+ * @param { Object } route The route params (currently unused).
+ * @returns { SafeAreaView } The UI displayed by React for this component.
+ */
+
 const Settings = ({ user }) => {
-    alert(JSON.stringify(user));
+    //alert(JSON.stringify(user));
 
     const [allowNotifications, setAllowNotifications] =
         useState(getSettingsForUser(user).allowNotifications);

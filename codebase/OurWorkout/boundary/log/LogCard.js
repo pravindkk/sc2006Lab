@@ -2,9 +2,18 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 /**
- * displays the passed in log
- * @param {*} item - log display 
- * @returns 
+ * @typedef { Object } WorkoutLogItem An individual item in a User's Workout Log.
+ * @property { string } workoutName The name of the corresponding Exercise.
+ * @property { string } notes Notes entered by the User for this WorkoutLogItem.
+ * @property { string } duration Intensity entered by the User for this WorkoutLogItem.
+ */
+
+/**
+ * Displays the passed-in WorkoutLogItem
+
+ * Assumption: The user viewing this component has already been logged in and has permission to view the workout log for which this LogCard is [one of] the LogCard(s) being displayed.
+ * @param { WorkoutLogItem } item - WorkoutLogItem to display
+ * @returns { View } The UI section displayed by React for this LogCard.
  */
 const LogCard = ({ item }) => {
     return (

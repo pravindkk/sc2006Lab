@@ -9,7 +9,26 @@ import LoadingIndicator from '../LoadingIndicator'
 import { Image } from 'react-native-elements'
 import AutoHeightImage from 'react-native-auto-height-image';
 
+/**
+ * @typedef ExerciseListItem Represents one individual Exercise to display.
+ * @property { string } name The name of the Exercise
+ * @property { string } description The description of the Exercise
+ * @property { string } photoUrl The URL of the image to display for this Exercise.
+ */
 
+/**
+ * Screen which displays one specific exercise.
+ * 
+ * Displays all information available regarding the exercise,
+ * specifically name, description and image. Right now random image picked.
+ * 
+ * Assumption: The user viewing this UI component has been logged in.
+ * @param { Object } props Navigation route params
+ * @param { Object } props.route
+ * @param { Object } props.route.params
+ * @param { ExerciseListItem } props.route.params.exerciseInfo The representation of the Exercise to display.
+ * @returns { SafeAreaView } The UI displayed by React for this ExerciseScreen.
+ */
 const ExerciseScreen = (props) => {
     const { exerciseInfo } = props.route.params;
     const [hasLoaded, setLoaded] = useState(false);

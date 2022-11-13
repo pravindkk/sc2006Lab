@@ -5,9 +5,23 @@ import { GymImg } from '../../assets/icons/GymImg'
 import { useNavigation } from '@react-navigation/native'
 
 /**
- * displays the different gym discussion cards
- * @param {*} item - Render List item 
- * @returns 
+ * @typedef { Object } GymInfo The non-array data corresponding to a Gym.
+ * @property { string } name The name of the Gym
+ * @property { string } desc The description of the Gym
+ */
+
+/**
+ * Displays a card UI idiom for a gym page discussion.
+ * Allows for navigation to the corresponding GymDiscussionScreen.
+ * 
+ * Assumption: The user viewing this UI component has been logged in.
+
+ * @param { GymInfo } item - The data to display regarding the Gym discussion.
+ * @param { Object } user - Details of the corresponding User.
+ * @param { string } user.firstName - The first name of the corresponding User.
+ * @param { string } user.lastName - The last name of the corresponding User.
+ * @param { string } user.photoURL - The URL of the profile image of the corresponding User.
+ * @returns { TouchableOpacity } The UI section displayed by React for this DiscussionCard.
  */
 const DiscussionCard = ({ item, user}) => {
     const navigation = useNavigation();

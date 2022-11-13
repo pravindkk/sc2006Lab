@@ -9,6 +9,14 @@ import Icon  from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicon  from 'react-native-vector-icons/Ionicons';
 import LoadingIndicator from '../LoadingIndicator'
 
+/**
+ * Displays the UI screen to show either the ProfileInfo component or the EditProfileInfo component of the User that is logged in, according to the state of this component. The switching is done by the User that is logged in and viewing this component interacting with an on-screen toggle displayed by this screen.
+ * 
+ * Assumption: The User viewing this screen has already been logged in.   
+ * @param { Navigator } navigation The React Navigator passed in by the parent component.
+ * @param { Object } route The route params (currently unused).
+ * @returns { SafeAreaView } The UI displayed by React for this screen.
+ */
 const ProfileInfoScreen = ({ navigation, route }) => {
     const [edit, setEdit] = useState(false);
     const [user, setUser] = useState('');

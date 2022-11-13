@@ -9,6 +9,21 @@ import { useNavigation } from '@react-navigation/native';
 import { FlashList } from '@shopify/flash-list'
 
 
+/**
+ * @typedef ExerciseListItem Represents one individual Exercise to display.
+ * @property { string } name The name of the Exercise
+ * @property { string } description The description of the Exercise
+ * @property { string } photoUrl The URL of the image to display for this Exercise.
+ */
+
+/**
+ * Used to display a list of ExerciseCard on the HomeScreen.
+ * Scrollable horizontally.
+ *  
+ * Assumption: The user viewing this UI component has been logged in.
+ * @param { Array<ExerciseListItem> } item The Exercise to display.
+ * @returns { View } The UI section displayed by React for this Exercise.
+ */
 
 const ExercisePreview = ({ exerciseList }) => {
     // const [exerciseList, setExerciseList] = useState([])
