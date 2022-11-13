@@ -13,9 +13,8 @@ import GymPreview from '../gym/GymPreview'
 import ExercisePreview from '../excercise/ExercisePreview'
 
 /**
- * The screen handling all user interface interaction and displays regarding searching Users, Gyms and Exercises. Takes as user input any fields by which to search and displays the results of the search.
- * 
- * Assumption: The user viewing this screen has already been logged in.
+ * The screen handling all user interface interaction and displays regarding searching Users, Gyms and Exercises. 
+ * Takes as user input for what to search and displays the results of the search.
  * @returns { SafeAreaView } The UI screen displayed by this component.
  */
 const SearchScreen = () => {

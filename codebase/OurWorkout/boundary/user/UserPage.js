@@ -5,14 +5,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicon from 'react-native-vector-icons/Ionicons'
 
 /**
- * Displays the user page corresponding to a specific User, showing their profile photo (if any) or placeholder image (if none), their first name and their last name.
- * 
- * Assumption: The user viewing this component has been logged-in.
+ * Displays the user page corresponding to a specific User, showing their profile photo, their first name and their last name.
  * @param { Object } props The route params from navigation towards this component. 
- * @param { Object } props.route.params.user The User to be displayed. 
- * @param { string } props.route.params.user.photoURL The URL of the photo of the User. 
- * @param { string } props.route.params.user.firstName The first name of the User. 
- * @param { string } props.route.params.user.lastName The last name of the User. 
+ * @param { Object } props.route.params.user The User object containing all user details (photo, first name, last name) to be displayed. 
  * @returns { SafeAreaView } The UI displayed to the user by react.
  */
 const UserPage = (props) => {
