@@ -4,6 +4,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { GymImg } from '../../assets/icons/GymImg'
 import { useNavigation } from '@react-navigation/native'
 
+/**
+ * displays the different gym discussion cards
+ * @param {*} item - Render List item 
+ * @returns 
+ */
 const DiscussionCard = ({ item, user}) => {
     const navigation = useNavigation();
 

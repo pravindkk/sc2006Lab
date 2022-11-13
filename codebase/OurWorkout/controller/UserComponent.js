@@ -16,7 +16,7 @@ import { firebase } from '../config'
  */
 
 /**
- * Async void function that stores data for the logged-in User, and thereby determines which User is currently logged-in, if any.
+ * Async void function that stores data locally for the logged-in User, and thereby determines which User is currently logged-in, if any.
  * @param { UserComponentUser } value The currently logged-in User to store. 
  * @return { Promise<void> }
  */
@@ -30,7 +30,7 @@ export const StoreUser = async (value) => {
   }
 
 /**
- * Async function that gets the stored User.
+ * Async function that gets the stored User from local storage.
  * @return { User } The data corresponding to a User, stored using StoreUser. 
  */
   export const GetUser = async () => {
@@ -44,7 +44,7 @@ export const StoreUser = async (value) => {
   }
 
   /**
-   * Get a User's settings
+   * Get a User's settings from local storage
    * @param { UserComponentUser } user The User to get the settings for.
    * @returns { UserSettings } The settings for the User.
    */
@@ -54,7 +54,7 @@ export const StoreUser = async (value) => {
   }
 
     /**
-   * Async void method to set the current User's settings.
+   * Async void method to set the current User's settings in both local storage and in cloud storage (Firebase).
    * @param { string } uid The UUID of the current User.
    * @param { UserSettings } settings The settings to set for the current User.
    * @returns { Promise<void> }
@@ -69,7 +69,7 @@ export const StoreUser = async (value) => {
   }
 
   /**
-   * Async void function to synchronise the local stored data of the logged-in User with that stored in the cloud DB.
+   * Async void function to synchronise the local stored data of the logged-in User with that stored in the cloud DB (firebase).
    * @param { string } uid The UID of the current logged-in User.
    * @returns { Promise<void> }
    */

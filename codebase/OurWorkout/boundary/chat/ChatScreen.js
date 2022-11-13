@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import LoadingIndicator from '../LoadingIndicator'
+import ChatUser from './ChatUser'
 
 /**
  * ChatScreen functions to show a searchable list of all Chats the current User is in.
@@ -25,6 +26,9 @@ const ChatScreen = ({navigation}) => {
   const [hasLoaded, setLoaded] = useState(false);
   const [chatList, setChatList] = useState([]);
 
+  /**
+   * Runs when the component is loaded
+   */
   useEffect(() => {
     getChatList();
 
@@ -40,6 +44,9 @@ const ChatScreen = ({navigation}) => {
     
   },[])
 
+  /**
+   * Call the firebase API to get the user's chats
+   */
   const getChatList = async() => {
     firebase.database().ref('/chatlist/' + firebase.auth().currentUser.uid)
       .on('value', snapshot => {
@@ -55,14 +62,13 @@ const ChatScreen = ({navigation}) => {
       })
   }
 
+  /**
+   * Runs for each item in the chatList
+   * @param {*} item - Render List Item 
+   * @returns 
+   */
   const renderItem = ({ item }) => (
-    <ListItem style={{marginTop: 10}} onPress={() => {navigation.navigate('SingleChat', {receiverData: item, senderData: loggedInUser})}}>
-      <Avatar source={{uri: item.photoURL}} title={item.firstName} rounded size="medium" />
-      <ListItem.Content>
-        <ListItem.Title style={{fontSize: 20}}>{item.firstName} {item.lastName}</ListItem.Title>
-        <ListItem.Subtitle style={{fontSize: 12}} numberOfLines={1}>{item.lastMsg}</ListItem.Subtitle>
-      </ListItem.Content>
-    </ListItem>
+    <ChatUser item={item} />
     
   );
 

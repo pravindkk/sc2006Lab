@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity, FlatList, TextInput } from 'react-native-gesture-handler';
@@ -13,6 +13,7 @@ import ImgToBase64 from 'react-native-image-base64';
 import * as FileSystem from 'expo-file-system';
 
 
+
 const GymDiscussionScreen = (props) => {
   const {gymInfo, user} = props.route.params;
 
@@ -20,6 +21,9 @@ const GymDiscussionScreen = (props) => {
   const [disabled, setDisabled] = useState(false);
   const [allChat, setAllChat] = React.useState([]);
 
+  /**
+   * runs as the first function
+   */
   const startup = () => {
     firebase.database().ref('/discussion/' + gymInfo.id)
     .once('value')
@@ -32,6 +36,9 @@ const GymDiscussionScreen = (props) => {
     })
   }
 
+  /**
+   * Runs when the component is loaded
+   */
   useEffect(() => {
     setAllChat([]);
     startup();
@@ -47,23 +54,14 @@ const GymDiscussionScreen = (props) => {
 
   const msgvalid = txt => txt && txt.replace(/\s/g, '').length;
 
-  // const image = () => {
-  //   launchImageLibraryAsync('photo', response => {
-  //     Imgto
-  //   })
-  // }
-
+  /**
+   * calls the image picker function and encode it to base64
+   * @returns selected image
+   */
   const sendImg = async() => {
     const pickedImage = await pickImage();
     if (pickedImage != null) {
-      // ImgToBase64.getBase64String(pickedImage)
-      // .then(base64String => {
-      //   let source = 'data:image/jpeg;base64,' + base64String;
-      //   sendMsg(source, 'picture');
-      // })
-      // .catch(err => {alert(err)});
       const base64 = await FileSystem.readAsStringAsync(pickedImage, { encoding: 'base64' });
-      // console.log(base64);
       let source = 'data:image/jpeg;base64,' + base64;
       sendMsg(source, 'picture')
     }
@@ -71,17 +69,14 @@ const GymDiscussionScreen = (props) => {
       alert('Did not choose a picture');
       return
     }
-
-    // sendImg(img, 'picture')
-    // await pickChatImage.then(res => {
-    //   var img = ''
-    //   if (res != null) {
-    //     img = res;
-    //   }
-    //   sendMsg(img, 'picture');
-    // })
   }
 
+  /**
+   * 
+   * @param {*} img - image that will be sent
+   * @param {*} type - type of the message(image or text)
+   * @returns 
+   */
   const sendMsg = (img, type) => {
     // console.log(allChat);
     if ((msg == '' || msgvalid(msg) == 0) && (type == 'text')) {
@@ -127,6 +122,7 @@ const GymDiscussionScreen = (props) => {
               <Text style={{fontSize: 20, paddingLeft: 10, marginRight: '17%'}}>{gymInfo.name}</Text>
           </View>
       </View>
+      <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={Platform.OS === 'ios' ? -200 : -240} >
       <FlatList
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => index}
@@ -170,7 +166,7 @@ const GymDiscussionScreen = (props) => {
           />
         </TouchableOpacity>
       </View>
-
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

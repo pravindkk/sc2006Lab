@@ -4,7 +4,7 @@
     "slug": "OurWorkout",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/Home.png",
+    "icon": "./assets/app-icon.png",
     "userInterfaceStyle": "light",
     "plugins": [
       [
@@ -15,7 +15,7 @@
       ]
     ],
     "splash": {
-      "image": "./assets/icons/Home.png",
+      "image": "./assets/splash-screen.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -26,15 +26,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jackdbean.OurWorkout"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.jackdbean.OurWorkout"
     },
-    "web": {
-      
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "a92f49da-4132-4a83-bc4a-e1f9fcc507cb"
+      }
     }
   }
 }

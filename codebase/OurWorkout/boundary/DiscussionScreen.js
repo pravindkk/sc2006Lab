@@ -12,33 +12,40 @@ import { GymImg } from '../assets/icons/GymImg'
 import DiscussionCard from './gym/DiscussionCard';
 
 const DiscussionScreen = () => {
-  const navigation = useNavigation();
   const [user, setUser] = useState('');
   const [gymList, setGymList] = useState([]);
   const [hasLoaded, setLoaded] = useState(false);
 
+  /**
+   * Runs when the component is loaded
+   */
   useEffect(() => {
     getLoggedInUser().then();
   },[])
 
+  /**
+   * gets the app current logged in user
+   */
   const getLoggedInUser = async () => {
     setGymList([]);
     await GetUser().then(async (user) => {
       setUser(user);
-      console.log("Discusion Screen user: ",user);
-      console.log("This is the user gym",user.likedGyms);
-      await getLikedGyms(user).then(console.log("Final gymList",gymList));
+      await getLikedGyms(user);
     })
 
   }
 
+  /**
+   * get the user's liked gyms' from firebase API
+   * @param {*} user - current user details
+   */
   const getLikedGyms = async (user) => {
     // console.log(GymImg[Math.floor(Math.random() * GymImg.length)]);
     try {
       await firebase.firestore().collection('gyms')
       .where(firebase.firestore.FieldPath.documentId(), 'in', user.likedGyms).get()
       .then((snapshot) => {
-        console.log(snapshot.docs[0].data());
+        // console.log(snapshot.docs[0].data());
         snapshot.docs.forEach(doc => {
           setGymList( arr => [...arr, doc.data()]);
         })
@@ -58,27 +65,12 @@ const DiscussionScreen = () => {
 
   }
 
-  const navigateToExerciseScreen = (item) => {
-    navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user});
-  }
-
+  /**
+   * displays item in discussionList
+   * @param {*} param0 - discussion item in discussionList
+   */
   const renderItem = ({ item }) => (
     <DiscussionCard item={item} user={user} />
-    // <TouchableOpacity onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
-    //   <View style={{borderRadius: 40, display: 'flex', alignItems: 'center', marginBottom: 20, shadowOpacity: 0.3, shadowRadius: 10}}>
-        
-    //     <Image source={{uri: GymImg[Math.floor(Math.random() * GymImg.length)]}} style={{width: Dimensions.get('window').width/2+100, height: 170, resizeMode: 'stretch'}} />
-    //     <Text style={{marginTop: 20}}>{item.name}</Text>
-        
-    //   </View>
-    // </TouchableOpacity>
-      // <ListItem bottomDivider style={{marginTop: 5}} onPress={() => {navigation.navigate("GymDiscussionScreen", {gymInfo: item, user: user})}}>
-        
-      //   <ListItem.Content>
-      //     <ListItem.Title style={{fontSize: 16}}>{item.name}</ListItem.Title>
-          
-      //   </ListItem.Content>
-      // </ListItem>
   )
   
 

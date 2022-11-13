@@ -10,18 +10,13 @@ import { GetUser } from '../../controller/UserComponent';
 const GymScreen = (props) => {
     const { gymInfo, user } = props.route.params;
     const [liked, setLiked] = useState(user.likedGyms.includes(gymInfo.id))
+
+    /**
+     * runs when the component is loaded
+     */
     useEffect(() => {
         console.log(gymInfo.coordinates);
         console.log(user);
-        // getLoggedInUser
-        // const getLoggedInUser = async () => {
-      
-        //     const loggedInUser = await GetUser();
-        //     // setUser(loggedInUser);
-        //     console.log(loggedInUser)
-        // }
-    
-        // getLoggedInUser()
     },[])
 
     return(

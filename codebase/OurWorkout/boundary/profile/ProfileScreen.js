@@ -13,6 +13,9 @@ const ProfileScreen = () => {
   const [hasLoaded, setLoaded] = useState(false);
   const [loggedIn, setLoggedIn] = useGlobalState('loggedIn')
 
+  /**
+   * Runs when the component is loaded
+   */
   useEffect(() => {
     const getLoggedInUser = async () => {
       
@@ -41,9 +44,6 @@ const ProfileScreen = () => {
         <View style={{justifyContent: 'center'}} >
           <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("ProfileInfo")} >
             <Text style={styles.buttonText}>Profile Information</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate("Settings")}>
-            <Text style={styles.buttonText}>Settings</Text>
           </TouchableOpacity>
         </View>
       

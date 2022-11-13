@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { firebase } from '../../config'
 import { FlatList } from 'react-native-gesture-handler'
@@ -6,33 +6,39 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import ExerciseCard from './ExerciseCard'
 import {TouchableOpacity} from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native';
+import { FlashList } from '@shopify/flash-list'
 
 
 
 const ExercisePreview = ({ exerciseList }) => {
     // const [exerciseList, setExerciseList] = useState([])
     const navigation = useNavigation();
-    useEffect(() => {
-        // console.log(exerciseList);
-        // for (var i=0; i<exerciseList.length; i++) {
-        //     console.log(exerciseList[i].name);
-        // }
-    }, [])
 
-    const renderItem = ({ item }) => (
-        <ExerciseCard item={item} />
-      );
+    /**
+     * displays the specific exercise card
+     * @param {*} item - Render List Item 
+     * @returns 
+     */
+    const renderItem = ({ item }) => {
+        return (
+            <ExerciseCard item={item} />
+        )
+        
+    }
+
+    const keyExtractor = (item) => item.uuid.toString();
 
     return (
-        <SafeAreaView>
-            <Text style={{fontWeight: 'bold', fontSize: 20}}>Exercises</Text>
+        <View>
+            
             <FlatList
                 horizontal={true}
                 data={exerciseList}
                 renderItem={renderItem}
-                keyExtractor={item => item.uuid}
+                keyExtractor={keyExtractor}
                 initialNumToRender={10}
-                maxToRenderPerBatch={30}
+                maxToRenderPerBatch={10}
+                windowSize={Dimensions.get('window').width*2}
             />
             {/* <FlatList
                 showsVerticalScrollIndicator={false}
@@ -43,7 +49,7 @@ const ExercisePreview = ({ exerciseList }) => {
                 style={{height: '100%', paddingTop: 30}}
                 
             /> */}
-        </SafeAreaView>
+        </View>
     )
 }
 

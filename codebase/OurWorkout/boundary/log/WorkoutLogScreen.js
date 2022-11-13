@@ -12,18 +12,9 @@ const WorkoutLogScreen = (props) => {
     const { user, exerciseList } = props.route.params;
     const [logList, setLogList] = useState([]);
 
-    // const startup = () => {
-    //     firebase.database().ref('/discussion/' + gymInfo.id)
-    //     .once('value')
-    //     .then(snapshot => {
-    //         // console.log('user data: ', snapshot.val());
-
-    //         if (snapshot.val() == null) {
-    //         firebase.database().ref('/messages/' + gymInfo.id).push();
-    //         }
-    //     })
-    // }
-
+    /**
+     * Runs when the component first loaded
+     */
     useEffect(() => {
         const onChildAdd = 
         firebase.database().ref('/exerciseLog/' + user.uid)
@@ -34,6 +25,11 @@ const WorkoutLogScreen = (props) => {
         return () => firebase.database().ref('/exerciseLog/' + user.uid).off('child_added', onChildAdd);
     }, [])
 
+    /**
+     * displays the log passed from the LogList
+     * @param {*} item - Render List item 
+     * @returns 
+     */
     const renderItem = ({item}) => (
         <LogCard item={item} />
     )

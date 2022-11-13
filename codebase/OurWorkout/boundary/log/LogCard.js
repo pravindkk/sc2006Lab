@@ -1,6 +1,11 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
+/**
+ * displays the passed in log
+ * @param {*} item - log display 
+ * @returns 
+ */
 const LogCard = ({ item }) => {
     return (
         <View style={{width: Dimensions.get("screen").width-60, justifyContent: 'center', alignSelf:'center', borderWidth: 0.3, borderRadius: 10, padding: 20, borderColor: '#e5f0fa', marginBottom: 30}}>

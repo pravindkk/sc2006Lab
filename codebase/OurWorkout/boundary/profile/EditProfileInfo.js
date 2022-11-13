@@ -10,6 +10,10 @@ const EditProfileInfo = ({ user }) => {
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
 
+    /**
+     * calls the firebase API to update the user details
+     * @param {*} uid  - unique id of user
+     */
     const updateUserDetails = async (uid) => {
         await firebase.firestore().collection('users').doc(uid).update({
             firstName,

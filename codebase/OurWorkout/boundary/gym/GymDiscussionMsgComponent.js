@@ -3,6 +3,11 @@ import { Avatar, ListItem } from 'react-native-elements';
 import React from 'react'
 import moment from 'moment';
 
+/**
+ * displays the message in the discussion page
+ * @param {*} props 
+ * @returns 
+ */
 const GymDiscussionMsgComponent = (props) => {
     const {sender, item} = props;
 

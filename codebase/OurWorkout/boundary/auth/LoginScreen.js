@@ -23,18 +23,38 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('')
     const [loggedIn, setLoggedIn] = useGlobalState('loggedIn');
 
+    /**
+     * Runs all the functions when component loads
+     */
     useEffect(() => {
         StoreUser('');
     }, [])
 
+    /**
+     * Logins the user by calling the firebase API
+     * @param {*} email 
+     * @param {*} password 
+     */
     loginUser = async (email, password) => {
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password)
                 .then(async (userCredential) => {
                     await updateLocalStorage(userCredential.user.uid).then(setLoggedIn(true));
                 })
-        } catch (error) {
-            alert(error.message)
+        } catch (e) {
+            if (e.code == 'auth/invalid-email') {
+                alert("Please enter a valid email");
+            }
+            else if (e.code == 'auth/user-not-found') {
+                alert("The user is not found. Please register for a new account!");
+            }
+            else if (e.code == 'auth/wrong-password') {
+                alert("Sorry the password is wrong! Try again");
+            }
+            else {
+                alert(e.message)
+            }
+            
         }
     }
 
