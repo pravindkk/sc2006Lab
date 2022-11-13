@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: boundary/BottomNavBar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: boundary/BottomNavBar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { StyleSheet, Text, View, Image, TouchableOpacity, Platform } from 'react-native'
+import React from 'react'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { SvgFromXml, SvgUri } from 'react-native-svg';
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
+
+import HomeScreen from './HomeScreen'
+import ProfileScreen from './profile/ProfileScreen'
+import SearchScreen from './search/SearchScreen';
+
+import SearchIcon from '../assets/icons/Search.svg'
+import ChatIcon from '../assets/icons/Chat.svg'
+import ProfileIcon from '../assets/icons/Profile.svg'
+import HomeIcon from '../assets/icons/Home.svg'
+import DiscussionScreen from './DiscussionScreen';
+// import { Tab } from 'react-native-elements/dist/tab/Tab';
+
+const Tab = createBottomTabNavigator()
+
+/**
+ * Displays the bottom navigation bar by which logged-in users navigate between various screens.
+ * 
+ * Specifically, HomeScreen, SearchScreen, DiscussionScreen and ProfileScreen.
+ * @returns { Tab.Navigator } The tabbed navigator for React to display.
+ */
+const BottomNavBar = () => {
+  
+  return (
+    &lt;Tab.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarStyle: styles.nav
+      }}
+    >
+      &lt;Tab.Screen
+        name="Home" 
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            &lt;View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
+              &lt;HomeIcon width={25} height={25} fill={focused ? '#fff' : '#fff'} />
+              { focused &amp;&amp; 
+                &lt;Text
+                  style={{color: focused ? '#fff' : '#72777A', fontSize: 12}}
+                >
+                  Home
+                &lt;/Text>
+              }
+            &lt;/View>
+          )
+        }}
+      />
+
+      &lt;Tab.Screen
+        name="Search" 
+        component={SearchScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            &lt;View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
+              &lt;SearchIcon width={25} height={25} fill={focused ? '#fff': '#303437'} />
+              { focused &amp;&amp; 
+                &lt;Text
+                  style={{color: focused ? '#fff' : '#72777A', fontSize: 12}}
+                >
+                  Search
+                &lt;/Text>
+              }
+            &lt;/View>
+          )
+        }}
+      />
+
+      &lt;Tab.Screen
+        name="Discussion" 
+        component={DiscussionScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            &lt;View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
+              &lt;Icon name='fitness-center' color={focused ? '#fff' : '#303437'} size={25} />
+              {/* &lt;ChatIcon width={25} height={25} fill={focused ? '#fff': '#303437'} /> */}
+              { focused &amp;&amp; 
+                &lt;Text
+                  style={{color: focused ? '#fff' : '#72777A', fontSize: 12}}
+                >
+                  Discuss
+                &lt;/Text>
+              }
+            &lt;/View>
+          )
+        }}
+      />
+
+
+      &lt;Tab.Screen
+        name="Profile" 
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({focused}) => (
+            &lt;View style={[styles.navIconGroup, {backgroundColor: focused ? '#303437': '#fff'}]}>
+              &lt;ProfileIcon width={25} height={25} fill={focused ? '#fff': '#303437'} />
+              { focused &amp;&amp; 
+                &lt;Text
+                  style={{color: focused ? '#fff' : '#72777A', fontSize: 12}}
+                >
+                  Profile
+                &lt;/Text>
+              }
+            &lt;/View>
+          )
+        }}
+      />
+    &lt;/Tab.Navigator>
+  )
+}
+
+export default BottomNavBar
+
+const styles = StyleSheet.create({
+  nav: {
+    position: 'absolute',
+    // padding: 20,
+    bottom: 30,
+    left: 15,
+    right: 15,
+    // elevation: 40,
+    backgroundColor: '#fff',
+    height: 60,
+    borderRadius: 24,
+    shadowRadius: 20,
+    shadowOpacity: 0.3,
+    shadowColor: '#72777A'
+    
+  },
+  navIconGroup: {
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    top: 15,
+    width: 80,
+    height: 50,
+    borderRadius: 30,
+    flexDirection: 'row',
+    justifyContent:'space-evenly',
+    padding: 5,
+    marginBottom: Platform.OS == 'ios' ? 0 : 30,
+  }
+})</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-pickChatImage.html">pickChatImage</a></li><li><a href="module-pickImage.html">pickImage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AllUserScreen">AllUserScreen</a></li><li><a href="global.html#BottomNavBar">BottomNavBar</a></li><li><a href="global.html#ChatScreen">ChatScreen</a></li><li><a href="global.html#ChatUser">ChatUser</a></li><li><a href="global.html#CreateWorkoutLog">CreateWorkoutLog</a></li><li><a href="global.html#DiscussionCard">DiscussionCard</a></li><li><a href="global.html#DiscussionScreen">DiscussionScreen</a></li><li><a href="global.html#EditProfileInfo">EditProfileInfo</a></li><li><a href="global.html#ExerciseCard">ExerciseCard</a></li><li><a href="global.html#ExercisePreview">ExercisePreview</a></li><li><a href="global.html#ExerciseScreen">ExerciseScreen</a></li><li><a href="global.html#GetUser">GetUser</a></li><li><a href="global.html#GymCard">GymCard</a></li><li><a href="global.html#GymDiscussionMsgComponent">GymDiscussionMsgComponent</a></li><li><a href="global.html#GymDiscussionScreen">GymDiscussionScreen</a></li><li><a href="global.html#GymPreview">GymPreview</a></li><li><a href="global.html#GymScreen">GymScreen</a></li><li><a href="global.html#HomeScreen">HomeScreen</a></li><li><a href="global.html#LikeGymPage">LikeGymPage</a></li><li><a href="global.html#LoadingIndicator">LoadingIndicator</a></li><li><a href="global.html#LogCard">LogCard</a></li><li><a href="global.html#LoginScreen">LoginScreen</a></li><li><a href="global.html#MsgComponent">MsgComponent</a></li><li><a href="global.html#ProfileInfo">ProfileInfo</a></li><li><a href="global.html#ProfileInfoScreen">ProfileInfoScreen</a></li><li><a href="global.html#ProfileScreen">ProfileScreen</a></li><li><a href="global.html#RegisterScreen">RegisterScreen</a></li><li><a href="global.html#SearchScreen">SearchScreen</a></li><li><a href="global.html#Settings">Settings</a></li><li><a href="global.html#SettingsScreen">SettingsScreen</a></li><li><a href="global.html#SingleChat">SingleChat</a></li><li><a href="global.html#StoreUser">StoreUser</a></li><li><a href="global.html#TimeDelivery">TimeDelivery</a></li><li><a href="global.html#UserPage">UserPage</a></li><li><a href="global.html#WorkoutLogScreen">WorkoutLogScreen</a></li><li><a href="global.html#getSettingsForUser">getSettingsForUser</a></li><li><a href="global.html#setSettingsForUser">setSettingsForUser</a></li><li><a href="global.html#updateLocalStorage">updateLocalStorage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Nov 13 2022 16:28:02 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
