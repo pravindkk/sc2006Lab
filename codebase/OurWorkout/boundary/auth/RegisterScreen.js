@@ -58,6 +58,12 @@ const RegisterScreen = () => {
     const registerUser = async (email, password, firstName, lastName) => {
         // const response = await fetch(image)
         // const blob = await response.blob();
+        let checkEmail = email.split('@')
+        if (checkEmail[0].length < 7 || checkEmail[0].length > 100 || checkEmail[1].length < 7 || checkEmail[1]>100) {
+            alert('Email is invalid')
+            return
+        }
+        
         console.log("creating");
         if (isSelected == false) {
             alert("Please accept the T&C of OurWorkout")
