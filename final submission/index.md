@@ -1,5 +1,9 @@
 ```
 .
++-- OurWorkout -- Software Requirement Specification.docx (The SRS)
++-- Testing CFGs
++-- +-- validEmail.png (The CFG for validEmail)
++-- +-- correctPassword.png (The CFG for correctPassword)
 +-- codebase
 |   +-- out 
 |   |   +-- global.html (Shows the code documentation)
