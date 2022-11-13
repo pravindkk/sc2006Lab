@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: boundary/gym/GymDiscussionScreen.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: boundary/gym/GymDiscussionScreen.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { TouchableOpacity, FlatList, TextInput } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { firebase } from '../../config'
+import uuid from 'react-native-uuid';
+import moment from 'moment';
+import GymDiscussionMsgComponent from './GymDiscussionMsgComponent';
+import { launchImageLibraryAsync } from 'expo-image-picker';
+import pickImage from '../../controller/ImagePicker'
+import ImgToBase64 from 'react-native-image-base64';
+import * as FileSystem from 'expo-file-system';
+
+/**
+ * @typedef { Object } GymInfo The non-array data corresponding to a Gym.
+ * @property { string } name The name of the Gym
+ * @property { string } desc The description of the Gym
+ */
+
+/**
+ * Displays the Gym discussion page and all messages contained within it.
+ * 
+ * Assumption: The user viewing this UI component has been logged in.
+ * @param { Object } props - The navigation route parameters.
+ * @param { Object } props.route
+ * @param { Object } props.route.params
+ * @param { GymInfo } props.route.params.gymInfo - Some data regarding the Gym.
+ * @param { Object } props.route.params.user - Some data regarding the user viewing the GymDiscussionScreen.
+ * @param { string } props.route.params.user.firstName - The first name of the corresponding User.
+ * @param { string } props.route.params.user.lastName - The last name of the corresponding User.
+ * @param { string } props.route.params.user.photoURL - The URL of the profile image of the corresponding User.
+ * @returns { SafeAreaView } The UI displayed by React for this GymScreen.
+ */
+
+const GymDiscussionScreen = (props) => {
+  const {gymInfo, user} = props.route.params;
+
+  const [msg, setMsg] = useState('');
+  const [disabled, setDisabled] = useState(false);
+  const [allChat, setAllChat] = React.useState([]);
+
+  /**
+   * runs as the first function
+   */
+  const startup = () => {
+    firebase.database().ref('/discussion/' + gymInfo.id)
+    .once('value')
+    .then(snapshot => {
+      // console.log('user data: ', snapshot.val());
+
+      if (snapshot.val() == null) {
+        firebase.database().ref('/messages/' + gymInfo.id).push();
+      }
+    })
+  }
+
+  /**
+   * Runs when the component is loaded
+   */
+  useEffect(() => {
+    setAllChat([]);
+    startup();
+      const onChildAdd = 
+          firebase.database().ref('/discussion/' + gymInfo.id)
+              .on('child_added', snapshot => {
+                  setAllChat((state) => [snapshot.val(), ...state]);
+                  // console.log(allChat);
+              })
+      return () => firebase.database().ref('/discussion/' + gymInfo.id).off('child_added', onChildAdd);
+      
+  }, [gymInfo.id])
+
+  const msgvalid = txt => txt &amp;&amp; txt.replace(/\s/g, '').length;
+
+  /**
+   * calls the image picker function and encode it to base64
+   * @returns selected image
+   */
+  const sendImg = async() => {
+    const pickedImage = await pickImage();
+    if (pickedImage != null) {
+      const base64 = await FileSystem.readAsStringAsync(pickedImage, { encoding: 'base64' });
+      let source = 'data:image/jpeg;base64,' + base64;
+      sendMsg(source, 'picture')
+    }
+    else {
+      alert('Did not choose a picture');
+      return
+    }
+  }
+
+  /**
+   * 
+   * @param {*} img - image that will be sent
+   * @param {*} type - type of the message(image or text)
+   * @returns 
+   */
+  const sendMsg = (img, type) => {
+    // console.log(allChat);
+    if ((msg == '' || msgvalid(msg) == 0) &amp;&amp; (type == 'text')) {
+        alert('Enter something');
+        return false
+    }
+    setDisabled(true);
+    let msgData = {
+        user: user,
+        message: msg,
+        sendTime: moment().format(''),
+        from: user.uid,
+        img: img,
+        msgType: type
+    };
+
+    const newReference = firebase.database().ref('/discussion/' + gymInfo.id).push();
+    msgData.id = newReference.key;
+    newReference.set(msgData).then(() => {
+        setMsg('');
+        setDisabled(false);
+    })
+  }
+
+  const renderItem = ({item}) => (
+    &lt;GymDiscussionMsgComponent
+      sender={item.from == firebase.auth().currentUser.uid}
+      item={item}
+    />
+  )
+  
+  return (
+    &lt;SafeAreaView style={{backgroundColor: '#fff', padding: 10, paddingBottom: 0}}>
+      &lt;View style={{display: 'flex',flexDirection: 'row', alignItems: 'center', paddingLeft: 10, paddingRight: 10, justifyContent: 'center', height: 50}}>
+          &lt;TouchableOpacity style={{flex: 1, justifyContent: 'center', alignSelf: 'center'}} onPress={() => props.navigation.goBack()}>
+              &lt;Icon
+                  name="arrow-back-circle-outline"
+                  color="#72777A"
+                  size={40}
+              />
+          &lt;/TouchableOpacity>
+          &lt;View style={{flex: 2,flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              &lt;Text style={{fontSize: 20, paddingLeft: 10, marginRight: '17%'}}>{gymInfo.name}&lt;/Text>
+          &lt;/View>
+      &lt;/View>
+      &lt;KeyboardAvoidingView behavior='position' keyboardVerticalOffset={Platform.OS === 'ios' ? -200 : -240} >
+      &lt;FlatList
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index}
+        data={allChat}
+        renderItem={renderItem}
+        inverted
+        style={{height: '90%'}}
+      />
+      &lt;View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
+        &lt;TextInput
+          style={{
+            backgroundColor: '#F2F4F5',
+            width: '80%',
+            minHeight: 30,
+            maxHeight: 60,
+            borderRadius: 25,
+            borderWidth: 0.5,
+            borderColor: '#fff',
+            paddingHorizontal: 15,
+            color: '#000',
+          }}
+          placeholder="Type a message"
+          placeholderTextColor='#000'
+          multiline={true}
+          value={msg}
+          onChangeText={val => setMsg(val)}
+        />
+        &lt;TouchableOpacity disabled={disabled} onPress={() => {sendImg();}}>
+          &lt;Icon
+            name='ios-camera'
+            color="#72777A"
+            size={20}
+          />
+        &lt;/TouchableOpacity>
+
+        &lt;TouchableOpacity disabled={disabled} onPress={() => {sendMsg('','text');}}>
+          &lt;Icon
+            name='paper-plane-sharp'
+            color="#72777A"
+            size={20}
+          />
+        &lt;/TouchableOpacity>
+      &lt;/View>
+      &lt;/KeyboardAvoidingView>
+    &lt;/SafeAreaView>
+  )
+}
+
+export default GymDiscussionScreen
+
+const styles = StyleSheet.create({})</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-pickChatImage.html">pickChatImage</a></li><li><a href="module-pickImage.html">pickImage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AllUserScreen">AllUserScreen</a></li><li><a href="global.html#BottomNavBar">BottomNavBar</a></li><li><a href="global.html#ChatScreen">ChatScreen</a></li><li><a href="global.html#ChatUser">ChatUser</a></li><li><a href="global.html#CreateWorkoutLog">CreateWorkoutLog</a></li><li><a href="global.html#DiscussionCard">DiscussionCard</a></li><li><a href="global.html#DiscussionScreen">DiscussionScreen</a></li><li><a href="global.html#EditProfileInfo">EditProfileInfo</a></li><li><a href="global.html#ExerciseCard">ExerciseCard</a></li><li><a href="global.html#ExercisePreview">ExercisePreview</a></li><li><a href="global.html#ExerciseScreen">ExerciseScreen</a></li><li><a href="global.html#GetUser">GetUser</a></li><li><a href="global.html#GymCard">GymCard</a></li><li><a href="global.html#GymDiscussionMsgComponent">GymDiscussionMsgComponent</a></li><li><a href="global.html#GymDiscussionScreen">GymDiscussionScreen</a></li><li><a href="global.html#GymPreview">GymPreview</a></li><li><a href="global.html#GymScreen">GymScreen</a></li><li><a href="global.html#HomeScreen">HomeScreen</a></li><li><a href="global.html#LikeGymPage">LikeGymPage</a></li><li><a href="global.html#LoadingIndicator">LoadingIndicator</a></li><li><a href="global.html#LogCard">LogCard</a></li><li><a href="global.html#LoginScreen">LoginScreen</a></li><li><a href="global.html#MsgComponent">MsgComponent</a></li><li><a href="global.html#ProfileInfo">ProfileInfo</a></li><li><a href="global.html#ProfileInfoScreen">ProfileInfoScreen</a></li><li><a href="global.html#ProfileScreen">ProfileScreen</a></li><li><a href="global.html#RegisterScreen">RegisterScreen</a></li><li><a href="global.html#SearchScreen">SearchScreen</a></li><li><a href="global.html#Settings">Settings</a></li><li><a href="global.html#SettingsScreen">SettingsScreen</a></li><li><a href="global.html#SingleChat">SingleChat</a></li><li><a href="global.html#StoreUser">StoreUser</a></li><li><a href="global.html#TimeDelivery">TimeDelivery</a></li><li><a href="global.html#UserPage">UserPage</a></li><li><a href="global.html#WorkoutLogScreen">WorkoutLogScreen</a></li><li><a href="global.html#getSettingsForUser">getSettingsForUser</a></li><li><a href="global.html#setSettingsForUser">setSettingsForUser</a></li><li><a href="global.html#updateLocalStorage">updateLocalStorage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Nov 13 2022 16:28:02 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: boundary/excercise/ExercisePreview.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: boundary/excercise/ExercisePreview.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { firebase } from '../../config'
+import { FlatList } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import ExerciseCard from './ExerciseCard'
+import {TouchableOpacity} from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native';
+import { FlashList } from '@shopify/flash-list'
+
+
+/**
+ * @typedef ExerciseListItem Represents one individual Exercise to display.
+ * @property { string } name The name of the Exercise
+ * @property { string } description The description of the Exercise
+ * @property { string } photoUrl The URL of the image to display for this Exercise.
+ */
+
+/**
+ * Used to display a list of ExerciseCard on the HomeScreen.
+ * Scrollable horizontally.
+ *  
+ * Assumption: The user viewing this UI component has been logged in.
+ * @param { Array&lt;ExerciseListItem> } item The Exercise to display.
+ * @returns { View } The UI section displayed by React for this Exercise.
+ */
+
+const ExercisePreview = ({ exerciseList }) => {
+    // const [exerciseList, setExerciseList] = useState([])
+    const navigation = useNavigation();
+
+    /**
+     * displays the specific exercise card
+     * @param {*} item - Render List Item 
+     * @returns 
+     */
+    const renderItem = ({ item }) => {
+        return (
+            &lt;ExerciseCard item={item} />
+        )
+        
+    }
+
+    const keyExtractor = (item) => item.uuid.toString();
+
+    return (
+        &lt;View>
+            
+            &lt;FlatList
+                horizontal={true}
+                data={exerciseList}
+                renderItem={renderItem}
+                keyExtractor={keyExtractor}
+                initialNumToRender={10}
+                maxToRenderPerBatch={10}
+                windowSize={Dimensions.get('window').width*2}
+            />
+            {/* &lt;FlatList
+                showsVerticalScrollIndicator={false}
+                numColumns={4}
+                keyExtractor={item => item.uuid}
+                data={exerciseList}
+                renderItem={renderItem}
+                style={{height: '100%', paddingTop: 30}}
+                
+            /> */}
+        &lt;/View>
+    )
+}
+
+export default ExercisePreview
+
+const styles = StyleSheet.create({
+    exerciseContainer: {
+        // backgroundColor: backgroundColor[Math.floor(Math.random()*backgroundColor.length)], 
+        padding: 20, 
+        borderRadius: 30, 
+        flexDirection: 'column', 
+        marginTop: 20, 
+        width: 200,
+        marginLeft: 20,
+        height: 150,
+        alignSelf: 'center',
+        justifyContent: 'space-between',
+    },
+})</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-pickChatImage.html">pickChatImage</a></li><li><a href="module-pickImage.html">pickImage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AllUserScreen">AllUserScreen</a></li><li><a href="global.html#BottomNavBar">BottomNavBar</a></li><li><a href="global.html#ChatScreen">ChatScreen</a></li><li><a href="global.html#ChatUser">ChatUser</a></li><li><a href="global.html#CreateWorkoutLog">CreateWorkoutLog</a></li><li><a href="global.html#DiscussionCard">DiscussionCard</a></li><li><a href="global.html#DiscussionScreen">DiscussionScreen</a></li><li><a href="global.html#EditProfileInfo">EditProfileInfo</a></li><li><a href="global.html#ExerciseCard">ExerciseCard</a></li><li><a href="global.html#ExercisePreview">ExercisePreview</a></li><li><a href="global.html#ExerciseScreen">ExerciseScreen</a></li><li><a href="global.html#GetUser">GetUser</a></li><li><a href="global.html#GymCard">GymCard</a></li><li><a href="global.html#GymDiscussionMsgComponent">GymDiscussionMsgComponent</a></li><li><a href="global.html#GymDiscussionScreen">GymDiscussionScreen</a></li><li><a href="global.html#GymPreview">GymPreview</a></li><li><a href="global.html#GymScreen">GymScreen</a></li><li><a href="global.html#HomeScreen">HomeScreen</a></li><li><a href="global.html#LikeGymPage">LikeGymPage</a></li><li><a href="global.html#LoadingIndicator">LoadingIndicator</a></li><li><a href="global.html#LogCard">LogCard</a></li><li><a href="global.html#LoginScreen">LoginScreen</a></li><li><a href="global.html#MsgComponent">MsgComponent</a></li><li><a href="global.html#ProfileInfo">ProfileInfo</a></li><li><a href="global.html#ProfileInfoScreen">ProfileInfoScreen</a></li><li><a href="global.html#ProfileScreen">ProfileScreen</a></li><li><a href="global.html#RegisterScreen">RegisterScreen</a></li><li><a href="global.html#SearchScreen">SearchScreen</a></li><li><a href="global.html#Settings">Settings</a></li><li><a href="global.html#SettingsScreen">SettingsScreen</a></li><li><a href="global.html#SingleChat">SingleChat</a></li><li><a href="global.html#StoreUser">StoreUser</a></li><li><a href="global.html#TimeDelivery">TimeDelivery</a></li><li><a href="global.html#UserPage">UserPage</a></li><li><a href="global.html#WorkoutLogScreen">WorkoutLogScreen</a></li><li><a href="global.html#getSettingsForUser">getSettingsForUser</a></li><li><a href="global.html#setSettingsForUser">setSettingsForUser</a></li><li><a href="global.html#updateLocalStorage">updateLocalStorage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Nov 13 2022 16:28:02 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

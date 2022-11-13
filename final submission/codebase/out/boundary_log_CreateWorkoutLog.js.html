@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: boundary/log/CreateWorkoutLog.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: boundary/log/CreateWorkoutLog.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { StyleSheet, Text, View, Image, KeyboardAvoidingView } from 'react-native'
+import React, { useState } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { TouchableOpacity, TextInput, ScrollView } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons'
+import CalendarPicker from 'react-native-calendar-picker';
+import moment from 'moment';
+import SearchableDropdown from 'react-native-searchable-dropdown';
+import { firebase } from '../../config'
+import uuid from 'react-native-uuid'
+
+/**
+ * @typedef { Object } WorkoutLogItem An individual item in a User's Workout Log.
+ * @property { string } workoutName The name of the corresponding Exercise.
+ * @property { string } notes Notes entered by the User for this WorkoutLogItem.
+ * @property { string } duration Intensity entered by the User for this WorkoutLogItem.
+ */
+
+/**
+ * Creates and inserts a new item in the workout log.
+ * 
+ * Assumption: The user viewing this component has already been logged in and has permission to view this Workout Log.
+ * @param { Object } props Navigation route params
+ * @param { Object } props.route
+ * @param { Object } props.route.params 
+ * @param { Object } props.route.params.user - Some data regarding the user who owns the Workout Log.
+ * @param { string } props.route.params.user.firstName - The first name of the corresponding User.
+ * @param { string } props.route.params.user.lastName - The last name of the corresponding User.
+ * @param { string } props.route.params.user.photoURL - The URL of the profile image of the corresponding User.
+ * @param { Array&lt;WorkoutLogItem> } props.route.params.exerciseList The individual items to be displayed, each informing of i.e. the exercise the user attempted.
+ * @returns { SafeAreaView } The UI displayed by React for the workout log.
+ */
+const CreateWorkoutLog = (props) => {
+    const { navigation } = props;
+    const { user, exerciseList } = props.route.params
+    const [workoutName, setWorkoutName] = useState('');
+    const [dateTime, setDateTime] = useState(null);
+    const [duration, setDuration] = useState(0);
+    const [notes, setNotes] = useState('');
+    const [calendar, setCalendar] = useState(false);
+    const [workout, setWorkout] = useState();
+
+    /**
+     * Submit the workout log using firebase API
+     * @returns 
+     */
+    const submitLog = async () => {
+        if (workoutName == '' || dateTime==null || duration==0 || notes == '') {
+            alert("Please enter all the details");
+            return;
+        }
+        let msgData = {
+            user,
+            workoutName,
+            dateTime,
+            duration,
+            notes,
+        };
+
+        const newReference = firebase.database().ref('/exerciseLog/' + user.uid).push();
+        msgData.id = newReference.key;
+        newReference.set(msgData).then(() => {
+            setWorkoutName('');
+            setDateTime(null);
+            setDuration(0);
+            setNotes('');
+            alert('Workout Log has been added');
+            navigation.goBack();
+        })
+    }
+
+
+
+    return (
+        &lt;SafeAreaView style={{padding: 20, backgroundColor: '#fff', height: '100%'}}>
+            &lt;View style={{flexDirection: 'row', alignItems: 'center'}}>
+            &lt;TouchableOpacity onPress={() => navigation.goBack()}>
+                &lt;Icon
+                    name="arrow-back-circle-outline"
+                    color="#72777A"
+                    size={35}
+                />
+            &lt;/TouchableOpacity>
+            &lt;Text style={styles.title}>
+                Create Log
+            &lt;/Text>
+            &lt;/View>
+            &lt;View style={{marginTop: 50}}>
+            &lt;KeyboardAvoidingView>
+            &lt;View style={styles.inputContainer}>
+                &lt;Text style={styles.inputTitle}>Workout Name&lt;/Text>
+                &lt;SearchableDropdown
+                    selectedItems={workout}
+                    onTextChange={(text) => console.log(text)}
+                    //On text change listner on the searchable input
+                    onItemSelect={(item) => {
+                        setWorkout(item)
+                        setWorkoutName(item.name)
+                    }}
+                    //onItemSelect called after the selection from the dropdown
+                    containerStyle={{ padding: 5 }}
+                    
+                    //suggestion container style
+                    textInputStyle={{
+                        //inserted text style
+                        // padding: 12,
+                        // borderWidth: 1,
+                        // borderColor: '#ccc',
+                        // backgroundColor: '#FAF7F6',
+                    }}
+                    itemStyle={{
+                        //single dropdown item style
+                        padding: 10,
+                        marginTop: 5,
+                        // backgroundColor: '#FAF9F8',
+                        borderColor: '#bbb',
+                        borderWidth: 0.2,
+                    }}
+                    itemTextStyle={{
+                        //text style of a single dropdown item
+                        color: '#222',
+                    }}
+                    itemsContainerStyle={{
+                        //items container style you can pass maxHeight
+                        //to restrict the items dropdown hieght
+                        maxHeight: '90%',
+                    }}
+                    items={exerciseList}
+                    
+                    //mapping of item array
+                    defaultIndex={2}
+                    //default selected item index
+                    placeholder="Enter your exercise"
+                    //place holder for the search input
+                    resetValue={false}
+                    //reset textInput Value with true and false state
+                    underlineColorAndroid="transparent"
+                    //To remove the underline from the android input
+                />
+            &lt;/View>
+            &lt;ScrollView>
+            
+                
+                &lt;View style={styles.inputContainer}>
+                    &lt;Text style={styles.inputTitle}>Date &amp; Time&lt;/Text>
+                    &lt;View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                    &lt;TouchableOpacity onPress={() => setCalendar(!calendar)}>
+                        &lt;Text style={{color: dateTime ? '#000': '#bfc1c4'}}>{dateTime ? dateTime.toString(): 'Please enter the date...'}&lt;/Text>
+                    &lt;/TouchableOpacity>
+                    &lt;TouchableOpacity onPress={() => setCalendar(!calendar)}>
+                        &lt;Icon name="calendar-outline" color="#2B2F32" size={20} />
+                    &lt;/TouchableOpacity>
+                    &lt;/View>
+                    {calendar ? 
+                        &lt;CalendarPicker onDateChange={e => {
+                            setDateTime(moment(e.toString()).format('D/M/YY'));
+                            setCalendar(false);
+                        }} previousTitleStyle={{marginLeft: 10, padding: 10}} nextTitleStyle={{marginRight: 10, padding: 10}} />
+                        : &lt;>&lt;/>
+                    }
+                    
+                &lt;/View>
+                &lt;View style={styles.inputContainer}>
+                    &lt;Text style={styles.inputTitle}>Duration (mins)&lt;/Text>
+                    &lt;TextInput
+                        value={duration}
+                        placeholder="Duration..."
+                        onChangeText={text => setDuration(text)}
+                        autoCorrect={false}
+                        style={styles.input}
+                        keyboardType="number-pad"
+                    />
+                &lt;/View>
+                &lt;View style={styles.inputContainer}>
+                    &lt;Text style={styles.inputTitle}>Notes&lt;/Text>
+                    &lt;TextInput
+                        value={notes}
+                        placeholder="Write your notes..."
+                        onChangeText={text => setNotes(text)}
+                        autoCorrect={false}
+                        style={styles.input}
+                    />
+                &lt;/View>
+                &lt;TouchableOpacity
+                    onPress={() => {submitLog();}}
+                    style={[styles.button, { marginTop: 30 }]}
+                >
+                    &lt;Text style={styles.buttonText}>Create Workout&lt;/Text>
+                &lt;/TouchableOpacity>
+            
+            &lt;/ScrollView>
+            &lt;/KeyboardAvoidingView>
+            &lt;/View>
+        &lt;/SafeAreaView>
+    )
+}
+
+export default CreateWorkoutLog
+
+const styles = StyleSheet.create({
+    
+    title: {
+        color: '#2B2F32',
+        fontWeight: 'bold',
+        fontSize: 35,
+        marginLeft: 10,
+        // marginBottom: 40
+    },
+    inputContainer: {
+        // width: '90%',
+        backgroundColor: '#f4f6f9',
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginTop: 5,
+        borderWidth: 1,
+        borderColor: "#CFD3D4"
+    },
+    inputTitle: {
+        color: "#5E6366",
+        marginBottom: 5
+    },
+    button: {
+        backgroundColor: "#303437",
+        alignItems: 'center',
+        padding: 15,
+        borderRadius: 12,
+    },
+    buttonText: {
+        color: "#FFFFFF",
+        fontSize: 20,
+    
+    },
+
+})</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-pickChatImage.html">pickChatImage</a></li><li><a href="module-pickImage.html">pickImage</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AllUserScreen">AllUserScreen</a></li><li><a href="global.html#BottomNavBar">BottomNavBar</a></li><li><a href="global.html#ChatScreen">ChatScreen</a></li><li><a href="global.html#ChatUser">ChatUser</a></li><li><a href="global.html#CreateWorkoutLog">CreateWorkoutLog</a></li><li><a href="global.html#DiscussionCard">DiscussionCard</a></li><li><a href="global.html#DiscussionScreen">DiscussionScreen</a></li><li><a href="global.html#EditProfileInfo">EditProfileInfo</a></li><li><a href="global.html#ExerciseCard">ExerciseCard</a></li><li><a href="global.html#ExercisePreview">ExercisePreview</a></li><li><a href="global.html#ExerciseScreen">ExerciseScreen</a></li><li><a href="global.html#GetUser">GetUser</a></li><li><a href="global.html#GymCard">GymCard</a></li><li><a href="global.html#GymDiscussionMsgComponent">GymDiscussionMsgComponent</a></li><li><a href="global.html#GymDiscussionScreen">GymDiscussionScreen</a></li><li><a href="global.html#GymPreview">GymPreview</a></li><li><a href="global.html#GymScreen">GymScreen</a></li><li><a href="global.html#HomeScreen">HomeScreen</a></li><li><a href="global.html#LikeGymPage">LikeGymPage</a></li><li><a href="global.html#LoadingIndicator">LoadingIndicator</a></li><li><a href="global.html#LogCard">LogCard</a></li><li><a href="global.html#LoginScreen">LoginScreen</a></li><li><a href="global.html#MsgComponent">MsgComponent</a></li><li><a href="global.html#ProfileInfo">ProfileInfo</a></li><li><a href="global.html#ProfileInfoScreen">ProfileInfoScreen</a></li><li><a href="global.html#ProfileScreen">ProfileScreen</a></li><li><a href="global.html#RegisterScreen">RegisterScreen</a></li><li><a href="global.html#SearchScreen">SearchScreen</a></li><li><a href="global.html#Settings">Settings</a></li><li><a href="global.html#SettingsScreen">SettingsScreen</a></li><li><a href="global.html#SingleChat">SingleChat</a></li><li><a href="global.html#StoreUser">StoreUser</a></li><li><a href="global.html#TimeDelivery">TimeDelivery</a></li><li><a href="global.html#UserPage">UserPage</a></li><li><a href="global.html#WorkoutLogScreen">WorkoutLogScreen</a></li><li><a href="global.html#getSettingsForUser">getSettingsForUser</a></li><li><a href="global.html#setSettingsForUser">setSettingsForUser</a></li><li><a href="global.html#updateLocalStorage">updateLocalStorage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Nov 13 2022 16:28:02 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
