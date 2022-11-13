@@ -14,9 +14,18 @@ import ChatIcon from '../assets/icons/Chat.svg'
 import ProfileIcon from '../assets/icons/Profile.svg'
 import HomeIcon from '../assets/icons/Home.svg'
 import DiscussionScreen from './DiscussionScreen';
+import { Tab } from 'react-native-elements/dist/tab/Tab';
 
 const Tab = createBottomTabNavigator()
 
+/**
+ * Displays the bottom navigation bar by which logged-in users navigate between various screens.
+ * 
+ * Specifically, HomeScreen, SearchScreen, DiscussionScreen and ProfileScreen.
+ * 
+ * Assumption: The current user has been logged in.
+ * @returns { Tab.Navigator } The tabbed navigator for React to display.
+ */
 const BottomNavBar = () => {
   
   return (

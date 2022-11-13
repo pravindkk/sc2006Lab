@@ -10,7 +10,12 @@ import { GetUser } from '../../controller/UserComponent'
 import FontAwesome from 'react-native-vector-icons/FontAwesome5'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-
+/**
+ * The screen handling all user interface interaction and displays regarding searching Users, Gyms and Exercises. Takes as user input any fields by which to search and displays the results of the search.
+ * 
+ * Assumption: The user viewing this screen has already been logged in.
+ * @returns { SafeAreaView } The UI screen displayed by this component.
+ */
 const SearchScreen = () => {
   const navigation = useNavigation();
   const [user, setUser] = useState('')

@@ -10,6 +10,25 @@ import { ScrollView } from 'react-native-gesture-handler';
 import * as FileSystem from 'expo-file-system';
 import { DefaultImg } from '../../assets/icons/DefaultImg';
 
+/**
+ * A part of the application boundary.
+ * Handles all user interaction involving user registration.
+ * The contract is that the registration screen is only called when the user has already been logged out.
+ * Otherwise, unpredictable behaviour could occur.
+ * 
+ * Upon succesful registration, the user account is created.
+ * 
+ * Upon succesful registration, the verification email is sent to the user.
+ * 
+ * Upon succesful registration, the user is logged in.
+ * 
+ * Upon succesful registration, the app navigates to the HomeScreen.
+ * 
+ * Note: Does not contain the UI for user email verification, only send the email.
+ * 
+ * This is a stateful component.
+ * @returns { View } The UI displayed to the user by React.
+ */
 const RegisterScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

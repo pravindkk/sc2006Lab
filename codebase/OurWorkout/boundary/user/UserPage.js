@@ -4,7 +4,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Ionicon from 'react-native-vector-icons/Ionicons'
 
-
+/**
+ * Displays the user page corresponding to a specific User, showing their profile photo (if any) or placeholder image (if none), their first name and their last name.
+ * 
+ * Assumption: The user viewing this component has been logged-in.
+ * @param { Object } props The route params from navigation towards this component. 
+ * @param { Object } props.route.params.user The User to be displayed. 
+ * @param { string } props.route.params.user.photoURL The URL of the photo of the User. 
+ * @param { string } props.route.params.user.firstName The first name of the User. 
+ * @param { string } props.route.params.user.lastName The last name of the User. 
+ * @returns { SafeAreaView } The UI displayed to the user by react.
+ */
 const UserPage = (props) => {
   const { user } = props.route.params;
 
@@ -36,11 +46,6 @@ const UserPage = (props) => {
             <View style={styles.inputContainer}>
                 <Text style={styles.inputTitle}>Last Name</Text>
                 <Text>{user.lastName}</Text>
-            </View>
-
-            <View style={styles.inputContainer}>
-                <Text style={styles.inputTitle}>Email</Text>
-                <Text>{user.email}</Text>
             </View>
     </SafeAreaView>
   )

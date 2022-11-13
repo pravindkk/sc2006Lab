@@ -11,6 +11,15 @@ import uuid from 'react-native-uuid';
 import Icon from 'react-native-vector-icons/Ionicons'
 
 
+/**
+ * AllUserScreen functions to show a searchable list of Users for chatting with.
+ * It handles all UI interactions with this list and navigates to individual SingleChat components as appropriate.
+ * 
+ * Assumption: That the user has already been logged in.
+ * @param { Object } object the anonymous object passed in and destructured   
+ * @param { NavigationProp } object.navigation The parent component's navigation prop, used for navigation between pages.   
+ * @returns { View } The UI displayed to the user by React.
+ */
 const AllUserScreen = ({ navigation }) => {
   const [userData, setUserData] = useState('');
   const [allUser, setAllUser] = useState([]);

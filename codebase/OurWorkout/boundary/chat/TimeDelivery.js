@@ -3,6 +3,14 @@ import React from 'react'
 import moment from 'moment';
 import { Icon } from 'react-native-elements';
 
+/**
+ * Displays the time of delivery and read/unread status of a message.
+ * 
+ * @param { Object } props 
+ * @param { boolean } props.sender Did the logged-in User send the message?
+ * @param { boolean } props.item.seen Did the logged-in User see the message?
+ * @returns { JSX.Element } The section of UI corresponding to this component.
+ */
 const TimeDelivery = (props) => {
     const { sender, item } = props;
     return (

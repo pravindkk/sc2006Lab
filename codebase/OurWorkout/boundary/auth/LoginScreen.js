@@ -5,6 +5,18 @@ import { firebase } from '../../config'
 import { StoreUser, updateLocalStorage } from '../../controller/UserComponent'
 import { useGlobalState } from '../../controller/GlobalState'
 
+/**
+ * A part of the application boundary.
+ * Handles all user interaction involving logging in to the app.
+ * Aka, authentication using email and password.
+ * The contract is that the login screen is only called when the user has already been logged out.
+ * Otherwise, unpredictable behaviour could occur.
+ * 
+ * Upon succesful login, the app navigates to the HomeScreen.
+ * 
+ * This is a stateful component.
+ * @returns { View } The UI displayed to the user by React.
+ */
 const LoginScreen = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('')

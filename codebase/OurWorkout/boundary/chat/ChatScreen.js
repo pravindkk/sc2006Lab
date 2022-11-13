@@ -11,6 +11,15 @@ import Entypo from 'react-native-vector-icons/Entypo'
 
 import LoadingIndicator from '../LoadingIndicator'
 
+/**
+ * ChatScreen functions to show a searchable list of all Chats the current User is in.
+ * It handles all UI interactions with this list and navigates to individual SingleChat components as appropriate.
+ * 
+ * Assumption: That the user has already been logged in.
+ * @param { Object } object the anonymous object passed in and destructured   
+ * @param { NavigationProp } object.navigation The parent component's navigation prop, used for navigation between pages.   
+ * @returns { View } The UI displayed to the user by React.
+ */
 const ChatScreen = ({navigation}) => {
   const [userData, setUserData] = useState('');
   const [hasLoaded, setLoaded] = useState(false);
@@ -18,6 +27,7 @@ const ChatScreen = ({navigation}) => {
 
   useEffect(() => {
     getChatList();
+
     const getLoggedInUser = async () => {
       
       const loggedInUser = await GetUser();
