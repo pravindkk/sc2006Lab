@@ -11,6 +11,12 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { GymImg } from '../assets/icons/GymImg'
 import DiscussionCard from './gym/DiscussionCard';
 
+/**
+ * Displays the DiscussionScreen, where the gym page discussions of the various Gyms the logged-in User has liked are accessible and may be navigated to.
+ * 
+ * Assumption: The user viewing this screen has already been logged in.
+ * @returns { SafeAreaView } The UI rendered by react in order to display this Screen.
+ */
 const DiscussionScreen = () => {
   const [user, setUser] = useState('');
   const [gymList, setGymList] = useState([]);

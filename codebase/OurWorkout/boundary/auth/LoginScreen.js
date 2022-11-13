@@ -13,8 +13,6 @@ import { useGlobalState } from '../../controller/GlobalState'
  * Otherwise, unpredictable behaviour could occur.
  * 
  * Upon succesful login, the app navigates to the HomeScreen.
- * 
- * This is a stateful component.
  * @returns { View } The UI displayed to the user by React.
  */
 const LoginScreen = () => {

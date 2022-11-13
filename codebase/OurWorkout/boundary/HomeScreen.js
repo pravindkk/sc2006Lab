@@ -15,6 +15,22 @@ import LoadingIndicator from './LoadingIndicator';
 import ExercisePreview from './excercise/ExercisePreview'
 import GymPreview from './gym/GymPreview';
 
+/**
+ * The HomeScreen, where the User is navigated to upon exiting the LoginScreen or the RegistrationScreen.
+ * 
+ * Provides functionality for viewing a list of Exercises.
+ * 
+ * Provides functionality for tapping on Exercises in the list in order to navigate to the corresponding ExerciseScreen.
+ * 
+ * Provides functionality for viewing a list of those Gyms the logged-in User has liked.
+ * 
+ * Provides functionality for tapping on Gyms in the list in order to navigate to the corresponding GymScreen.
+ * 
+ * Provides functionality for navigation to the WorkoutLog and ChatScreen of the logged-in User.
+ * 
+ * Assumption: The user viewing this screen has already been logged in.
+ * @returns { SafeAreaView } The UI rendered by React in order to display this screen.  
+ */
 const HomeScreen = () => {
     const navigation = useNavigation();
     const [user, setUser] = useState('');

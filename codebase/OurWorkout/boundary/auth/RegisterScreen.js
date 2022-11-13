@@ -25,8 +25,6 @@ import { DefaultImg } from '../../assets/icons/DefaultImg';
  * Upon succesful registration, the app navigates to the HomeScreen.
  * 
  * Note: Does not contain the UI for user email verification, only send the email.
- * 
- * This is a stateful component.
  * @returns { View } The UI displayed to the user by React.
  */
 const RegisterScreen = () => {
