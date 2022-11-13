@@ -5,15 +5,15 @@ import { Avatar, ListItem } from 'react-native-elements'
 import moment from 'moment'
 
 /**
- * React component to display a single ChatMessage.
- * @param { Object } props The properties of the ChatMessage to be displayed. 
+ * React component to display a single chat message
+ * @param { props } props The properties of the ChatMessage to be displayed. 
  * @param { boolean } props.sender Did the logged-in User send the ChatMessage? 
  * @param { Object } props.item The other contents of the ChatMessage. 
  * @param { string } props.item.firstName The first name of the User that sent the ChatMessage. 
  * @param { string } props.item.lastName The last name of the User that sent the ChatMessage. 
  * @param { string } props.item.sendTime The time the ChatMessage was sent. 
  * @param { string } props.item.message The textual contents of the ChatMessage. 
- * @returns { JSX.Element } The section of UI to be displayed by React for this component.
+ * @returns { ListItem } The UI to display one of the chat message for the user.
  */
 const MsgComponent = (props) => {
     const { sender, item } = props

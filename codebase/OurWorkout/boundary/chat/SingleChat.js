@@ -9,16 +9,12 @@ import Icon  from 'react-native-vector-icons/Ionicons';
 import { Avatar } from 'react-native-elements';
 
 /**
- * React component to display a single Chat.
- * 
- * Assumption: That the "receiver" user is that who has been logged in.
+ * Boundary class to display a (user-to-user) single Chat.
  * @param { Object } props The route params used when navigating to this component.
  * @param { Object } props.route.params.receiverData The properties of the user viewing the chat.
- * @param { Object } props.route.params.receiverData.id The UUID the user viewing the chat.
- * @param { Object } props.route.params.receiverData.roomId The chatroom UUID corresponding to the view of the user observing the chat.
+ * @param { string } props.route.params.receiverData.roomId The chatroom UUID corresponding to the view of the user observing the chat.
  * @param { Object } props.route.params.senderData The properties of the other user.
- * @param { Object } props.route.params.senderData.uid The UUID of the other user.
- * @returns { JSX.Element } The UI screen to be displayed by React for this component.
+ * @returns { SafeAreaView } The UI screen to be displayed by React for this component.
  */
 const SingleChat = (props) => {
     
