@@ -4,13 +4,10 @@ import { ListItem, Avatar } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 
 /**
- * Displays list items in the list of Chats with other Users
+ * Displays one of the created chats passed as an object from a List
  * 
- * @param { Object } item - The Chat to display  
- * @param { string } item.firstName - The first name of the other user the Chat is with.  
- * @param { string } item.lastName - The last name of the other user the Chat is with.
- * @param { string } item.lastMsg - The text of the last (latest) ChatMessage sent in the Chat.
- * @returns { JSX.Element } The UI to display for this list element
+ * @param { item } item - Object containing info (First Name, Last Name, Latest Message) for one of the created chats for the user. 
+ * @returns { ListItem } The UI to display one of the created chats for the user
  */
 const ChatUser = ({ item }) => {
     const navigation = useNavigation();

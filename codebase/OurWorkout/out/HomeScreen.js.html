@@ -1,4 +1,32 @@
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, Platform } from 'react-native'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: HomeScreen.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: HomeScreen.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, Platform } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native'
@@ -27,6 +55,8 @@ import GymPreview from './gym/GymPreview';
  * Provides functionality for tapping on Gyms in the list in order to navigate to the corresponding GymScreen.
  * 
  * Provides functionality for navigation to the WorkoutLog and ChatScreen of the logged-in User.
+ * 
+ * Assumption: The user viewing this screen has already been logged in.
  * @returns { SafeAreaView } The UI rendered by React in order to display this screen.  
  */
 const HomeScreen = () => {
@@ -147,72 +177,72 @@ const HomeScreen = () => {
     }
 
     return hasLoaded ?
-        <SafeAreaView style={styles.container}>
-            <View style={{padding: 30}}>
-                <View style={{display: 'flex', flexDirection: 'row', justifyContent:'space-between', paddingTop: 0}}>
-                    <Text style={styles.welcomeBanner}>
+        &lt;SafeAreaView style={styles.container}>
+            &lt;View style={{padding: 30}}>
+                &lt;View style={{display: 'flex', flexDirection: 'row', justifyContent:'space-between', paddingTop: 0}}>
+                    &lt;Text style={styles.welcomeBanner}>
                         Welcome {'\n'}Back, {user.firstName}
-                    </Text>
-                    <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity onPress={() => navigation.navigate("WorkoutLog", { user: user, exerciseList: allExerciseList })} style={{justifyContent: 'center'}}>
-                        <View style={[styles.chatIconButton,{marginRight: 15}]}>
-                            <FontAwesome5Icon
+                    &lt;/Text>
+                    &lt;View style={{flexDirection: 'row'}}>
+                    &lt;TouchableOpacity onPress={() => navigation.navigate("WorkoutLog", { user: user, exerciseList: allExerciseList })} style={{justifyContent: 'center'}}>
+                        &lt;View style={[styles.chatIconButton,{marginRight: 15}]}>
+                            &lt;FontAwesome5Icon
                                 name="dumbbell"
                                 color="#72777A"
                                 size={25}
                             />
-                        </View>
+                        &lt;/View>
                         
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate("ChatScreen")} style={{justifyContent: 'center'}}>
-                        <View style={styles.chatIconButton}>
-                            <Icon
+                    &lt;/TouchableOpacity>
+                    &lt;TouchableOpacity onPress={() => navigation.navigate("ChatScreen")} style={{justifyContent: 'center'}}>
+                        &lt;View style={styles.chatIconButton}>
+                            &lt;Icon
                                 name="chatbubbles-outline"
                                 color="#72777A"
                                 size={25}
                             />
-                        </View>
+                        &lt;/View>
                         
-                    </TouchableOpacity>
-                    </View>
+                    &lt;/TouchableOpacity>
+                    &lt;/View>
                     
-                </View>
-                <View style={{alignItems: 'center',flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-                    <Text style={{fontWeight: 'bold', fontSize: 20}}>Exercises</Text>
-                    <TouchableOpacity onPress={() => getExercise()}>
-                    <Icon
+                &lt;/View>
+                &lt;View style={{alignItems: 'center',flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+                    &lt;Text style={{fontWeight: 'bold', fontSize: 20}}>Exercises&lt;/Text>
+                    &lt;TouchableOpacity onPress={() => getExercise()}>
+                    &lt;Icon
                     name='reload-circle-outline'
                     color='#72777A'
                     size={25}
                     />
-                    </TouchableOpacity>
-                </View>
+                    &lt;/TouchableOpacity>
+                &lt;/View>
                 {hasExerciseLoaded ? 
-                    <ExercisePreview exerciseList={exerciseList} />:
-                    <LoadingIndicator />
+                    &lt;ExercisePreview exerciseList={exerciseList} />:
+                    &lt;LoadingIndicator />
                 }
                 
-                <View style={{alignItems: 'center',flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-                    <Text style={{fontWeight: 'bold', fontSize: 20}}>Gyms near you</Text>
-                    <TouchableOpacity onPress={() => getNearByGyms()}>
-                    <Icon
+                &lt;View style={{alignItems: 'center',flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+                    &lt;Text style={{fontWeight: 'bold', fontSize: 20}}>Gyms near you&lt;/Text>
+                    &lt;TouchableOpacity onPress={() => getNearByGyms()}>
+                    &lt;Icon
                     name='reload-circle-outline'
                     color='#72777A'
                     size={25}
                     />
-                    </TouchableOpacity>
-                </View>
+                    &lt;/TouchableOpacity>
+                &lt;/View>
                 {hasGymLoaded ?
                 gymList.length != 0 ? 
-                    <GymPreview gymList={gymList} user={user} /> :
-                    <Text style={{marginTop: 30}}>There are no gyms near you!</Text>
-                :   <LoadingIndicator />
+                    &lt;GymPreview gymList={gymList} user={user} /> :
+                    &lt;Text style={{marginTop: 30}}>There are no gyms near you!&lt;/Text>
+                :   &lt;LoadingIndicator />
                 }
                 
                 
-            </View>
-        </SafeAreaView>
-    : <LoadingIndicator />
+            &lt;/View>
+        &lt;/SafeAreaView>
+    : &lt;LoadingIndicator />
 }
 
 export default HomeScreen
@@ -250,4 +280,26 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         borderColor: '#E3E5E5'
     }
-})
+})</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BottomNavBar">BottomNavBar</a></li><li><a href="global.html#DiscussionScreen">DiscussionScreen</a></li><li><a href="global.html#HomeScreen">HomeScreen</a></li><li><a href="global.html#LoadingIndicator">LoadingIndicator</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Nov 13 2022 12:35:43 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

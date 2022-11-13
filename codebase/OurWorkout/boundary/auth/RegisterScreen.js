@@ -13,19 +13,13 @@ import { DefaultImg } from '../../assets/icons/DefaultImg';
 /**
  * A part of the application boundary.
  * Handles all user interaction involving user registration.
- * The contract is that the registration screen is only called when the user has already been logged out.
- * Otherwise, unpredictable behaviour could occur.
  * 
  * Upon succesful registration, the user account is created.
- * 
- * Upon succesful registration, the verification email is sent to the user.
  * 
  * Upon succesful registration, the user is logged in.
  * 
  * Upon succesful registration, the app navigates to the HomeScreen.
- * 
- * Note: Does not contain the UI for user email verification, only send the email.
- * @returns { View } The UI displayed to the user by React.
+ * @returns { View } The Register UI for the user
  */
 const RegisterScreen = () => {
     const [email, setEmail] = useState('');
@@ -55,10 +49,10 @@ const RegisterScreen = () => {
     /**
      * This function creates a new user in firebase using the email, firstName, lastName, email
      * and image
-     * @param {*} email 
-     * @param {*} password 
-     * @param {*} firstName 
-     * @param {*} lastName 
+     * @param {email} email - Email of the user
+     * @param {password} password - Password to be set by the user
+     * @param {firstName} firstName - First Name of the user
+     * @param {lastName} lastName  - Last Name of the user
      */
 
     const registerUser = async (email, password, firstName, lastName) => {

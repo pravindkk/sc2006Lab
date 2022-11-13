@@ -7,13 +7,10 @@ import { useGlobalState } from '../../controller/GlobalState'
 
 /**
  * A part of the application boundary.
- * Handles all user interaction involving logging in to the app.
- * Aka, authentication using email and password.
- * The contract is that the login screen is only called when the user has already been logged out.
- * Otherwise, unpredictable behaviour could occur.
+ * Handles all user interaction involving logging in to the app (authentication using email and password).
  * 
  * Upon succesful login, the app navigates to the HomeScreen.
- * @returns { View } The UI displayed to the user by React.
+ * @returns { View } The Login UI for the user
  */
 const LoginScreen = () => {
     const navigation = useNavigation();
@@ -30,8 +27,8 @@ const LoginScreen = () => {
 
     /**
      * Logins the user by calling the firebase API
-     * @param {*} email 
-     * @param {*} password 
+     * @param {email} email 
+     * @param {password} password 
      */
     loginUser = async (email, password) => {
         try {

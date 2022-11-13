@@ -17,8 +17,8 @@ import ChatUser from './ChatUser'
  * It handles all UI interactions with this list and navigates to individual SingleChat components as appropriate.
  * 
  * Assumption: That the user has already been logged in.
- * @param { Object } object the anonymous object passed in and destructured   
- * @param { NavigationProp } object.navigation The parent component's navigation prop, used for navigation between pages.   
+ * @param { props } object the anonymous object passed in and destructured   
+ * @param { navigation } object.navigation The parent component's navigation prop, used for navigation between pages.   
  * @returns { View } The UI displayed to the user by React.
  */
 const ChatScreen = ({navigation}) => {
